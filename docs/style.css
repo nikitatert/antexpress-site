@@ -1,7 +1,5 @@
 /* ——— Global (white theme) ——— */
-:root{
-  --bg:#ffffff; --fg:#111111; --muted:#555; --card:#ffffff; --border:#e5e5e5;
-}
+:root{ --bg:#ffffff; --fg:#111111; --muted:#555; --card:#ffffff; --border:#e5e5e5; }
 *{box-sizing:border-box}
 body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:var(--bg);color:var(--fg)}
 .wrap{max-width:1120px;margin:0 auto;padding:16px 20px 56px}
@@ -23,13 +21,17 @@ nav a:hover{color:var(--fg)}
 h1{font-size:clamp(28px,5vw,44px);line-height:1.1;margin:0}
 h2{font-size:clamp(20px,3.6vw,28px);margin:0 0 10px}
 h3{margin:0 0 6px}
-p{margin:0;color:var(--muted)}
+p{margin:0;color:var(--muted);line-height:1.5}
 
 /* Grids & cards */
 .grid{display:grid;gap:14px}
 .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .grid.cols-4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
+.card{
+  background:var(--card); border:1px solid var(--border); border-radius:16px; padding:16px;
+  overflow:visible; /* prevent text clipping at left edge */
+}
+a.card{display:block; color:inherit; text-decoration:none}
 .kv{display:flex;gap:12px;align-items:flex-start}
 .kv .ico{min-width:36px;height:36px;border-radius:10px;border:1px solid var(--border);display:grid;place-items:center}
 
