@@ -4,20 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Проекты — АНТэкспресс</title>
-  <meta name="description" content="Ключевые кейсы и направления проектных поставок компании АНТэкспресс." />
+  <meta name="description" content="Проекты и кейсы компании АНТэкспресс." />
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
   <div class="wrap">
     <header>
-      <a class="logo" href="./index.html">
-        <img src="./logo.png" alt="АНТэкспресс" width="200" height="58"/>
-      </a>
+      <a class="logo" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" width="200" height="58"/></a>
       <nav>
         <a href="./about.html">О компании</a>
         <a href="./projects.html">Проекты</a>
-        <!-- absolute URL to avoid any GH Pages weirdness -->
         <a href="https://nikitatert.github.io/antexpress-site/contacts.html">Контакты</a>
       </nav>
     </header>
@@ -28,23 +25,21 @@
         <p>Выдержка из направлений, где мы работаем как единый подрядчик по снабжению и логистике.</p>
       </section>
 
-      <section class="grid cols-2">
-        <a class="card" href="./project-nikolo-dol.html">
-          <h3>Николо-Дол</h3>
-          <p>Промышленное строительство.</p>
-        </a>
-        <a class="card" href="./project-skandinaviya.html">
-          <h3>Скандинавия</h3>
-          <p>Кросс-бордер логистика.</p>
-        </a>
-        <a class="card" href="./project-sakhalin.html">
-          <h3>Сахалин</h3>
-          <p>Морская логистика.</p>
-        </a>
-        <a class="card" href="./project-baikal.html">
-          <h3>Байкал</h3>
-          <p>Сезонные окна поставок.</p>
-        </a>
+      <section class="section">
+        <div class="list">
+          <a class="card" href="./project-nikolo-dol.html">
+            <h3>Николо-Дол</h3>
+          </a>
+          <a class="card" href="./project-skandinaviya.html">
+            <h3>Скандинавия</h3>
+          </a>
+          <a class="card" href="./project-sakhalin.html">
+            <h3>Сахалин</h3>
+          </a>
+          <a class="card" href="./project-baikal.html">
+            <h3>Байкал</h3>
+          </a>
+        </div>
       </section>
     </main>
 
@@ -53,8 +48,6 @@
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
     </footer>
   </div>
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
