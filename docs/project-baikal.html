@@ -8,11 +8,31 @@
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
   <style>
+    /* page-local styles */
     .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
     .gallery{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     figure{margin:0}
-    .gallery img{width:100%;height:auto;border-radius:12px;border:1px solid var(--border)}
+    .gallery img{width:100%;height:auto;border-radius:12px;border:1px solid var(--border);cursor:zoom-in}
     figcaption{font-size:12px;color:var(--muted);margin-top:6px}
+
+    /* Lightbox */
+    .lightbox[hidden]{display:none}
+    .lightbox{
+      position:fixed; inset:0; background:rgba(0,0,0,.8);
+      display:grid; place-items:center; z-index:2000; padding:24px;
+    }
+    .lightbox__img{max-width:92vw; max-height:92vh; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.5)}
+    .lightbox__controls{
+      position:fixed; inset:0; pointer-events:none;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:24px;
+    }
+    .lb-btn{
+      pointer-events:auto;
+      background:rgba(255,255,255,.9); border:0; border-radius:12px;
+      padding:10px 14px; font-size:16px; font-weight:700; cursor:pointer;
+    }
+    .lb-close{position:fixed; top:16px; right:16px}
   </style>
 </head>
 <body>
@@ -37,7 +57,7 @@
       </section>
 
       <section class="section">
-        <div class="gallery">
+        <div class="gallery" id="gallery">
           <figure><img src="./media/baikal/baikal-01.jpg" alt="Байкал — фото 1"><figcaption>Фото 1</figcaption></figure>
           <figure><img src="./media/baikal/baikal-02.jpg" alt="Байкал — фото 2"><figcaption>Фото 2</figcaption></figure>
           <figure><img src="./media/baikal/baikal-03.jpg" alt="Байкал — фото 3"><figcaption>Фото 3</figcaption></figure>
@@ -55,6 +75,55 @@
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
     </footer>
   </div>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+
+  <!-- Lightbox markup -->
+  <div class="lightbox" id="lightbox" hidden>
+    <img class="lightbox__img" id="lbImg" alt="Просмотр изображения">
+    <button class="lb-btn lb-close" id="lbClose" aria-label="Закрыть">×</button>
+    <div class="lightbox__controls">
+      <button class="lb-btn" id="lbPrev" aria-label="Предыдущее">←</button>
+      <button class="lb-btn" id="lbNext" aria-label="Следующее">→</button>
+    </div>
+  </div>
+
+  <script>
+    // Lightbox JS (page-local)
+    const gallery = Array.from(document.querySelectorAll('#gallery img'));
+    const box = document.getElementById('lightbox');
+    const img = document.getElementById('lbImg');
+    const btnPrev = document.getElementById('lbPrev');
+    const btnNext = document.getElementById('lbNext');
+    const btnClose = document.getElementById('lbClose');
+    let idx = 0;
+
+    function openAt(i){
+      idx = i;
+      img.src = gallery[idx].src;
+      box.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeBox(){
+      box.hidden = true;
+      document.body.style.overflow = '';
+    }
+    function nav(delta){
+      idx = (idx + delta + gallery.length) % gallery.length;
+      img.src = gallery[idx].src;
+    }
+
+    gallery.forEach((el,i)=>el.addEventListener('click', ()=>openAt(i)));
+    btnClose.addEventListener('click', closeBox);
+    btnPrev.addEventListener('click', ()=>nav(-1));
+    btnNext.addEventListener('click', ()=>nav(1));
+    box.addEventListener('click', (e)=>{ if(e.target===box) closeBox(); });
+    window.addEventListener('keydown', (e)=>{
+      if(box.hidden) return;
+      if(e.key==='Escape') closeBox();
+      if(e.key==='ArrowLeft') nav(-1);
+      if(e.key==='ArrowRight') nav(1);
+    });
+
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
