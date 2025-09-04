@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>АНТэкспресс — логистика и проектные поставки</title>
+  <meta name="description" content="АНТэкспресс — снабжение и логистика для крупных инфраструктурных проектов." />
+  <style>
+    :root { --bg:#0a0a0a; --fg:#f2f2f2; --muted:#b5b5b5; --card:#151515; --accent:#ffffff; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; background:var(--bg); color:var(--fg); }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 32px 20px 56px; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .logo { display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; }
+    .badge { width:40px; height:40px; border-radius:14px; background:var(--fg); color:#111; display:grid; place-items:center; font-weight:700; }
+    nav a { color:var(--muted); text-decoration:none; margin-left:16px; font-size:14px; }
+    nav a:hover { color:var(--fg); }
+    .hero { display:grid; gap:14px; margin:40px 0 28px; }
+    h1 { font-size: clamp(28px, 5vw, 44px); line-height:1.1; margin:0; }
+    p { color:var(--muted); margin:0; }
+    .cta { margin-top:18px; display:flex; gap:10px; flex-wrap:wrap; }
+    .btn { background:var(--fg); color:#111; padding:12px 16px; border-radius:12px; text-decoration:none; font-weight:600; }
+    .btn.sec { background:transparent; outline:1px solid #333; color:var(--fg); }
+    .cards { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:28px; }
+    .card { background:var(--card); border:1px solid #222; border-radius:18px; padding:16px; }
+    footer { color:var(--muted); font-size:14px; margin-top:40px; padding-top:16px; border-top:1px solid #222; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="logo" href="#">
+        <div class="badge">АНТ</div>
+        <div>
+          <div style="font-weight:600;">АНТэкспресс</div>
+          <div style="font-size:12px; color:var(--muted);">логистика • проектные поставки</div>
+        </div>
+      </a>
+      <nav>
+        <a href="#about">О компании</a>
+        <a href="#services">Услуги</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <h1>Надёжные проектные поставки для сложных регионов и сроков</h1>
+        <p>АНТэкспресс — снабжение и логистика для крупных инфраструктурных проектов. От тендеров и контрактации до доставки и отчётности.</p>
+        <div class="cta">
+          <a class="btn" href="#services">Наши услуги</a>
+          <a class="btn sec" href="#contacts">Запросить КП</a>
+        </div>
+      </section>
+
+      <section id="services" class="cards">
+        <article class="card">
+          <h3>Логистика и снабжение</h3>
+          <p>Комплексная поставка оборудования и материалов под ключ.</p>
+        </article>
+        <article class="card">
+          <h3>Проектные поставки</h3>
+          <p>Планирование, тендеры, контроль качества и сроки.</p>
+        </article>
+        <article class="card">
+          <h3>Импорт / Экспорт</h3>
+          <p>Таможня, сертификация, складирование, мультимодальные маршруты.</p>
+        </article>
+      </section>
+
+      <section id="about" style="margin-top:28px;">
+        <div class="card">
+          <h3>ООО «АНТэкспресс» — реквизиты</h3>
+          <p>ИНН 9721004216 • КПП 773001001 • ОГРН 1167746597226</p>
+          <p>Адрес: 121151, Москва, наб. Тараса Шевченко, 23А • E-mail: info@antexp.ru</p>
+        </div>
+      </section>
+
+      <section id="contacts" style="margin-top:28px;">
+        <div class="card">
+          <h3>Контакты</h3>
+          <p>Почта: <a href="mailto:info@antexp.ru">info@antexp.ru</a></p>
+          <p>Напишите задачу — вернёмся с планом и ориентировочной сметой.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
+      <div><a href="#" style="color:var(--muted);">Политика конфиденциальности</a></div>
+    </footer>
+  </div>
+  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
+</html>
