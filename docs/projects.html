@@ -11,10 +11,13 @@
 <body>
   <div class="wrap">
     <header>
-      <a class="logo" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" width="200" height="58"/></a>
+      <a class="logo" href="./index.html">
+        <img src="./logo.png" alt="АНТэкспресс" width="200" height="58"/>
+      </a>
       <nav>
         <a href="./about.html">О компании</a>
         <a href="./projects.html">Проекты</a>
+        <!-- absolute URL to avoid any GH Pages weirdness -->
         <a href="https://nikitatert.github.io/antexpress-site/contacts.html">Контакты</a>
       </nav>
     </header>
@@ -26,10 +29,22 @@
       </section>
 
       <section class="grid cols-2">
-        <a class="card" href="./project-nikolo-dol.html"><h3>Николо-Дол</h3><p>Промышленное строительство.</p></a>
-        <a class="card" href="./project-skandinaviya.html"><h3>Скандинавия</h3><p>Кросс-бордер логистика.</p></a>
-        <a class="card" href="./project-sakhalin.html"><h3>Сахалин</h3><p>Морская логистика.</p></a>
-        <a class="card" href="./project-baikal.html"><h3>Байкал</h3><p>Сезонные окна поставок.</p></a>
+        <a class="card" href="./project-nikolo-dol.html">
+          <h3>Николо-Дол</h3>
+          <p>Промышленное строительство.</p>
+        </a>
+        <a class="card" href="./project-skandinaviya.html">
+          <h3>Скандинавия</h3>
+          <p>Кросс-бордер логистика.</p>
+        </a>
+        <a class="card" href="./project-sakhalin.html">
+          <h3>Сахалин</h3>
+          <p>Морская логистика.</p>
+        </a>
+        <a class="card" href="./project-baikal.html">
+          <h3>Байкал</h3>
+          <p>Сезонные окна поставок.</p>
+        </a>
       </section>
     </main>
 
@@ -38,6 +53,8 @@
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
     </footer>
   </div>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
