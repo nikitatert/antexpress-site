@@ -44,4 +44,43 @@
           <div class="field"><label>Описание задач *</label><textarea required rows="6" name="desc" placeholder="Кратко: номенклатура, объёмы, требования к качеству/сертификации, условия поставки (ИНКОТЕРМС), ограничения по логистике и срокам…"></textarea></div>
           <div class="cta" style="margin-top:6px;">
             <button class="btn" type="submit">Сформировать письмо</button>
-            <a class="btn sec" href="mailto:info@antexp.ru?subj
+            <a class="btn sec" href="mailto:info@antexp.ru?subject=Запрос%20КП%20—%20АНТэкспресс">Открыть почту вручную</a>
+          </div>
+          <p class="notice">Нажимая «Сформировать письмо», вы откроете свой почтовый клиент с заполненным письмом на <a href="mailto:info@antexp.ru">info@antexp.ru</a>.</p>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
+      <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById('kpForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      const to = 'info@antexp.ru';
+      const subject = `Запрос КП — ${data.company || 'АНТэкспресс'}`;
+      const lines = [
+        'Здравствуйте,','',
+        'Прошу подготовить коммерческое предложение по проектным поставкам.','',
+        `Имя: ${data.name || ''}`,
+        `Компания: ${data.company || ''}`,
+        `Email: ${data.email || ''}`,
+        `Телефон: ${data.phone || ''}`,
+        `Локация проекта: ${data.location || ''}`,
+        `Сроки/дедлайн: ${data.deadline || ''}`,
+        `Бюджет: ${data.budget || ''}`,'',
+        'Описание задач:', (data.desc || ''), '', 'Спасибо!'
+      ];
+      const body = encodeURIComponent(lines.join('\n'));
+      const url = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${body}`;
+      window.location.href = url;
+    });
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
