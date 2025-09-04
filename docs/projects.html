@@ -15,7 +15,7 @@
       <nav>
         <a href="./about.html">О компании</a>
         <a href="./projects.html">Проекты</a>
-        <a href="https://nikitatert.github.io/antexpress-site/contacts.html">Контакты</a>
+        <a href="./contacts.html">Контакты</a>
       </nav>
     </header>
 
@@ -27,18 +27,10 @@
 
       <section class="section">
         <div class="list">
-          <a class="card" href="./project-nikolo-dol.html">
-            <h3>Николо-Дол</h3>
-          </a>
-          <a class="card" href="./project-skandinaviya.html">
-            <h3>Скандинавия</h3>
-          </a>
-          <a class="card" href="./project-sakhalin.html">
-            <h3>Сахалин</h3>
-          </a>
-          <a class="card" href="./project-baikal.html">
-            <h3>Байкал</h3>
-          </a>
+          <a class="card" href="./project-nikolo-dol.html"><h3>Николо-Дол</h3></a>
+          <a class="card" href="./project-skandinaviya.html"><h3>Скандинавия</h3></a>
+          <a class="card" href="./project-sakhalin.html"><h3>Сахалин</h3></a>
+          <a class="card" href="./project-baikal.html"><h3>Байкал</h3></a>
         </div>
       </section>
     </main>
@@ -49,5 +41,10 @@
     </footer>
   </div>
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>
+    document.querySelectorAll('nav a').forEach(a=>{
+      if(a.href===window.location.href){a.classList.add('active')}
+    });
+  </script>
 </body>
 </html>
