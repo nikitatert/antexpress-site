@@ -8,10 +8,11 @@
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
   <style>
-    .gallery { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
-    .gallery img { width:100%; height:220px; object-fit:cover; border-radius:12px; border:1px solid var(--border); }
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .gallery{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     figure{margin:0}
-    figcaption{font-size:12px; color:var(--muted); margin-top:6px}
+    .gallery img{width:100%;height:auto;border-radius:12px;border:1px solid var(--border)}
+    figcaption{font-size:12px;color:var(--muted);margin-top:6px}
   </style>
 </head>
 <body>
@@ -28,18 +29,19 @@
     <main>
       <section class="hero section">
         <h1>Сахалин</h1>
-        <p>Морская логистика и береговые операции.</p>
+        <p>Морская логистика и береговые операции. Фотоотчёт по ключевым этапам.</p>
+        <div class="toolbar">
+          <a class="btn sec" href="./projects.html">← К списку проектов</a>
+          <a class="btn" href="https://nikitatert.github.io/antexpress-site/contacts.html">Связаться</a>
+        </div>
       </section>
 
       <section class="section">
         <div class="gallery">
-          <!-- Upload your photos to: docs/media/sakhalin/01.jpg ... 06.jpg -->
-          <figure><img loading="lazy" src="./media/sakhalin/01.jpg" alt="Сахалин — фото 1"><figcaption>Фото 1</figcaption></figure>
-          <figure><img loading="lazy" src="./media/sakhalin/02.jpg" alt="Сахалин — фото 2"><figcaption>Фото 2</figcaption></figure>
-          <figure><img loading="lazy" src="./media/sakhalin/03.jpg" alt="Сахалин — фото 3"><figcaption>Фото 3</figcaption></figure>
-          <figure><img loading="lazy" src="./media/sakhalin/04.jpg" alt="Сахалин — фото 4"><figcaption>Фото 4</figcaption></figure>
-          <figure><img loading="lazy" src="./media/sakhalin/05.jpg" alt="Сахалин — фото 5"><figcaption>Фото 5</figcaption></figure>
-          <figure><img loading="lazy" src="./media/sakhalin/06.jpg" alt="Сахалин — фото 6"><figcaption>Фото 6</figcaption></figure>
+          <figure><img src="./media/sakhalin/1.jpg" alt="Сахалин — фото 1"><figcaption>Фото 1</figcaption></figure>
+          <figure><img src="./media/sakhalin/1_15 - Фото.jpg" alt="Сахалин — фото 2"><figcaption>Фото 2</figcaption></figure>
+          <figure><img src="./media/sakhalin/1_6 - Photo.jpg" alt="Сахалин — фото 3"><figcaption>Фото 3</figcaption></figure>
+          <figure><img src="./media/sakhalin/1_7 - Photo.jpg" alt="Сахалин — фото 4"><figcaption>Фото 4</figcaption></figure>
         </div>
       </section>
     </main>
