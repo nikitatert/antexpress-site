@@ -8,10 +8,11 @@
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
   <style>
-    .gallery { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
-    .gallery img { width:100%; height:220px; object-fit:cover; border-radius:12px; border:1px solid var(--border); }
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .gallery{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     figure{margin:0}
-    figcaption{font-size:12px; color:var(--muted); margin-top:6px}
+    .gallery img{width:100%;height:auto;border-radius:12px;border:1px solid var(--border)}
+    figcaption{font-size:12px;color:var(--muted);margin-top:6px}
   </style>
 </head>
 <body>
@@ -28,18 +29,40 @@
     <main>
       <section class="hero section">
         <h1>Николо-Дол</h1>
-        <p>Промышленное строительство. Фотоотчёт по этапам поставок и логистики.</p>
+        <p>Проектные поставки для промышленного строительства. Фотоотчёт с объекта.</p>
+        <div class="toolbar">
+          <a class="btn sec" href="./projects.html">← К списку проектов</a>
+          <a class="btn" href="https://nikitatert.github.io/antexpress-site/contacts.html">Связаться</a>
+        </div>
       </section>
 
       <section class="section">
         <div class="gallery">
-          <!-- Upload your photos to: docs/media/nikolo-dol/01.jpg ... 06.jpg -->
-          <figure><img loading="lazy" src="./media/nikolo-dol/01.jpg" alt="Николо-Дол — фото 1"><figcaption>Фото 1</figcaption></figure>
-          <figure><img loading="lazy" src="./media/nikolo-dol/02.jpg" alt="Николо-Дол — фото 2"><figcaption>Фото 2</figcaption></figure>
-          <figure><img loading="lazy" src="./media/nikolo-dol/03.jpg" alt="Николо-Дол — фото 3"><figcaption>Фото 3</figcaption></figure>
-          <figure><img loading="lazy" src="./media/nikolo-dol/04.jpg" alt="Николо-Дол — фото 4"><figcaption>Фото 4</figcaption></figure>
-          <figure><img loading="lazy" src="./media/nikolo-dol/05.jpg" alt="Николо-Дол — фото 5"><figcaption>Фото 5</figcaption></figure>
-          <figure><img loading="lazy" src="./media/nikolo-dol/06.jpg" alt="Николо-Дол — фото 6"><figcaption>Фото 6</figcaption></figure>
+          <!-- Put these files in: docs/media/nikolo-dol/ -->
+          <figure>
+            <img loading="lazy" src="./media/nikolo-dol/nikolo-01.jpg" alt="Николо-Дол — фото 1">
+            <figcaption>Фото 1</figcaption>
+          </figure>
+          <figure>
+            <img loading="lazy" src="./media/nikolo-dol/nikolo-02.jpg" alt="Николо-Дол — фото 2">
+            <figcaption>Фото 2</figcaption>
+          </figure>
+          <figure>
+            <img loading="lazy" src="./media/nikolo-dol/nikolo-03.jpg" alt="Николо-Дол — фото 3">
+            <figcaption>Фото 3</figcaption>
+          </figure>
+          <figure>
+            <img loading="lazy" src="./media/nikolo-dol/nikolo-04.jpg" alt="Николо-Дол — фото 4">
+            <figcaption>Фото 4</figcaption>
+          </figure>
+          <figure>
+            <img loading="lazy" src="./media/nikolo-dol/nikolo-05.jpg" alt="Николо-Дол — фото 5">
+            <figcaption>Фото 5</figcaption>
+          </figure>
+          <figure>
+            <img loading="lazy" src="./media/nikolo-dol/nikolo-06.jpg" alt="Николо-Дол — фото 6">
+            <figcaption>Фото 6</figcaption>
+          </figure>
         </div>
       </section>
     </main>
