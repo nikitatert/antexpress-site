@@ -43,6 +43,13 @@ nav a{
 }
 nav a:hover{color:var(--fg); background:#f7f7f7}
 
+/* ===== Highlight current page ===== */
+nav a.active{
+  color:var(--brand);
+  font-weight:700;
+  border-bottom:2px solid var(--brand);
+}
+
 /* ===== Typography ===== */
 .section{margin:40px 0}
 .hero{display:grid;gap:14px;margin:28px 0}
