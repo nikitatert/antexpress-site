@@ -8,7 +8,7 @@
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
 
-  <!-- Leaflet (map) -->
+  <!-- Leaflet CSS -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -18,7 +18,7 @@
   <style>
     .map-wrap{margin-top:28px}
     #ru-map{
-      height: 500px;
+      height: 520px;
       width: 100%;
       border:1px solid var(--border);
       border-radius: 16px;
@@ -31,7 +31,7 @@
       padding: 4px 6px;
     }
     @media (max-width: 640px){
-      #ru-map{height: 380px}
+      #ru-map{height: 400px}
     }
   </style>
 </head>
@@ -85,30 +85,44 @@
     });
   </script>
 
-  <!-- Leaflet (map) -->
+  <!-- Leaflet JS -->
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""
   ></script>
   <script>
-    // Init map
-    const map = L.map('ru-map', { scrollWheelZoom:false }).setView([61.5, 96], 3.2);
+    // ------ Init map focused on Russia only ------
+    const RUSSIA_BOUNDS = L.latLngBounds(
+      [41.0, 19.0],   // SW (approx)
+      [82.0, 190.0]   // NE (approx, includes Far East across 180°)
+    );
 
-    // Tiles
+    const map = L.map('ru-map', {
+      scrollWheelZoom: false,
+      worldCopyJump: false,
+      maxBounds: RUSSIA_BOUNDS,
+      maxBoundsViscosity: 0.8
+    }).setView([61.5, 96], 3.7);
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18, attribution: '&copy; OpenStreetMap'
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap'
     }).addTo(map);
 
-    // ---- Your locations ----
-    // (coords can be fine-tuned later; these are good defaults)
+    // ------ Your 5 locations ------
+    // Coords are practical, can be refined later if needed.
     const locations = [
-      [46.9590,142.7380,"Сахалин (Южно-Сахалинск)"],
-      [54.5144,36.2550,"Калуга"],
-      [55.9200,36.8500,"Николо-Дол (МО)"],     // ~примерная точка
-      [59.9500,30.3000,"Скандинавия (С-З)"],   // район СПб
-      [55.7558,37.6173,"Москва"],
-      [55.6500,109.3300,"Север Байкала (Северобайкальск)"]
+      // 1) Скандинавия (МО, Коммунарка / м. «Потапово»)
+      [55.536, 37.541, "МО, Коммунарка — ЖК «Скандинавия Юг», м. «Потапово»", "./project-skandinaviya.html"],
+      // 2) Сахалин — СТК «Горный воздух», Южно-Сахалинск
+      [46.957, 142.736, "Южно-Сахалинск — СТК «Горный воздух»", "./project-sakhalin.html"],
+      // 3) Калужская область — усадьба Гурьевых (ориентир: г. Калуга)
+      [54.5144, 36.2550, "Калужская обл. — на месте усадьбы Гурьевых XVIII века", "./project-nikolo-dol.html"],
+      // 4) Север Байкала — с. Турка, ОЭЗ «Байкальская гавань»
+      [53.780, 108.261, "Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»", "./project-baikal.html"],
+      // 5) Санкт-Петербург — ул. Новая, д. 51, к. 79, стр. 1 (рядом с Лахта Центром)
+      [60.010, 30.260, "Санкт-Петербург, ул. Новая, д. 51, к. 79, стр. 1 (10 минут от «Лахта Центра»)", "./project-skandinaviya.html"]
     ];
 
     const pin = L.icon({
@@ -119,12 +133,17 @@
     });
 
     const group = L.featureGroup();
-    locations.forEach(([lat, lon, label])=>{
+
+    locations.forEach(([lat, lon, label, link])=>{
       const m = L.marker([lat, lon], {icon:pin})
         .bindTooltip(label, {direction:'top', offset:[0,-12]})
-        .bindPopup(`<strong>${label}</strong>`);
+        .bindPopup(`<strong>${label}</strong>${link ? '<br><a href="'+link+'">Открыть проект</a>' : ''}`);
+      if (link){
+        m.on('click', ()=> window.location.href = link);
+      }
       group.addLayer(m);
     });
+
     group.addTo(map);
     map.fitBounds(group.getBounds().pad(0.25));
   </script>
