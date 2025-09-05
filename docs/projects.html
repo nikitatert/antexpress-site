@@ -8,33 +8,15 @@
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
 
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    crossorigin=""
-  />
   <style>
     .map-wrap{margin-top:28px}
     #ru-map{
-      height: 520px;
-      width: 100%;
+      height:520px; width:100%;
       border:1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
+      border-radius:16px; overflow:hidden;
+      background:#eef2f1;
     }
-    .leaflet-container {
-      background: #f5f5f5; /* light grey background instead of world */
-    }
-    .leaflet-tooltip{
-      font-size: 12px;
-      font-weight: 600;
-      border-radius: 8px;
-      padding: 4px 6px;
-    }
-    @media (max-width: 640px){
-      #ru-map{height: 400px}
-    }
+    @media (max-width:640px){ #ru-map{height:400px} }
   </style>
 </head>
 <body>
@@ -63,13 +45,11 @@
         </div>
       </section>
 
-      <!-- География проектов -->
+      <!-- География проектов (Яндекс.Карты) -->
       <section class="section">
         <h2>География проектов</h2>
         <p>Точки присутствия и ключевые площадки поставок.</p>
-        <div class="map-wrap">
-          <div id="ru-map" aria-label="Карта проектов АНТэкспресс"></div>
-        </div>
+        <div class="map-wrap"><div id="ru-map"></div></div>
       </section>
     </main>
 
@@ -81,63 +61,80 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
+    // highlight current nav link
     document.querySelectorAll('nav a').forEach(a=>{
       if(a.href===window.location.href){a.classList.add('active')}
     });
   </script>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <!-- Russia polygon GeoJSON (simplified) -->
-  <script src="https://cdn.jsdelivr.net/gh/datasets/geo-boundaries-world-110m@master/countries/RUS.geojson"></script>
+  <!-- Yandex Maps (no key needed for basic usage) -->
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
   <script>
-    const map = L.map('ru-map', {scrollWheelZoom:false});
+    ymaps.ready(init);
 
-    // blank background (no tiles)
-    L.tileLayer('', { attribution:'' }).addTo(map);
-
-    // load Russia polygon
-    fetch("https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries/RUS.geojson")
-      .then(r=>r.json())
-      .then(geojson=>{
-        const layer = L.geoJSON(geojson, {
-          style:{
-            color:"#0f6d2f",
-            weight:1,
-            fillColor:"#dcefe2",
-            fillOpacity:0.8
-          }
-        }).addTo(map);
-        map.fitBounds(layer.getBounds().pad(0.2));
+    function init(){
+      // Ограничиваем карту пределами РФ (широкие границы с ДВ)
+      const RUSSIA_BOUNDS_SW = [41.0, 19.0];   // Юго-запад
+      const RUSSIA_BOUNDS_NE = [82.0, 190.0];  // Северо-восток (захватывает Дальний Восток за 180°
+      const map = new ymaps.Map('ru-map', {
+        center: [61.5, 96], zoom: 4,
+        controls: ['zoomControl']
+      }, {
+        restrictMapArea: [RUSSIA_BOUNDS_SW, RUSSIA_BOUNDS_NE],
+        suppressMapOpenBlock: true
       });
 
-    // your 5 locations
-    const locations = [
-      [55.536, 37.541, "МО, Коммунарка — ЖК «Скандинавия Юг», м. «Потапово»", "./project-skandinaviya.html"],
-      [46.957, 142.736, "Южно-Сахалинск — СТК «Горный воздух»", "./project-sakhalin.html"],
-      [54.5144, 36.2550, "Калужская обл. — на месте усадьбы Гурьевых XVIII века", "./project-nikolo-dol.html"],
-      [53.780, 108.261, "Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»", "./project-baikal.html"],
-      [60.010, 30.260, "Санкт-Петербург, ул. Новая, д. 51, к. 79, стр. 1 (10 минут от «Лахта Центра»)", "./project-skandinaviya.html"]
-    ];
+      // Точки (5 штук) — можно уточнить координаты позже
+      const points = [
+        {
+          coords: [55.536, 37.541],
+          hint: 'МО, Коммунарка — ЖК «Скандинавия Юг», м. «Потапово»',
+          balloon: '<strong>Скандинавия (МО, Коммунарка)</strong><br>ЖК «Скандинавия Юг», рядом м. «Потапово».<br><a href="./project-skandinaviya.html">Открыть проект</a>'
+        },
+        {
+          coords: [46.957, 142.736],
+          hint: 'Южно-Сахалинск — СТК «Горный воздух»',
+          balloon: '<strong>Сахалин</strong><br>о. Сахалин, г. Южно-Сахалинск, СТК «Горный воздух».<br><a href="./project-sakhalin.html">Открыть проект</a>'
+        },
+        {
+          coords: [54.5144, 36.2550],
+          hint: 'Калужская область — усадьба Гурьевых',
+          balloon: '<strong>Калужская область</strong><br>На месте усадьбы Гурьевых XVIII века.<br><a href="./project-nikolo-dol.html">Открыть проект</a>'
+        },
+        {
+          coords: [53.780, 108.261],
+          hint: 'Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»',
+          balloon: '<strong>Байкал</strong><br>Респ. Бурятия, с. Турка, ОЭЗ «Байкальская гавань».<br><a href="./project-baikal.html">Открыть проект</a>'
+        },
+        {
+          coords: [60.010, 30.260],
+          hint: 'Санкт-Петербург — ул. Новая, д. 51, к. 79, стр. 1',
+          balloon: '<strong>Санкт-Петербург</strong><br>ул. Новая, д. 51, к. 79, стр. 1 (10 минут от «Лахта Центра»).<br><a href="./project-skandinaviya.html">Открыть проект</a>'
+        }
+      ];
 
-    const pin = L.icon({
-      iconUrl:'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-      shadowUrl:'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-      iconSize:[25,41], iconAnchor:[12,41],
-      popupAnchor:[1,-34], shadowSize:[41,41]
-    });
+      // Стиль маркеров — зелёные (в духе бренда)
+      const preset = 'islands#greenDotIcon';
 
-    const group = L.featureGroup();
-    locations.forEach(([lat, lon, label, link])=>{
-      const m = L.marker([lat, lon], {icon:pin})
-        .bindTooltip(label, {direction:'top', offset:[0,-12]})
-        .bindPopup(`<strong>${label}</strong>${link ? '<br><a href="'+link+'">Открыть проект</a>' : ''}`);
-      if (link){
-        m.on('click', ()=> window.location.href = link);
+      // Добавляем точки
+      const collection = new ymaps.GeoObjectCollection({}, { preset });
+      points.forEach(p => {
+        const placemark = new ymaps.Placemark(p.coords, {
+          hintContent: p.hint,
+          balloonContent: p.balloon
+        });
+        collection.add(placemark);
+      });
+      map.geoObjects.add(collection);
+
+      // Автоцентрирование по всем точкам
+      if (points.length){
+        const bounds = collection.getBounds();
+        if (bounds) {
+          map.setBounds(bounds, {checkZoomRange:true, zoomMargin:40});
+        }
       }
-      group.addLayer(m);
-    });
-    group.addTo(map);
+    }
   </script>
 </body>
 </html>
