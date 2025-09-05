@@ -79,7 +79,6 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight current nav link
     document.querySelectorAll('nav a').forEach(a=>{
       if(a.href===window.location.href){a.classList.add('active')}
     });
@@ -92,36 +91,22 @@
     crossorigin=""
   ></script>
   <script>
-    // ------ Init map focused on Russia only ------
-    const RUSSIA_BOUNDS = L.latLngBounds(
-      [41.0, 19.0],   // SW (approx)
-      [82.0, 190.0]   // NE (approx, includes Far East across 180°)
-    );
+    // Init map centered on Russia
+    const map = L.map('ru-map', { scrollWheelZoom:false }).setView([61.5, 96], 3.7);
 
-    const map = L.map('ru-map', {
-      scrollWheelZoom: false,
-      worldCopyJump: false,
-      maxBounds: RUSSIA_BOUNDS,
-      maxBoundsViscosity: 0.8
-    }).setView([61.5, 96], 3.7);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: '&copy; OpenStreetMap'
+    // ---- Carto Light basemap (no country borders) ----
+    L.tileLayer('https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
     }).addTo(map);
 
-    // ------ Your 5 locations ------
-    // Coords are practical, can be refined later if needed.
+    // Your 5 project locations
     const locations = [
-      // 1) Скандинавия (МО, Коммунарка / м. «Потапово»)
       [55.536, 37.541, "МО, Коммунарка — ЖК «Скандинавия Юг», м. «Потапово»", "./project-skandinaviya.html"],
-      // 2) Сахалин — СТК «Горный воздух», Южно-Сахалинск
       [46.957, 142.736, "Южно-Сахалинск — СТК «Горный воздух»", "./project-sakhalin.html"],
-      // 3) Калужская область — усадьба Гурьевых (ориентир: г. Калуга)
       [54.5144, 36.2550, "Калужская обл. — на месте усадьбы Гурьевых XVIII века", "./project-nikolo-dol.html"],
-      // 4) Север Байкала — с. Турка, ОЭЗ «Байкальская гавань»
       [53.780, 108.261, "Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»", "./project-baikal.html"],
-      // 5) Санкт-Петербург — ул. Новая, д. 51, к. 79, стр. 1 (рядом с Лахта Центром)
       [60.010, 30.260, "Санкт-Петербург, ул. Новая, д. 51, к. 79, стр. 1 (10 минут от «Лахта Центра»)", "./project-skandinaviya.html"]
     ];
 
