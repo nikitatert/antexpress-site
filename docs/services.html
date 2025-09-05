@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Услуги — АНТэкспресс</title>
+  <meta name="description" content="Услуги компании АНТэкспресс." />
+  <link rel="icon" href="./logo.png" type="image/png" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="logo" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" width="200" height="58"/></a>
+      <nav>
+        <a href="./about.html">О компании</a>
+        <a href="./services.html">Услуги</a>
+        <a href="./projects.html">Проекты</a>
+        <a href="./contacts.html">Контакты</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero section">
+        <h1>Услуги</h1>
+        <p>Здесь в будущем появится описание услуг компании.</p>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
+      <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
+    </footer>
+  </div>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>
+    document.querySelectorAll('nav a').forEach(a=>{
+      if(a.href===window.location.href){a.classList.add('active')}
+    });
+  </script>
+</body>
+</html>
