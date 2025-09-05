@@ -7,17 +7,6 @@
   <meta name="description" content="Проекты и кейсы компании АНТэкспресс." />
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
-
-  <style>
-    .map-wrap{margin-top:28px}
-    #ru-map{
-      height:520px; width:100%;
-      border:1px solid var(--border);
-      border-radius:16px; overflow:hidden;
-      background:#eef2f1;
-    }
-    @media (max-width:640px){ #ru-map{height:400px} }
-  </style>
 </head>
 <body>
   <div class="wrap">
@@ -25,6 +14,7 @@
       <a class="logo" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" width="200" height="58"/></a>
       <nav>
         <a href="./about.html">О компании</a>
+        <a href="./services.html">Услуги</a>
         <a href="./projects.html">Проекты</a>
         <a href="./contacts.html">Контакты</a>
       </nav>
@@ -46,12 +36,7 @@
         </div>
       </section>
 
-      <!-- География проектов (Яндекс.Карты) -->
-      <section class="section">
-        <h2>География проектов</h2>
-        <p>Точки присутствия и ключевые площадки поставок.</p>
-        <div class="map-wrap"><div id="ru-map"></div></div>
-      </section>
+      <!-- Карта останется тут, если она у тебя есть -->
     </main>
 
     <footer>
@@ -59,81 +44,10 @@
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
     </footer>
   </div>
-
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight current nav link
     document.querySelectorAll('nav a').forEach(a=>{
       if(a.href===window.location.href){a.classList.add('active')}
-    });
-  </script>
-
-  <!-- Yandex Maps -->
-  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-  <script>
-    ymaps.ready(function init(){
-      // Ограничиваем картой пределами РФ (широкие границы с ДВ)
-      var RUSSIA_BOUNDS_SW = [41.0, 19.0];   // Юго-запад
-      var RUSSIA_BOUNDS_NE = [82.0, 190.0];  // Северо-восток
-
-      var map = new ymaps.Map('ru-map', {
-        center: [61.5, 96], zoom: 4,
-        controls: ['zoomControl']
-      }, {
-        restrictMapArea: [RUSSIA_BOUNDS_SW, RUSSIA_BOUNDS_NE],
-        suppressMapOpenBlock: true
-      });
-
-      // Точки (5 штук)
-      var points = [
-        // Скандинавия — МО, Коммунарка (ЖК «Скандинавия Юг», м. «Потапово»)
-        {
-          coords: [55.536, 37.541],
-          hint: 'МО, Коммунарка — ЖК «Скандинавия Юг», м. «Потапово»',
-          balloon: '<strong>Скандинавия (Коммунарка)</strong><br>ЖК «Скандинавия Юг», рядом м. «Потапово».<br><a href="./project-skandinaviya.html">Открыть проект</a>'
-        },
-        // Сахалин — СТК «Горный воздух», Южно-Сахалинск
-        {
-          coords: [46.957, 142.736],
-          hint: 'Южно-Сахалинск — СТК «Горный воздух»',
-          balloon: '<strong>Сахалин</strong><br>о. Сахалин, г. Южно-Сахалинск, СТК «Горный воздух».<br><a href="./project-sakhalin.html">Открыть проект</a>'
-        },
-        // Калуга — усадьба Гурьевых (ориентир Калуга)
-        {
-          coords: [54.5144, 36.2550],
-          hint: 'Калужская область — усадьба Гурьевых',
-          balloon: '<strong>Калужская область</strong><br>На месте усадьбы Гурьевых XVIII века.<br><a href="./project-nikolo-dol.html">Открыть проект</a>'
-        },
-        // Байкал — Респ. Бурятия, с. Турка, ОЭЗ «Байкальская гавань»
-        {
-          coords: [53.780, 108.261],
-          hint: 'Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»',
-          balloon: '<strong>Байкал</strong><br>Респ. Бурятия, с. Турка, ОЭЗ «Байкальская гавань».<br><a href="./project-baikal.html">Открыть проект</a>'
-        },
-        // Санкт-Петербург — ул. Новая, д. 51, к. 79, стр. 1
-        {
-          coords: [60.010, 30.260],
-          hint: 'Санкт-Петербург — ул. Новая, д. 51, к. 79, стр. 1',
-          balloon: '<strong>Санкт-Петербург</strong><br>ул. Новая, д. 51, к. 79, стр. 1 (10 минут от «Лахта Центра»).<br><a href="./project-skandinaviya.html">Открыть проект</a>'
-        }
-      ];
-
-      // Коллекция зелёных меток
-      var collection = new ymaps.GeoObjectCollection({}, { preset: 'islands#greenDotIcon' });
-      points.forEach(function(p){
-        var placemark = new ymaps.Placemark(p.coords, {
-          hintContent: p.hint,
-          balloonContent: p.balloon
-        });
-        collection.add(placemark);
-      });
-      map.geoObjects.add(collection);
-
-      // Подгоняем карту под все точки
-      var bounds = collection.getBounds();
-      if (bounds) {
-        map.setBounds(bounds, {checkZoomRange:true, zoomMargin:40});
-      }
     });
   </script>
 </body>
