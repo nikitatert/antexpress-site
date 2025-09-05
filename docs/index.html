@@ -14,6 +14,7 @@
       <a class="logo" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" width="200" height="58"/></a>
       <nav>
         <a href="./about.html">О компании</a>
+        <a href="./services.html">Услуги</a>
         <a href="./projects.html">Проекты</a>
         <a href="./contacts.html">Контакты</a>
       </nav>
@@ -49,7 +50,8 @@
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
     document.querySelectorAll('nav a').forEach(a=>{
-      if(a.href===window.location.href){a.classList.add('active')});
+      if(a.href===window.location.href){a.classList.add('active')}
+    });
   </script>
 </body>
 </html>
