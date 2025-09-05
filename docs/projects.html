@@ -8,13 +8,14 @@
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
   <style>
-    /* Map block styling */
+    /* Map block */
     .map-wrap{margin-top:28px}
-    #world-map{
+    #ru-map{
       height:520px; width:100%;
       border:1px solid var(--border);
       border-radius:16px; overflow:hidden;
       background:#eef3f0; /* ocean */
+      position:relative;
     }
     .tip{
       position:absolute; pointer-events:none; z-index:10;
@@ -22,14 +23,10 @@
       padding:6px 8px; border-radius:8px; opacity:0; transform:translate(-50%,-120%);
       white-space:nowrap;
     }
-    .dot{
-      fill:#0f6d2f; /* brand green */
-      stroke:#fff; stroke-width:2px;
-      cursor:pointer;
-      transition:transform .12s ease;
-    }
-    .dot:hover{ transform:scale(1.1) }
-    @media (max-width:640px){ #world-map{height:400px} }
+    .ru-land{fill:#e5ebe8; stroke:none}              /* Russia polygon */
+    .dot{fill:#0f6d2f; stroke:#fff; stroke-width:2px; cursor:pointer; transition:transform .12s}
+    .dot:hover{transform:scale(1.1)}
+    @media (max-width:640px){ #ru-map{height:400px} }
   </style>
 </head>
 <body>
@@ -63,7 +60,7 @@
         <h2>География проектов</h2>
         <p>Точки присутствия и ключевые площадки поставок.</p>
         <div class="map-wrap">
-          <div id="world-map"></div>
+          <div id="ru-map"></div>
           <div class="tip" id="map-tip"></div>
         </div>
       </section>
@@ -77,88 +74,80 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight current nav link
     document.querySelectorAll('nav a').forEach(a=>{
       if(a.href===window.location.href){a.classList.add('active')}
     });
   </script>
 
-  <!-- D3 + TopoJSON (vector map, no borders) -->
+  <!-- D3 + TopoJSON -->
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
   <script>
     (function(){
-      const container = document.getElementById('world-map');
-      const tooltip   = document.getElementById('map-tip');
+      const el = document.getElementById('ru-map');
+      const tip = document.getElementById('map-tip');
 
-      // Your 5 precise points (lon, lat!)
+      // 5 locations (lat, lon) + links
       const points = [
-        {name:'МО, Коммунарка — ЖК «Скандинавия Юг», м. «Потапово»',    lat:55.536, lon:37.541, link:'./project-skandinaviya.html'},
-        {name:'Южно-Сахалинск — СТК «Горный воздух»',                  lat:46.957, lon:142.736, link:'./project-sakhalin.html'},
+        {name:'МО, Коммунарка — ЖК «Скандинавия Юг», м. «Потапово»', lat:55.536, lon:37.541, link:'./project-skandinaviya.html'},
+        {name:'Южно-Сахалинск — СТК «Горный воздух»',               lat:46.957, lon:142.736, link:'./project-sakhalin.html'},
         {name:'Калужская обл. — на месте усадьбы Гурьевых XVIII века', lat:54.5144, lon:36.2550, link:'./project-nikolo-dol.html'},
-        {name:'Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»',     lat:53.780, lon:108.261, link:'./project-baikal.html'},
+        {name:'Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»',  lat:53.780, lon:108.261, link:'./project-baikal.html'},
         {name:'Санкт-Петербург, ул. Новая, д. 51, к. 79, стр. 1 (10 мин от «Лахта Центра»)', lat:60.010, lon:30.260, link:'./project-skandinaviya.html'}
       ];
 
-      // Render function (responsive)
       async function draw(){
-        container.innerHTML = ''; // clear on resize
-        const width  = container.clientWidth;
-        const height = container.clientHeight;
+        el.innerHTML='';
+        const w = el.clientWidth, h = el.clientHeight;
+        const svg = d3.select(el).append('svg')
+          .attr('width', w).attr('height', h)
+          .attr('viewBox', `0 0 ${w} ${h}`);
 
-        const svg = d3.select(container).append('svg')
-          .attr('width', width).attr('height', height)
-          .attr('viewBox', `0 0 ${width} ${height}`);
-
-        // Ocean (already via background, but add sphere for clipping)
         const g = svg.append('g');
 
-        // Load land only (no borders)
-        const landTopo = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json').then(r=>r.json());
-        const land = topojson.feature(landTopo, landTopo.objects.land);
+        // Load world countries, then filter Russia only (id 643)
+        const world = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r=>r.json());
+        const countries = topojson.feature(world, world.objects.countries);
+        const russia = { type:'FeatureCollection',
+          features: countries.features.filter(f => f.id === 643)  // 643 = Russia
+        };
 
-        const projection = d3.geoMercator().fitSize([width, height], land);
+        // Fit the projection to Russia polygon only
+        const projection = d3.geoMercator().fitSize([w,h], russia);
         const path = d3.geoPath(projection);
 
-        // Land shape
+        // Draw Russia land (no other countries)
         g.append('path')
-          .datum(land)
-          .attr('d', path)
-          .attr('fill', '#e5ebe8')   // land
-          .attr('stroke', 'none');   // <-- no borders at all
+          .datum(russia)
+          .attr('class','ru-land')
+          .attr('d', path);
 
         // Dots
-        const dots = g.selectAll('.dot')
+        g.selectAll('.dot')
           .data(points)
           .enter()
           .append('circle')
-          .attr('class', 'dot')
+          .attr('class','dot')
           .attr('r', 5)
-          .attr('cx', d => projection([d.lon, d.lat])[0])
-          .attr('cy', d => projection([d.lon, d.lat])[1])
+          .attr('cx', d=>projection([d.lon, d.lat])[0])
+          .attr('cy', d=>projection([d.lon, d.lat])[1])
           .on('mouseenter', function(e,d){
-            tooltip.textContent = d.name;
-            tooltip.style.opacity = 1;
+            tip.textContent = d.name;
+            tip.style.opacity = 1;
           })
           .on('mousemove', function(e){
-            const x = e.clientX - container.getBoundingClientRect().left;
-            const y = e.clientY - container.getBoundingClientRect().top;
-            tooltip.style.left = `${x}px`;
-            tooltip.style.top  = `${y}px`;
+            const rect = el.getBoundingClientRect();
+            tip.style.left = (e.clientX - rect.left) + 'px';
+            tip.style.top  = (e.clientY - rect.top ) + 'px';
           })
-          .on('mouseleave', function(){
-            tooltip.style.opacity = 0;
-          })
+          .on('mouseleave', ()=> tip.style.opacity = 0)
           .on('click', (e,d)=>{ if(d.link) window.location.href = d.link; });
 
-        // Zoom/pan (optional but nice)
-        const zoom = d3.zoom().scaleExtent([1, 8]).on('zoom', (event)=>{
-          g.attr('transform', event.transform);
-        });
+        // Optional zoom/pan within Russia
+        const zoom = d3.zoom().scaleExtent([1, 8]).on('zoom', (ev)=>{ g.attr('transform', ev.transform); });
         svg.call(zoom);
       }
 
-      // initial + responsive redraw
       draw();
       window.addEventListener('resize', draw);
     })();
