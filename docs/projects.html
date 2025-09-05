@@ -7,26 +7,34 @@
   <meta name="description" content="Проекты и кейсы компании АНТэкспресс." />
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+  />
   <style>
-    /* Map block */
     .map-wrap{margin-top:28px}
     #ru-map{
-      height:520px; width:100%;
+      height: 520px;
+      width: 100%;
       border:1px solid var(--border);
-      border-radius:16px; overflow:hidden;
-      background:#eef3f0; /* ocean */
-      position:relative;
+      border-radius: 16px;
+      overflow: hidden;
     }
-    .tip{
-      position:absolute; pointer-events:none; z-index:10;
-      background:#111; color:#fff; font-size:12px; line-height:1.3;
-      padding:6px 8px; border-radius:8px; opacity:0; transform:translate(-50%,-120%);
-      white-space:nowrap;
+    .leaflet-container {
+      background: #f5f5f5; /* light grey background instead of world */
     }
-    .ru-land{fill:#e5ebe8; stroke:none}              /* Russia polygon */
-    .dot{fill:#0f6d2f; stroke:#fff; stroke-width:2px; cursor:pointer; transition:transform .12s}
-    .dot:hover{transform:scale(1.1)}
-    @media (max-width:640px){ #ru-map{height:400px} }
+    .leaflet-tooltip{
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 4px 6px;
+    }
+    @media (max-width: 640px){
+      #ru-map{height: 400px}
+    }
   </style>
 </head>
 <body>
@@ -60,8 +68,7 @@
         <h2>География проектов</h2>
         <p>Точки присутствия и ключевые площадки поставок.</p>
         <div class="map-wrap">
-          <div id="ru-map"></div>
-          <div class="tip" id="map-tip"></div>
+          <div id="ru-map" aria-label="Карта проектов АНТэкспресс"></div>
         </div>
       </section>
     </main>
@@ -79,78 +86,58 @@
     });
   </script>
 
-  <!-- D3 + TopoJSON -->
-  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <!-- Russia polygon GeoJSON (simplified) -->
+  <script src="https://cdn.jsdelivr.net/gh/datasets/geo-boundaries-world-110m@master/countries/RUS.geojson"></script>
   <script>
-    (function(){
-      const el = document.getElementById('ru-map');
-      const tip = document.getElementById('map-tip');
+    const map = L.map('ru-map', {scrollWheelZoom:false});
 
-      // 5 locations (lat, lon) + links
-      const points = [
-        {name:'МО, Коммунарка — ЖК «Скандинавия Юг», м. «Потапово»', lat:55.536, lon:37.541, link:'./project-skandinaviya.html'},
-        {name:'Южно-Сахалинск — СТК «Горный воздух»',               lat:46.957, lon:142.736, link:'./project-sakhalin.html'},
-        {name:'Калужская обл. — на месте усадьбы Гурьевых XVIII века', lat:54.5144, lon:36.2550, link:'./project-nikolo-dol.html'},
-        {name:'Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»',  lat:53.780, lon:108.261, link:'./project-baikal.html'},
-        {name:'Санкт-Петербург, ул. Новая, д. 51, к. 79, стр. 1 (10 мин от «Лахта Центра»)', lat:60.010, lon:30.260, link:'./project-skandinaviya.html'}
-      ];
+    // blank background (no tiles)
+    L.tileLayer('', { attribution:'' }).addTo(map);
 
-      async function draw(){
-        el.innerHTML='';
-        const w = el.clientWidth, h = el.clientHeight;
-        const svg = d3.select(el).append('svg')
-          .attr('width', w).attr('height', h)
-          .attr('viewBox', `0 0 ${w} ${h}`);
+    // load Russia polygon
+    fetch("https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries/RUS.geojson")
+      .then(r=>r.json())
+      .then(geojson=>{
+        const layer = L.geoJSON(geojson, {
+          style:{
+            color:"#0f6d2f",
+            weight:1,
+            fillColor:"#dcefe2",
+            fillOpacity:0.8
+          }
+        }).addTo(map);
+        map.fitBounds(layer.getBounds().pad(0.2));
+      });
 
-        const g = svg.append('g');
+    // your 5 locations
+    const locations = [
+      [55.536, 37.541, "МО, Коммунарка — ЖК «Скандинавия Юг», м. «Потапово»", "./project-skandinaviya.html"],
+      [46.957, 142.736, "Южно-Сахалинск — СТК «Горный воздух»", "./project-sakhalin.html"],
+      [54.5144, 36.2550, "Калужская обл. — на месте усадьбы Гурьевых XVIII века", "./project-nikolo-dol.html"],
+      [53.780, 108.261, "Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»", "./project-baikal.html"],
+      [60.010, 30.260, "Санкт-Петербург, ул. Новая, д. 51, к. 79, стр. 1 (10 минут от «Лахта Центра»)", "./project-skandinaviya.html"]
+    ];
 
-        // Load world countries, then filter Russia only (id 643)
-        const world = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r=>r.json());
-        const countries = topojson.feature(world, world.objects.countries);
-        const russia = { type:'FeatureCollection',
-          features: countries.features.filter(f => f.id === 643)  // 643 = Russia
-        };
+    const pin = L.icon({
+      iconUrl:'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+      shadowUrl:'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      iconSize:[25,41], iconAnchor:[12,41],
+      popupAnchor:[1,-34], shadowSize:[41,41]
+    });
 
-        // Fit the projection to Russia polygon only
-        const projection = d3.geoMercator().fitSize([w,h], russia);
-        const path = d3.geoPath(projection);
-
-        // Draw Russia land (no other countries)
-        g.append('path')
-          .datum(russia)
-          .attr('class','ru-land')
-          .attr('d', path);
-
-        // Dots
-        g.selectAll('.dot')
-          .data(points)
-          .enter()
-          .append('circle')
-          .attr('class','dot')
-          .attr('r', 5)
-          .attr('cx', d=>projection([d.lon, d.lat])[0])
-          .attr('cy', d=>projection([d.lon, d.lat])[1])
-          .on('mouseenter', function(e,d){
-            tip.textContent = d.name;
-            tip.style.opacity = 1;
-          })
-          .on('mousemove', function(e){
-            const rect = el.getBoundingClientRect();
-            tip.style.left = (e.clientX - rect.left) + 'px';
-            tip.style.top  = (e.clientY - rect.top ) + 'px';
-          })
-          .on('mouseleave', ()=> tip.style.opacity = 0)
-          .on('click', (e,d)=>{ if(d.link) window.location.href = d.link; });
-
-        // Optional zoom/pan within Russia
-        const zoom = d3.zoom().scaleExtent([1, 8]).on('zoom', (ev)=>{ g.attr('transform', ev.transform); });
-        svg.call(zoom);
+    const group = L.featureGroup();
+    locations.forEach(([lat, lon, label, link])=>{
+      const m = L.marker([lat, lon], {icon:pin})
+        .bindTooltip(label, {direction:'top', offset:[0,-12]})
+        .bindPopup(`<strong>${label}</strong>${link ? '<br><a href="'+link+'">Открыть проект</a>' : ''}`);
+      if (link){
+        m.on('click', ()=> window.location.href = link);
       }
-
-      draw();
-      window.addEventListener('resize', draw);
-    })();
+      group.addLayer(m);
+    });
+    group.addTo(map);
   </script>
 </body>
 </html>
