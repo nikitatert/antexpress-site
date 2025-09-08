@@ -7,6 +7,8 @@
   <meta name="description" content="Свяжитесь с АНТэкспресс для консультации и подготовки коммерческого предложения." />
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./theme.css" />
+  <script defer src="./theme.js"></script>
   <style>
     .breadcrumbs{font-size:14px;color:var(--muted)}
     .breadcrumbs a{color:inherit;text-decoration:none}
@@ -29,6 +31,7 @@
         <a href="./services.html">Услуги</a>
         <a href="./projects.html">Проекты</a>
         <a href="./contacts.html">Контакты</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема"><span class="sun">☀︎</span><span class="moon">☾</span></button>
       </nav>
     </header>
 
@@ -81,14 +84,13 @@
     document.getElementById('y').textContent=new Date().getFullYear();
     document.querySelectorAll('nav a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
 
-    // Mailto form (no backend)
+    // Mailto form
     const form = document.getElementById('contactForm');
     form.addEventListener('submit', (e)=>{
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const msg = document.getElementById('msg').value.trim();
-
       const subject = encodeURIComponent('Запрос КП — АНТэкспресс');
       const body = encodeURIComponent(`Имя: ${name}\nEmail: ${email}\n\nСообщение:\n${msg}`);
       window.location.href = `mailto:info@antexp.ru?subject=${subject}&body=${body}`;
