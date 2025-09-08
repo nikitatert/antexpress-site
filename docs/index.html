@@ -24,37 +24,41 @@
   <script defer src="./theme.js"></script>
 
   <style>
-    /* ====== HEADER: topbar + menubar ====== */
+    /* ====== HEADER: two distinct rows ====== */
+    header{background:var(--card)}
     .topbar{
       display:flex; align-items:center; justify-content:space-between;
       gap:16px; padding:12px 0;
       border-bottom:1px solid var(--border);
     }
-    .brand img{height:68px; width:auto} /* big logo */
-    .contact-row{display:flex; align-items:center; gap:22px; flex-wrap:wrap}
-    .ci{display:flex; align-items:center; gap:10px; font-weight:700}
-    .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
-    .ci a{color:var(--text); text-decoration:none}
-    .ci a:hover{color:var(--link)}
+    .brand img{height:72px; width:auto}
+    .info-list{display:flex; align-items:center; gap:28px; flex-wrap:wrap}
+    .info{
+      display:flex; flex-direction:column; line-height:1.2;
+      min-width:180px;
+    }
+    .info .label{font-size:12px; color:var(--muted); font-weight:600}
+    .info .value{font-weight:700; white-space:nowrap}
+    .info .value a{color:var(--text); text-decoration:none}
+    .info .value a:hover{color:var(--link)}
+
     .menubar{
-      display:flex; align-items:center; gap:14px; padding:10px 0;
-      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; gap:16px;
+      padding:10px 0; border-bottom:1px solid var(--border);
       margin-bottom:10px;
     }
     .menubar a{ font-weight:700; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; border:1px solid transparent }
     .menubar a:hover{ color:var(--link); border-color:var(--border) }
-    .menubar a.active{ border-color:var(--text); }
-    @media (max-width: 920px){
-      .brand img{height:56px}
-      .topbar{gap:12px}
-    }
-    @media (max-width: 680px){
-      .contact-row{gap:12px}
-      .ci{font-size:14px}
-      .brand img{height:46px}
+    .menubar a.active{ border-color:var(--text) }
+
+    @media (max-width:980px){ .brand img{height:60px} }
+    @media (max-width:720px){
+      .brand img{height:52px}
+      .info-list{gap:16px}
+      .info{min-width:unset}
     }
 
-    /* ====== Home-specific blocks ====== */
+    /* ====== Home sections (unchanged) ====== */
     .hero-wrap{
       position:relative; overflow:hidden; border-radius:20px;
       background: radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
@@ -98,30 +102,34 @@
     <!-- ====== HEADER ====== -->
     <header>
 
-      <!-- Top info bar -->
+      <!-- Row 1: logo + contact info -->
       <div class="topbar">
         <a class="brand" href="./index.html" aria-label="АНТэкспресс — на главную">
           <img src="./logo.png" alt="АНТэкспресс" />
         </a>
 
-        <div class="contact-row">
-          <!-- EDIT your real phone/email/hours here -->
-          <div class="ci">
-            📞 <div><small>Call-центр</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div>
+        <div class="info-list">
+          <!-- Update these values with your real data -->
+          <div class="info">
+            <span class="label">Телефон</span>
+            <span class="value"><a href="tel:+74950000000">+7 (495) 000-00-00</a></span>
           </div>
-          <div class="ci">
-            ✉️ <div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div>
+          <div class="info">
+            <span class="label">Email</span>
+            <span class="value"><a href="mailto:info@antexp.ru">info@antexp.ru</a></span>
           </div>
-          <div class="ci">
-            🕘 <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div>
+          <div class="info">
+            <span class="label">Время работы</span>
+            <span class="value">Пн–Пт, 9:00–18:00</span>
           </div>
+
           <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
             <span class="sun">☀︎</span><span class="moon">☾</span>
           </button>
         </div>
       </div>
 
-      <!-- Second bar: main menu -->
+      <!-- Row 2: main navigation -->
       <nav class="menubar" aria-label="Основная навигация">
         <a href="./index.html">Главная</a>
         <a href="./about.html">О компании</a>
@@ -240,7 +248,7 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight "Главная" in second-row menu
+    // highlight "Главная" in row 2 menu
     document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
   </script>
 </body>
