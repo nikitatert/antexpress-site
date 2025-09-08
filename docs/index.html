@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>АНТэкспресс — Генеральный подрядчик по снабжению и логистике</title>
-  <meta name="description" content="АНТэкспресс — единая точка ответственности за проектные поставки: планирование, закупки, логистика и контроль качества под KPI и сроки." />
+  <title>АНТЭкспресс — Генеральный подрядчик по снабжению и логистике</title>
+  <meta name="description" content="АНТЭкспресс — единая точка ответственности за проектные поставки: планирование, закупки, логистика и контроль качества под KPI и сроки." />
   <link rel="icon" href="./logo.png" type="image/png" />
 
   <!-- Theme no-flash -->
@@ -27,20 +27,18 @@
     /* ===== TWO-LINE HEADER ===== */
     header{display:block;width:100%}
 
-    /* LINE 1: logo + contacts ONLY */
     .topbar{
       display:flex; align-items:center; justify-content:space-between;
       padding:12px 0; gap:16px;
       border-bottom:1px solid var(--border);
     }
-    .brand img{height:72px; width:auto} /* big logo */
+    .brand img{height:72px; width:auto}
     .contact-row{display:flex; align-items:center; gap:24px; flex-wrap:wrap}
     .ci{display:flex; align-items:center; gap:10px; font-weight:700}
     .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
     .ci a{color:var(--text); text-decoration:none}
     .ci a:hover{color:var(--link)}
 
-    /* LINE 2: main menu UNDER the topbar */
     .menubar{
       display:flex; align-items:center; gap:14px;
       padding:10px 0; border-bottom:1px solid var(--border);
@@ -48,7 +46,7 @@
     .menubar a{ font-weight:700; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; border:1px solid transparent }
     .menubar a:hover{ color:var(--link); border-color:var(--border) }
     .menubar a.active{ border-color:var(--text); }
-    .menubar .spacer{flex:1} /* push toggle to the right on line 2 */
+    .menubar .spacer{flex:1}
 
     @media (max-width: 920px){
       .brand img{height:58px}
@@ -105,25 +103,24 @@
 
       <!-- LINE 1: logo + contacts -->
       <div class="topbar">
-        <a class="brand" href="./index.html" aria-label="АНТэкспресс — на главную">
-          <img src="./logo.png" alt="АНТэкспресс" />
+        <a class="brand" href="./index.html" aria-label="АНТЭкспресс — на главную">
+          <img src="./logo.png" alt="АНТЭкспресс" />
         </a>
 
         <div class="contact-row">
-          <!-- Edit your real phone/email/hours here -->
           <div class="ci">
-            📞 <div><small>Call-центр</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div>
+            <div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div>
           </div>
           <div class="ci">
-            ✉️ <div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div>
+            <div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div>
           </div>
           <div class="ci">
-            🕘 <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div>
+            <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div>
           </div>
         </div>
       </div>
 
-      <!-- LINE 2: menu ONLY (and theme toggle at far right) -->
+      <!-- LINE 2: menu ONLY -->
       <nav class="menubar" aria-label="Основная навигация">
         <a href="./index.html">Главная</a>
         <a href="./about.html">О компании</a>
@@ -231,7 +228,7 @@
           </div>
           <div class="toolbar">
             <a class="btn" href="./contacts.html">Запросить КП</a>
-            <a class="btn sec" href="mailto:info@antexp.ru?subject=Запрос%20КП%20—%20АНТэкспресс">Написать на почту</a>
+            <a class="btn sec" href="mailto:info@antexp.ru?subject=Запрос%20КП%20—%20АНТЭкспресс">Написать на почту</a>
           </div>
         </div>
       </section>
@@ -239,14 +236,13 @@
 
     <!-- FOOTER -->
     <footer>
-      <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
+      <div>© <span id="y"></span> ООО «АНТЭкспресс». Все права защищены.</div>
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
     </footer>
   </div>
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight "Главная" in the second line menu
     document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
   </script>
 </body>
