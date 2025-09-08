@@ -3,129 +3,99 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Наши объекты — АНТэкспресс</title>
-  <meta name="description" content="Проекты и кейсы компании АНТэкспресс." />
+  <title>Наши объекты — АНТЭкспресс</title>
+  <meta name="description" content="Проекты и кейсы компании АНТЭкспресс." />
   <link rel="icon" href="./logo.png" type="image/png" />
-
-  <!-- No-flash theme -->
   <script>
-    (function(){
-      try{
-        var k='site-theme', s=localStorage.getItem(k),
-            d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-theme', s||(d?'dark':'light'));
-      }catch(e){}
-    })();
+    (function(){try{var k='site-theme',s=localStorage.getItem(k),
+    d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', s||(d?'dark':'light'));}catch(e){}})();
   </script>
-
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="./theme.css" />
   <script defer src="./theme.js"></script>
-
   <style>
-    .menubar{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--border);margin-bottom:10px}
-    .menubar a{font-weight:700;padding:8px 10px;border-radius:10px;color:var(--text);text-decoration:none;border:1px solid transparent}
-    .menubar a:hover{color:var(--link);border-color:var(--border)}
-    .menubar a.active{border-color:var(--text)}
-    .menubar .spacer{flex:1}
-
-    .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)}
-    .brand img{height:68px;width:auto}
-    .contact-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
-    .ci{display:flex;align-items:center;gap:10px;font-weight:700}
-    .ci small{display:block;font-weight:600;color:var(--muted);line-height:1.1}
-    .ci a{color:var(--text);text-decoration:none}
-    .ci a:hover{color:var(--link)}
-    @media (max-width:920px){.brand img{height:56px}}
-    @media (max-width:680px){.brand img{height:46px}.ci{font-size:14px}}
-
-    .map-wrap{margin-top:28px}
-    #ru-map{height:520px;width:100%;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#eef2f1}
-    @media (max-width:640px){#ru-map{height:400px}}
-
     .breadcrumbs{font-size:14px;color:var(--muted)}
     .breadcrumbs a{color:inherit;text-decoration:none}
     .breadcrumbs a:hover{text-decoration:underline}
+    .map-wrap{margin-top:28px}
+    #ru-map{height:520px;width:100%;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#eef2f1}
+    @media (max-width:640px){#ru-map{height:400px}}
   </style>
 </head>
 <body>
-<div class="wrap">
-  <!-- HEADER -->
-  <header>
-    <div class="topbar">
-      <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТэкспресс"></a>
-      <div class="contact-row">
-        <div class="ci">📞 <div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
-        <div class="ci">✉️ <div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div></div>
-        <div class="ci">🕘 <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
+  <div class="wrap">
+    <header>
+      <div class="topbar">
+        <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТЭкспресс" style="height:72px"/></a>
+        <div class="contact-row">
+          <div class="ci"><div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
+          <div class="ci"><div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div></div>
+          <div class="ci"><div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
+        </div>
       </div>
-    </div>
-    <nav class="menubar" aria-label="Основная навигация">
-      <a href="./index.html">Главная</a>
-      <a href="./about.html">О компании</a>
-      <a href="./services.html">Услуги</a>
-      <a href="./projects.html">Наши объекты</a>
-      <a href="./contacts.html">Контакты</a>
-      <span class="spacer"></span>
-      <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему"><span class="sun">☀︎</span><span class="moon">☾</span></button>
-    </nav>
-  </header>
+      <nav class="menubar" aria-label="Основная навигация">
+        <a href="./index.html">Главная</a>
+        <a href="./about.html">О компании</a>
+        <a href="./services.html">Услуги</a>
+        <a href="./projects.html">Наши объекты</a>
+        <a href="./contacts.html">Контакты</a>
+        <span class="spacer"></span>
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему"><span class="sun">☀︎</span><span class="moon">☾</span></button>
+      </nav>
+    </header>
 
-  <!-- MAIN -->
-  <main>
-    <section class="hero section">
-      <div class="breadcrumbs"><a href="./index.html">Главная</a> &nbsp;›&nbsp; Наши объекты</div>
-      <h1>Наши объекты</h1>
-      <p>Выдержка из направлений, где мы работаем как единый подрядчик по снабжению и логистике.</p>
-    </section>
+    <main>
+      <section class="hero section">
+        <div class="breadcrumbs"><a href="./index.html">Главная</a> &nbsp;›&nbsp; Наши объекты</div>
+        <h1>Проекты и кейсы</h1>
+        <p>Выдержка из направлений, где мы работаем как единый подрядчик по снабжению и логистике.</p>
+      </section>
 
-    <section class="section">
-      <div class="list">
-        <a class="card" href="./project-nikolo-dol.html"><h3>Николо-Дол</h3></a>
-        <a class="card" href="./project-skandinaviya.html"><h3>Скандинавия</h3></a>
-        <a class="card" href="./project-sakhalin.html"><h3>Сахалин</h3></a>
-        <a class="card" href="./project-baikal.html"><h3>Байкал</h3></a>
-        <a class="card" href="./project-lahta.html"><h3>Лахта Парк</h3></a>
-      </div>
-    </section>
+      <section class="section">
+        <div class="list">
+          <a class="card" href="./project-nikolo-dol.html"><h3>Николо-Дол</h3></a>
+          <a class="card" href="./project-skandinaviya.html"><h3>Скандинавия</h3></a>
+          <a class="card" href="./project-sakhalin.html"><h3>Сахалин</h3></a>
+          <a class="card" href="./project-baikal.html"><h3>Байкал</h3></a>
+          <a class="card" href="./project-lahta.html"><h3>Лахта Парк</h3></a>
+        </div>
+      </section>
 
-    <section class="section">
-      <h2>География проектов</h2>
-      <p>Точки присутствия и ключевые площадки поставок.</p>
-      <div class="map-wrap"><div id="ru-map"></div></div>
-    </section>
-  </main>
+      <section class="section">
+        <h2>География проектов</h2>
+        <p>Точки присутствия и ключевые площадки поставок.</p>
+        <div class="map-wrap"><div id="ru-map"></div></div>
+      </section>
+    </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
-    <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
-  </footer>
-</div>
+    <footer>
+      <div>© <span id="y"></span> ООО «АНТЭкспресс». Все права защищены.</div>
+      <div><a href="./privacy.html" style="color:var(--muted)">Политика конфиденциальности</a></div>
+    </footer>
+  </div>
 
-<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
-<script>
-  document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
-</script>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <script>document.querySelectorAll('.menubar a').forEach(a=>{if(a.href===location.href)a.classList.add('active')});</script>
 
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
-<script>
-  ymaps.ready(function(){
-    var RUSSIA_BOUNDS_SW=[41.0,19.0], RUSSIA_BOUNDS_NE=[82.0,190.0];
-    var map=new ymaps.Map('ru-map',{center:[61.5,96],zoom:4,controls:['zoomControl']},{
-      restrictMapArea:[RUSSIA_BOUNDS_SW,RUSSIA_BOUNDS_NE], suppressMapOpenBlock:true
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+  <script>
+    ymaps.ready(function(){
+      var map=new ymaps.Map('ru-map',{center:[61.5,96],zoom:4,controls:['zoomControl']},{
+        restrictMapArea:[[41.0,19.0],[82.0,190.0]],suppressMapOpenBlock:true
+      });
+      var points=[
+        {c:[55.536,37.541],h:'МО, Коммунарка — ЖК «Скандинавия Юг», м. «Потапово»',b:'<strong>Скандинавия</strong><br>МО, Коммунарка.<br><a href="./project-skandinaviya.html">Открыть проект</a>'},
+        {c:[46.957,142.736],h:'Южно-Сахалинск — СТК «Горный воздух»',b:'<strong>Сахалин</strong><br>Южно-Сахалинск, СТК «Горный воздух».<br><a href="./project-sakhalin.html">Открыть проект</a>'},
+        {c:[54.5144,36.2550],h:'Калужская обл. — усадьба Гурьевых',b:'<strong>Калужская область</strong><br>Николо-Дол.<br><a href="./project-nikolo-dol.html">Открыть проект</a>'},
+        {c:[53.780,108.261],h:'Респ. Бурятия, Турка — ОЭЗ «Байкальская гавань»',b:'<strong>Байкал</strong><br>ОЭЗ «Байкальская гавань».<br><a href="./project-baikal.html">Открыть проект</a>'},
+        {c:[60.010,30.260],h:'Санкт-Петербург — ул. Новая, 51',b:'<strong>Лахта Парк</strong><br>Санкт-Петербург, рядом с «Лахта Центр».<br><a href="./project-lahta.html">Открыть проект</a>'}
+      ];
+      var col=new ymaps.GeoObjectCollection({}, {preset:'islands#greenDotIcon'});
+      points.forEach(p=>col.add(new ymaps.Placemark(p.c,{hintContent:p.h,balloonContent:p.b})));
+      map.geoObjects.add(col);
+      var b=col.getBounds(); if(b){ map.setBounds(b,{checkZoomRange:true,zoomMargin:40}); }
     });
-    var points=[
-      {coords:[55.536,37.541],hint:'МО, Коммунарка — ЖК «Скандинавия Юг», м. «Потапово»',balloon:'<strong>Скандинавия (Коммунарка)</strong><br><a href="./project-skandinaviya.html">Открыть проект</a>'},
-      {coords:[46.957,142.736],hint:'Южно-Сахалинск — СТК «Горный воздух»',balloon:'<strong>Сахалин</strong><br><a href="./project-sakhalin.html">Открыть проект</a>'},
-      {coords:[54.5144,36.2550],hint:'Калужская область — усадьба Гурьевых',balloon:'<strong>Калужская область</strong><br><a href="./project-nikolo-dol.html">Открыть проект</a>'},
-      {coords:[53.780,108.261],hint:'Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»',balloon:'<strong>Байкал</strong><br><a href="./project-baikal.html">Открыть проект</a>'},
-      {coords:[60.010,30.260],hint:'Санкт-Петербург — ул. Новая, 51, к.79',balloon:'<strong>Санкт-Петербург</strong><br><a href="./project-lahta.html">Открыть проект</a>'}
-    ];
-    var col=new ymaps.GeoObjectCollection({}, {preset:'islands#greenDotIcon'});
-    points.forEach(p=>col.add(new ymaps.Placemark(p.coords,{hintContent:p.hint,balloonContent:p.balloon})));
-    map.geoObjects.add(col); var b=col.getBounds(); if(b){map.setBounds(b,{checkZoomRange:true,zoomMargin:40});}
-  });
-</script>
+  </script>
 </body>
 </html>
