@@ -4,46 +4,80 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Политика конфиденциальности — АНТэкспресс</title>
-  <meta name="description" content="Политика конфиденциальности ООО «АНТэкспресс»." />
   <link rel="icon" href="./logo.png" type="image/png" />
+  <script>
+    (function(){
+      try{
+        var k='site-theme', s=localStorage.getItem(k),
+            d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', s||(d?'dark':'light'));
+      }catch(e){}
+    })();
+  </script>
   <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./theme.css" />
+  <script defer src="./theme.js"></script>
+  <style>
+    .menubar{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--border);margin-bottom:10px}
+    .menubar a{font-weight:700;padding:8px 10px;border-radius:10px;color:var(--text);text-decoration:none;border:1px solid transparent}
+    .menubar a:hover{color:var(--link);border-color:var(--border)}
+    .menubar a.active{border-color:var(--text)}
+    .menubar .spacer{flex:1}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)}
+    .brand img{height:68px;width:auto}
+    .contact-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+    .ci{display:flex;align-items:center;gap:10px;font-weight:700}
+    .ci small{display:block;font-weight:600;color:var(--muted);line-height:1.1}
+    .ci a{color:var(--text);text-decoration:none}
+    .ci a:hover{color:var(--link)}
+    @media (max-width:920px){.brand img{height:56px}}
+    @media (max-width:680px){.brand img{height:46px}.ci{font-size:14px}}
+  </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <a class="logo" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" width="200" height="58"/></a>
-      <nav>
-        <a href="./about.html">О компании</a>
-        <a href="./projects.html">Проекты</a>
-        <a href="https://nikitatert.github.io/antexpress-site/contacts.html">Контакты</a>
-      </nav>
-    </header>
+<div class="wrap">
+  <!-- HEADER -->
+  <header>
+    <div class="topbar">
+      <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТэкспресс"></a>
+      <div class="contact-row">
+        <div class="ci">📞 <div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
+        <div class="ci">✉️ <div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div></div>
+        <div class="ci">🕘 <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
+      </div>
+    </div>
+    <nav class="menubar">
+      <a href="./index.html">Главная</a>
+      <a href="./about.html">О компании</a>
+      <a href="./services.html">Услуги</a>
+      <a href="./projects.html">Наши объекты</a>
+      <a href="./contacts.html">Контакты</a>
+      <span class="spacer"></span>
+      <button class="theme-toggle" id="themeToggle"><span class="sun">☀︎</span><span class="moon">☾</span></button>
+    </nav>
+  </header>
 
-    <main>
-      <section class="hero section">
-        <h1>Политика конфиденциальности</h1>
-        <p>Как мы обрабатываем и защищаем персональные данные пользователей.</p>
-      </section>
+  <!-- MAIN -->
+  <main>
+    <section class="section">
+      <h1>Политика конфиденциальности</h1>
+      <div class="card">
+        <p>Мы уважаем вашу конфиденциальность. Данные, которые вы передаёте через формы или по электронной почте, используются только для связи по вашему запросу. Мы не передаём данные третьим лицам без вашего согласия, за исключением случаев, предусмотренных законодательством.</p>
+        <p>Свяжитесь с нами по адресу <a href="mailto:info@antexp.ru">info@antexp.ru</a>, если у вас есть вопросы по обработке персональных данных.</p>
+      </div>
+    </section>
+  </main>
 
-      <section class="cards" style="margin-top:0;">
-        <article class="card"><h3>1. Общие положения</h3><p>Настоящая Политика определяет порядок обработки и защиты персональных данных ООО «АНТэкспресс».</p></article>
-        <article class="card"><h3>2. Состав обрабатываемых данных</h3><p>Имя, e-mail, телефон, сведения из форм, технические данные (IP, cookies, данные браузера).</p></article>
-        <article class="card"><h3>3. Цели обработки</h3><p>Обратная связь, подготовка предложений, исполнение договоров, улучшение сервиса и безопасности.</p></article>
-        <article class="card"><h3>4. Правовые основания</h3><p>Согласие пользователя, исполнение договора и законные интересы Компании.</p></article>
-        <article class="card"><h3>5. Передача третьим лицам</h3><p>Подрядчикам и провайдерам — строго в необходимом объёме при соблюдении конфиденциальности.</p></article>
-        <article class="card"><h3>6. Сроки хранения</h3><p>Храним не дольше, чем требуется целями обработки и законом; далее удаляем или обезличиваем.</p></article>
-        <article class="card"><h3>7. Права субъектов</h3><p>Доступ, актуализация, ограничение, удаление — по запросу на <a href="mailto:info@antexp.ru">info@antexp.ru</a>.</p></article>
-        <article class="card"><h3>8. Безопасность</h3><p>Организационные и технические меры защиты, соразмерные рискам.</p></article>
-        <article class="card"><h3>9. Cookies</h3><p>Используем для статистики и улучшения работы; управлять можно в настройках браузера.</p></article>
-        <article class="card"><h3>10. Изменения</h3><p>Актуальная версия Политики публикуется на этой странице.</p></article>
-      </section>
-    </main>
+  <!-- FOOTER -->
+  <footer>
+    <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
+    <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
+  </footer>
+</div>
 
-    <footer>
-      <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
-      <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
-    </footer>
-  </div>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script>
+  document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
+</script>
 </body>
 </html>
