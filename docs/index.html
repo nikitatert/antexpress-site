@@ -7,13 +7,14 @@
   <meta name="description" content="АНТэкспресс — единая точка ответственности за проектные поставки: планирование, закупки, логистика и контроль качества под KPI и сроки." />
   <link rel="icon" href="./logo.png" type="image/png" />
 
+  <!-- prevent theme flash -->
   <script>
     (function(){
       try{
         var k='site-theme';
         var s=localStorage.getItem(k);
-        var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-theme', s|| (d?'dark':'light'));
+        var d=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', s || (d ? 'dark' : 'light'));
       }catch(e){}
     })();
   </script>
@@ -23,53 +24,48 @@
   <script defer src="./theme.js"></script>
 
   <style>
-    /* ===== HEADER (two rows) ===== */
-    header{background:var(--card)}
+    /* ===== HEADER with two stacked rows ===== */
+    header{ background: var(--card); }
 
-    /* Row 1: logo + contacts */
+    /* Row 1: LOGO · Телефон · Email · Время работы (one continuous row) */
     .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0; border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:flex-start;
+      gap:28px; padding:14px 0; border-bottom:1px solid var(--border);
+      flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
     }
-    .brand img{height:72px; width:auto}
-    .contacts{display:flex; align-items:center; gap:28px; flex-wrap:wrap}
-    .cblock{display:flex; flex-direction:column; line-height:1.2; min-width:200px}
-    .cblock .label{font-size:12px; color:var(--muted); font-weight:600}
-    .cblock .value{font-weight:700; white-space:nowrap}
-    .cblock .value a{color:var(--text); text-decoration:none}
-    .cblock .value a:hover{color:var(--link)}
+    .topbar::-webkit-scrollbar{ display:none; }
+    .brand img{ height:72px; width:auto; flex:0 0 auto; }
 
-    /* Row 2: navigation — forced single line */
+    .cblock{
+      display:flex; flex-direction:column; line-height:1.2; flex:0 0 auto;
+      min-width:200px;
+    }
+    .cblock .label{ font-size:12px; color:var(--muted); font-weight:600; }
+    .cblock .value{ font-weight:700; white-space:nowrap; }
+    .cblock .value a{ color:var(--text); text-decoration:none; }
+    .cblock .value a:hover{ color:var(--link); }
+
+    /* Row 2: menu (on its own row, under row 1) */
     .menubar{
       display:flex; align-items:center; gap:22px;
       padding:12px 0; border-bottom:1px solid var(--border);
-      margin-bottom:20px;
-      flex-wrap: nowrap;          /* keep one line */
-      overflow-x: auto;           /* allow scroll on very small screens */
-      -webkit-overflow-scrolling: touch;
+      margin-bottom:20px; flex-wrap:nowrap; overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
     }
-    .menubar::-webkit-scrollbar{display:none} /* hide tiny scrollbar */
+    .menubar::-webkit-scrollbar{ display:none; }
     .menubar a{
       font-weight:700; padding:8px 10px; border-radius:10px;
       text-decoration:none; color:var(--text); border:1px solid transparent;
-      white-space: nowrap;        /* prevent breaking per link */
-      flex: 0 0 auto;             /* don’t shrink links */
+      white-space:nowrap; flex:0 0 auto;
     }
-    .menubar a:hover{ color:var(--link); border-color:var(--border) }
-    .menubar a.active{ border-color:var(--text) }
+    .menubar a:hover{ color:var(--link); border-color:var(--border); }
+    .menubar a.active{ border-color:var(--text); }
 
-    @media (max-width: 980px){
-      .brand img{height:60px}
-      .contacts{gap:18px}
-      .cblock{min-width:170px}
-    }
-    @media (max-width: 720px){
-      .brand img{height:52px}
-      .contacts{gap:12px}
-      .cblock{min-width:unset}
-    }
+    /* Responsive tweaks */
+    @media (max-width:980px){ .brand img{height:60px} .cblock{min-width:170px} }
+    @media (max-width:720px){ .brand img{height:52px} .cblock{min-width:unset} }
 
-    /* ===== Existing homepage blocks (unchanged) ===== */
+    /* ===== Home sections (unchanged) ===== */
     .hero-wrap{
       position:relative; overflow:hidden; border-radius:20px;
       background: radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
@@ -78,26 +74,26 @@
       border:1px solid var(--border); box-shadow: var(--shadow);
       padding: clamp(28px, 6vw, 60px);
     }
-    .hero-grid{display:grid; gap:24px; grid-template-columns: 1.3fr 1fr; align-items:center}
-    @media (max-width: 900px){ .hero-grid{grid-template-columns:1fr} }
+    .hero-grid{display:grid; gap:24px; grid-template-columns:1.3fr 1fr; align-items:center}
+    @media (max-width:900px){ .hero-grid{grid-template-columns:1fr} }
     .kpi{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:20px}
-    .kpi .card{ text-align:center; padding:18px }
-    .kpi .num{ font-size: clamp(24px, 4vw, 34px); font-weight:800 }
-    .kpi .cap{ color: var(--muted); font-size: 12px }
+    .kpi .card{text-align:center; padding:18px}
+    .kpi .num{font-size:clamp(24px,4vw,34px); font-weight:800}
+    .kpi .cap{color:var(--muted); font-size:12px}
     .features{display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media (max-width: 900px){ .features{grid-template-columns:1fr} }
+    @media (max-width:900px){ .features{grid-template-columns:1fr} }
     .features .card{padding:20px}
     .features h3{margin:0 0 6px 0}
     .section h2{margin-bottom:6px}
     .lead{color:var(--muted); margin-bottom:18px}
     .process{display:grid; gap:14px; grid-template-columns:repeat(4,minmax(0,1fr))}
-    @media (max-width: 1024px){ .process{grid-template-columns:repeat(2,minmax(0,1fr))} }
-    @media (max-width: 640px){ .process{grid-template-columns:1fr} }
+    @media (max-width:1024px){ .process{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width:640px){ .process{grid-template-columns:1fr} }
     .step{position:relative; padding:18px}
     .step .n{font-weight:800; font-size:12px; color:var(--muted); letter-spacing:.08em}
     .projects .list{display:grid; gap:14px; grid-template-columns:repeat(5,minmax(0,1fr))}
-    @media (max-width: 1100px){ .projects .list{grid-template-columns:repeat(3,minmax(0,1fr))} }
-    @media (max-width: 640px){ .projects .list{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width:1100px){ .projects .list{grid-template-columns:repeat(3,minmax(0,1fr))} }
+    @media (max-width:640px){ .projects .list{grid-template-columns:repeat(2,minmax(0,1fr))} }
     .projects .card h3{margin:2px 0}
     .cta-strip{
       display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
@@ -111,26 +107,25 @@
 
     <!-- ===== HEADER ===== -->
     <header>
-      <!-- Row 1 -->
+      <!-- ROW 1: logo, phone, email, hours (one line) -->
       <div class="topbar">
         <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" /></a>
-        <div class="contacts">
-          <div class="cblock">
-            <span class="label">Телефон</span>
-            <span class="value"><a href="tel:+74950000000">+7 (495) 000-00-00</a></span>
-          </div>
-          <div class="cblock">
-            <span class="label">Email</span>
-            <span class="value"><a href="mailto:info@antexp.ru">info@antexp.ru</a></span>
-          </div>
-          <div class="cblock">
-            <span class="label">Время работы</span>
-            <span class="value">Пн–Пт, 9:00–18:00</span>
-          </div>
+
+        <div class="cblock">
+          <span class="label">Телефон</span>
+          <span class="value"><a href="tel:+74950000000">+7 (495) 000-00-00</a></span>
+        </div>
+        <div class="cblock">
+          <span class="label">Email</span>
+          <span class="value"><a href="mailto:info@antexp.ru">info@antexp.ru</a></span>
+        </div>
+        <div class="cblock">
+          <span class="label">Время работы</span>
+          <span class="value">Пн–Пт, 9:00–18:00</span>
         </div>
       </div>
 
-      <!-- Row 2 -->
+      <!-- ROW 2: menu (separate row UNDER row 1) -->
       <nav class="menubar" aria-label="Основная навигация">
         <a href="./index.html">Главная</a>
         <a href="./about.html">О компании</a>
@@ -173,7 +168,7 @@
         </div>
       </section>
 
-      <!-- keep the rest of your home sections exactly as you have them -->
+      <!-- keep the rest of your home sections as they are -->
     </main>
 
     <footer>
