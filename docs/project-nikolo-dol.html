@@ -11,7 +11,10 @@
     .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
     .gallery{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     figure{margin:0}
-    .gallery img{width:100%;height:auto;border-radius:12px;border:1px solid var(--border);cursor:zoom-in}
+    .gallery img{
+      width:100%;height:auto;border-radius:12px;border:1px solid var(--border);cursor:zoom-in;
+      aspect-ratio: 4 / 3; object-fit: cover; background:#f4f4f4;
+    }
     figcaption{font-size:12px;color:var(--muted);margin-top:6px}
     .lightbox[hidden]{display:none}
     .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.8);display:grid;place-items:center;z-index:2000;padding:24px}
@@ -45,14 +48,14 @@
 
       <section class="section">
         <div class="gallery" id="gallery">
-          <figure><img src="./media/nikolo-dol/nikolo-01.jpg" alt="Николо-Дол — фото 1"><figcaption>Фото 1</figcaption></figure>
-          <figure><img src="./media/nikolo-dol/nikolo-02.jpg" alt="Николо-Дол — фото 2"><figcaption>Фото 2</figcaption></figure>
-          <figure><img src="./media/nikolo-dol/nikolo-03.jpg" alt="Николо-Дол — фото 3"><figcaption>Фото 3</figcaption></figure>
-          <figure><img src="./media/nikolo-dol/nikolo-04.jpg" alt="Николо-Дол — фото 4"><figcaption>Фото 4</figcaption></figure>
-          <figure><img src="./media/nikolo-dol/nikolo-05.jpg" alt="Николо-Дол — фото 5"><figcaption>Фото 5</figcaption></figure>
-          <figure><img src="./media/nikolo-dol/nikolo-06.jpg" alt="Николо-Дол — фото 6"><figcaption>Фото 6</figcaption></figure>
-          <figure><img src="./media/nikolo-dol/nikolo-07.jpg" alt="Николо-Дол — фото 7"><figcaption>Фото 7</figcaption></figure>
-          <figure><img src="./media/nikolo-dol/nikolo-08.jpg" alt="Николо-Дол — фото 8"><figcaption>Фото 8</figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="./media/nikolo-dol/nikolo-01.jpg" alt="Николо-Дол — фото 1"><figcaption>Фото 1</figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="./media/nikolo-dol/nikolo-02.jpg" alt="Николо-Дол — фото 2"><figcaption>Фото 2</figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="./media/nikolo-dol/nikolo-03.jpg" alt="Николо-Дол — фото 3"><figcaption>Фото 3</figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="./media/nikolo-dol/nikolo-04.jpg" alt="Николо-Дол — фото 4"><figcaption>Фото 4</figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="./media/nikolo-dol/nikolo-05.jpg" alt="Николо-Дол — фото 5"><figcaption>Фото 5</figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="./media/nikolo-dol/nikolo-06.jpg" alt="Николо-Дол — фото 6"><figcaption>Фото 6</figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="./media/nikolo-dol/nikolo-07.jpg" alt="Николо-Дол — фото 7"><figcaption>Фото 7</figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="./media/nikolo-dol/nikolo-08.jpg" alt="Николо-Дол — фото 8"><figcaption>Фото 8</figcaption></figure>
         </div>
       </section>
     </main>
@@ -67,8 +70,7 @@
     <img class="lightbox__img" id="lbImg" alt="Просмотр изображения">
     <button class="lb-btn lb-close" id="lbClose" aria-label="Закрыть">×</button>
     <div class="lightbox__controls">
-      <button class="lb-btn" id="lbPrev" aria-label="Предыдущее">←</button>
-      <button class="lb-btn" id="lbNext" aria-label="Следующее">→</button>
+      <button class="lb-btn" id="lbPrev" aria-label="Предыдущее">←</button><button class="lb-btn" id="lbNext" aria-label="Следующее">→</button>
     </div>
   </div>
 
