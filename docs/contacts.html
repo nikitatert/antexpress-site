@@ -4,97 +4,87 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Контакты — АНТэкспресс</title>
-  <meta name="description" content="Свяжитесь с АНТэкспресс для консультации и подготовки коммерческого предложения." />
   <link rel="icon" href="./logo.png" type="image/png" />
+  <script>
+    (function(){
+      try{
+        var k='site-theme', s=localStorage.getItem(k),
+            d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', s||(d?'dark':'light'));
+      }catch(e){}
+    })();
+  </script>
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="./theme.css" />
   <script defer src="./theme.js"></script>
   <style>
-    .breadcrumbs{font-size:14px;color:var(--muted)}
-    .breadcrumbs a{color:inherit;text-decoration:none}
-    .breadcrumbs a:hover{text-decoration:underline}
-    .form{display:grid;gap:10px;margin-top:12px}
-    .form label{font-weight:600}
-    .form input,.form textarea{
-      width:100%; padding:12px; border:1px solid var(--border); border-radius:12px;
-      font:inherit; resize:vertical
-    }
-    .form small{color:var(--muted)}
+    .menubar{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--border);margin-bottom:10px}
+    .menubar a{font-weight:700;padding:8px 10px;border-radius:10px;color:var(--text);text-decoration:none;border:1px solid transparent}
+    .menubar a:hover{color:var(--link);border-color:var(--border)}
+    .menubar a.active{border-color:var(--text)}
+    .menubar .spacer{flex:1}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)}
+    .brand img{height:68px;width:auto}
+    .contact-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+    .ci{display:flex;align-items:center;gap:10px;font-weight:700}
+    .ci small{display:block;font-weight:600;color:var(--muted);line-height:1.1}
+    .ci a{color:var(--text);text-decoration:none}
+    .ci a:hover{color:var(--link)}
+    @media (max-width:920px){.brand img{height:56px}}
+    @media (max-width:680px){.brand img{height:46px}.ci{font-size:14px}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <a class="logo" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" width="200" height="58"/></a>
-      <nav>
-        <a href="./about.html">О компании</a>
-        <a href="./services.html">Услуги</a>
-        <a href="./projects.html">Проекты</a>
-        <a href="./contacts.html">Контакты</a>
-        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема"><span class="sun">☀︎</span><span class="moon">☾</span></button>
-      </nav>
-    </header>
+<div class="wrap">
+  <!-- HEADER -->
+  <header>
+    <div class="topbar">
+      <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТэкспресс"></a>
+      <div class="contact-row">
+        <div class="ci">📞 <div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
+        <div class="ci">✉️ <div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div></div>
+        <div class="ci">🕘 <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
+      </div>
+    </div>
+    <nav class="menubar">
+      <a href="./index.html">Главная</a>
+      <a href="./about.html">О компании</a>
+      <a href="./services.html">Услуги</a>
+      <a href="./projects.html">Наши объекты</a>
+      <a href="./contacts.html">Контакты</a>
+      <span class="spacer"></span>
+      <button class="theme-toggle" id="themeToggle"><span class="sun">☀︎</span><span class="moon">☾</span></button>
+    </nav>
+  </header>
 
-    <main>
-      <section class="hero section">
-        <div class="breadcrumbs"><a href="./index.html">Главная</a> &nbsp;›&nbsp; Контакты</div>
-        <h1>Контакты</h1>
+  <!-- MAIN -->
+  <main>
+    <section class="section">
+      <h1>Контакты</h1>
+      <div class="card" style="margin-bottom:14px">
+        <p><strong>Телефон:</strong> <a href="tel:+74950000000">+7 (495) 000-00-00</a></p>
+        <p><strong>Email:</strong> <a href="mailto:info@antexp.ru">info@antexp.ru</a></p>
+        <p><strong>Почтовый адрес:</strong> 121151, г. Москва, наб. Тараса Шевченко, 23А</p>
+        <p><strong>График работы:</strong> Пн–Пт, 9:00–18:00</p>
+      </div>
 
-        <div class="card" style="margin-top:18px">
-          <h3>Свяжитесь с нами</h3>
-          <p><strong>Почта:</strong> <a href="mailto:info@antexp.ru">info@antexp.ru</a></p>
-          <p><strong>Почтовый адрес:</strong> 121151, г. Москва, наб. Тараса Шевченко, 23А</p>
-          <h3 style="margin-top:18px">График работы</h3>
-          <p>Пн–Пт, 9:00 до 18:00</p>
-        </div>
+      <div class="toolbar">
+        <a class="btn" href="mailto:info@antexp.ru?subject=Запрос%20КП%20—%20АНТэкспресс">Написать напрямую</a>
+        <a class="btn sec" href="./projects.html">Наши объекты</a>
+      </div>
+    </section>
+  </main>
 
-        <div class="card" style="margin-top:18px">
-          <h3>Быстрый запрос</h3>
-          <p class="muted">Заполните форму — мы получим письмо с вашими данными.</p>
-          <form class="form" id="contactForm">
-            <div>
-              <label for="name">Имя *</label>
-              <input id="name" name="name" type="text" required placeholder="Иван Иванов" />
-            </div>
-            <div>
-              <label for="email">Email *</label>
-              <input id="email" name="email" type="email" required placeholder="you@example.com" />
-            </div>
-            <div>
-              <label for="msg">Сообщение *</label>
-              <textarea id="msg" name="msg" rows="6" required placeholder="Коротко опишите задачу…"></textarea>
-              <small>Нажимая «Отправить», вы откроете почтовый клиент с готовым письмом.</small>
-            </div>
-            <div class="toolbar">
-              <button class="btn" type="submit">Отправить</button>
-              <a class="btn sec" href="mailto:info@antexp.ru?subject=Запрос%20КП%20—%20АНТэкспресс">Написать напрямую</a>
-            </div>
-          </form>
-        </div>
-      </section>
-    </main>
+  <!-- FOOTER -->
+  <footer>
+    <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
+    <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
+  </footer>
+</div>
 
-    <footer>
-      <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
-      <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
-    </footer>
-  </div>
-
-  <script>
-    document.getElementById('y').textContent=new Date().getFullYear();
-    document.querySelectorAll('nav a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
-
-    // Mailto form
-    const form = document.getElementById('contactForm');
-    form.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const msg = document.getElementById('msg').value.trim();
-      const subject = encodeURIComponent('Запрос КП — АНТэкспресс');
-      const body = encodeURIComponent(`Имя: ${name}\nEmail: ${email}\n\nСообщение:\n${msg}`);
-      window.location.href = `mailto:info@antexp.ru?subject=${subject}&body=${body}`;
-    });
-  </script>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script>
+  document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
+</script>
 </body>
 </html>
