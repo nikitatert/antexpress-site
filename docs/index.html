@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>АНТЭкспресс — Генеральный подрядчик по снабжению и логистике</title>
   <meta name="description" content="АНТЭкспресс — единая точка ответственности за проектные поставки: планирование, закупки, логистика и контроль качества под KPI и сроки." />
-  <link rel="icon" href="./logo.png" type="image/png" />
+  <link rel="icon" href="./logo-light.png" type="image/png" />
 
   <!-- Theme no-flash -->
   <script>
@@ -32,16 +32,23 @@
       padding:12px 0; gap:16px;
       border-bottom:1px solid var(--border);
     }
-    .brand img{height:72px; width:auto}
+
+    .brand{display:flex; align-items:center}
+    .brand .logo{height:72px; width:auto}
+    /* swap logos by theme */
+    .logo.dark{display:none}
+    [data-theme="dark"] .logo.light{display:none}
+    [data-theme="dark"] .logo.dark{display:inline}
+
     .contact-row{display:flex; align-items:center; gap:24px; flex-wrap:wrap}
     .ci{display:flex; align-items:center; gap:10px; font-weight:700}
     .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
-    .ci a{color:var(--text); text-decoration:none}
-    .ci a:hover{color:var(--link)}
+    .topbar .ci a{color:var(--text); text-decoration:none}
+    .topbar .ci a:hover{color:var(--link)}
 
     .menubar{
-      display:flex; align-items:center; gap:14px;
-      padding:10px 0; border-bottom:1px solid var(--border);
+      display:flex; align-items:center; gap:14px; padding:10px 0;
+      border-bottom:1px solid var(--border); margin-bottom:10px;
     }
     .menubar a{ font-weight:700; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; border:1px solid transparent }
     .menubar a:hover{ color:var(--link); border-color:var(--border) }
@@ -49,15 +56,15 @@
     .menubar .spacer{flex:1}
 
     @media (max-width: 920px){
-      .brand img{height:58px}
-      .contact-row{gap:14px}
+      .brand .logo{height:56px}
+      .contact-row{gap:12px}
     }
     @media (max-width: 680px){
-      .brand img{height:48px}
+      .brand .logo{height:46px}
       .ci{font-size:14px}
     }
 
-    /* ===== Home-specific blocks ===== */
+    /* ===== Home blocks ===== */
     .hero-wrap{
       position:relative; overflow:hidden; border-radius:20px;
       background: radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
@@ -76,7 +83,7 @@
     .features{display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
     @media (max-width: 900px){ .features{grid-template-columns:1fr} }
     .features .card{padding:20px}
-    .features h3{margin:0 0 6px 0}
+    .features h2{margin-bottom:6px}
     .section h2{margin-bottom:6px}
     .lead{color:var(--muted); margin-bottom:18px}
     .process{display:grid; gap:14px; grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -98,31 +105,25 @@
 <body>
   <div class="wrap">
 
-    <!-- ====== HEADER (TWO SEPARATE LINES) ====== -->
+    <!-- ====== HEADER ====== -->
     <header>
-
-      <!-- LINE 1: logo + contacts -->
+      <!-- LINE 1 -->
       <div class="topbar">
         <a class="brand" href="./index.html" aria-label="АНТЭкспресс — на главную">
-          <img src="./logo.png" alt="АНТЭкспресс" />
+          <img src="./logo-light.png" alt="АНТЭкспресс" class="logo light" />
+          <img src="./logo-dark.png"  alt="АНТЭкспресс" class="logo dark" />
         </a>
 
         <div class="contact-row">
-          <div class="ci">
-            <div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div>
-          </div>
-          <div class="ci">
-            <div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div>
-          </div>
-          <div class="ci">
-            <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div>
-          </div>
+          <div class="ci"><div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
+          <div class="ci"><div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div></div>
+          <div class="ci"><div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
         </div>
       </div>
 
-      <!-- LINE 2: menu ONLY -->
+      <!-- LINE 2 -->
       <nav class="menubar" aria-label="Основная навигация">
-        <a href="./index.html">Главная</a>
+        <a href="./index.html" class="active">Главная</a>
         <a href="./about.html">О компании</a>
         <a href="./services.html">Услуги</a>
         <a href="./projects.html">Наши объекты</a>
@@ -148,7 +149,6 @@
                 <a class="btn sec" href="./projects.html">Наши объекты</a>
               </div>
 
-              <!-- KPIs -->
               <div class="kpi">
                 <div class="card"><div class="num">10+ лет</div><div class="cap">в проектных поставках</div></div>
                 <div class="card"><div class="num">100%</div><div class="cap">прозрачность и отчётность</div></div>
@@ -243,6 +243,7 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
+    // highlight current in second-line menu
     document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
   </script>
 </body>
