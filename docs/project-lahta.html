@@ -11,7 +11,10 @@
     .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
     .gallery{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     figure{margin:0}
-    .gallery img{width:100%;height:auto;border-radius:12px;border:1px solid var(--border);cursor:zoom-in}
+    .gallery img{
+      width:100%;height:auto;border-radius:12px;border:1px solid var(--border);cursor:zoom-in;
+      aspect-ratio: 4 / 3; object-fit: cover; background:#f4f4f4;
+    }
     figcaption{font-size:12px;color:var(--muted);margin-top:6px}
     .lightbox[hidden]{display:none}
     .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.8);display:grid;place-items:center;z-index:2000;padding:24px}
@@ -45,11 +48,10 @@
 
       <section class="section">
         <div class="gallery" id="gallery">
-          <!-- Добавьте фото в docs/media/lahta-park/lahta-01.jpg и т.д. -->
-          <figure><img src="./media/lahta-park/lahta-01.jpg" alt="Лахта Парк — фото 1"><figcaption>Фото 1</figcaption></figure>
-          <figure><img src="./media/lahta-park/lahta-02.jpg" alt="Лахта Парк — фото 2"><figcaption>Фото 2</figcaption></figure>
-          <figure><img src="./media/lahta-park/lahta-03.jpg" alt="Лахта Парк — фото 3"><figcaption>Фото 3</figcaption></figure>
-          <figure><img src="./media/lahta-park/lahta-04.jpg" alt="Лахта Парк — фото 4"><figcaption>Фото 4</figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="./media/lahta-park/lahta-01.jpg" alt="Лахта Парк — фото 1"><figcaption>Фото 1</figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="./media/lahta-park/lahta-02.jpg" alt="Лахта Парк — фото 2"><figcaption>Фото 2</figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="./media/lahta-park/lahta-03.jpg" alt="Лахта Парк — фото 3"><figcaption>Фото 3</figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="./media/lahta-park/lahta-04.jpg" alt="Лахта Парк — фото 4"><figcaption>Фото 4</figcaption></figure>
         </div>
       </section>
     </main>
