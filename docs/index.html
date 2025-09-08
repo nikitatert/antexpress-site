@@ -7,14 +7,14 @@
   <meta name="description" content="АНТэкспресс — единая точка ответственности за проектные поставки: планирование, закупки, логистика и контроль качества под KPI и сроки." />
   <link rel="icon" href="./logo.png" type="image/png" />
 
-  <!-- Prevent theme flash -->
+  <!-- No-flash theme -->
   <script>
     (function(){
       try{
         var k='site-theme';
         var s=localStorage.getItem(k);
-        var d=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-theme', s || (d?'dark':'light'));
+        var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', s||(d?'dark':'light'));
       }catch(e){}
     })();
   </script>
@@ -24,44 +24,60 @@
   <script defer src="./theme.js"></script>
 
   <style>
-    /* ===== Two DISTINCT header rows ===== */
-    header { margin-bottom: 12px; }
-    .header-topbar{
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      width: 100%;
-    }
-    .brand img{ height:72px; width:auto; display:block; }
-    .top-contacts{ display:flex; align-items:center; gap:28px; flex-wrap:wrap; }
-    .ci{ display:flex; flex-direction:column; line-height:1.2; }
-    .ci .label{ font-size:12px; color:var(--muted); font-weight:700; letter-spacing:.02em; }
-    .ci .value{ font-weight:800; }
-    .ci a{ color:var(--text); text-decoration:none; }
-    .ci a:hover{ color:var(--link); }
+    /* ========= STRICT TWO-ROW HEADER ========= */
+    .site-header{margin-bottom:12px}
 
-    /* Row 2 is a SEPARATE block under row 1 */
-    .header-menubar{
-      display:block; width:100%;
-      padding: 10px 0;
+    /* Row 1 (topbar) */
+    .topbar-wrap{
+      width:100%;
+      background:var(--card);
       border-bottom:1px solid var(--border);
     }
-    .menubar{ display:flex; align-items:center; gap:14px; }
-    .menubar a{
-      font-weight:700; padding:8px 10px; border-radius:10px;
-      color:var(--text); text-decoration:none; border:1px solid transparent;
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:20px; padding:12px 0;
     }
-    .menubar a:hover{ color:var(--link); border-color:var(--border); }
-    .menubar a.active{ border-color:var(--text); }
+    .brand img{height:72px; width:auto}
+    .contacts{display:flex; align-items:center; gap:28px; flex-wrap:wrap}
+    .ci{display:flex; flex-direction:column; line-height:1.2}
+    .ci .label{font-size:12px; color:var(--muted); font-weight:700; letter-spacing:.02em}
+    .ci .value{font-weight:800}
+    .ci a{color:var(--text); text-decoration:none}
+    .ci a:hover{color:var(--link)}
+
+    /* Row 2 (menubar) — completely separate block */
+    .menubar-wrap{
+      width:100%;
+      background:var(--card);
+      border-bottom:1px solid var(--border);
+    }
+    .menubar{
+      display:flex; align-items:center; gap:16px;
+      padding:10px 0;
+    }
+    /* Make sure global header styles don't interfere */
+    .menubar a,
+    .menubar a:link,
+    .menubar a:visited{
+      color:var(--text) !important;
+      text-decoration:none;
+      font-weight:700;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid transparent;
+    }
+    .menubar a:hover{ color:var(--link) !important; border-color:var(--border) }
+    .menubar a.active{ border-color:var(--text) }
 
     /* Responsive */
-    @media (max-width: 900px){ .brand img{height:58px} }
-    @media (max-width: 720px){
-      .top-contacts{ gap:18px; justify-content:flex-start; }
-      .brand img{height:50px}
+    @media (max-width:920px){ .brand img{height:58px} }
+    @media (max-width:720px){
+      .topbar{flex-direction:column; align-items:flex-start}
+      .contacts{gap:16px}
+      .brand img{height:48px}
     }
 
-    /* ===== Home sections (unchanged) ===== */
+    /* ===== Home blocks (unchanged) ===== */
     .hero-wrap{
       position:relative; overflow:hidden; border-radius:20px;
       background: radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
@@ -102,35 +118,40 @@
 <body>
   <div class="wrap">
 
-    <!-- ===== HEADER (Row 1 + Row 2) ===== -->
-    <header>
+    <!-- ========= HEADER (two separate rows) ========= -->
+    <header class="site-header">
+
       <!-- Row 1 -->
-      <div class="header-topbar">
-        <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" /></a>
+      <div class="topbar-wrap">
+        <div class="topbar">
+          <a class="brand" href="./index.html" aria-label="АНТэкспресс — на главную">
+            <img src="./logo.png" alt="АНТэкспресс" />
+          </a>
 
-        <div class="top-contacts">
-          <!-- Update your real data here -->
-          <div class="ci">
-            <span class="label">Телефон</span>
-            <span class="value"><a href="tel:+74950000000">+7 (495) 000-00-00</a></span>
-          </div>
-          <div class="ci">
-            <span class="label">Email</span>
-            <span class="value"><a href="mailto:info@antexp.ru">info@antexp.ru</a></span>
-          </div>
-          <div class="ci">
-            <span class="label">Время работы</span>
-            <span class="value">Пн–Пт, 9:00–18:00</span>
-          </div>
+          <div class="contacts">
+            <!-- EDIT your real data here -->
+            <div class="ci">
+              <span class="label">Телефон</span>
+              <span class="value"><a href="tel:+74950000000">+7 (495) 000-00-00</a></span>
+            </div>
+            <div class="ci">
+              <span class="label">Email</span>
+              <span class="value"><a href="mailto:info@antexp.ru">info@antexp.ru</a></span>
+            </div>
+            <div class="ci">
+              <span class="label">Время работы</span>
+              <span class="value">Пн–Пт, 9:00–18:00</span>
+            </div>
 
-          <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
-            <span class="sun">☀︎</span><span class="moon">☾</span>
-          </button>
+            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
+              <span class="sun">☀︎</span><span class="moon">☾</span>
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- Row 2 -->
-      <div class="header-menubar">
+      <div class="menubar-wrap">
         <nav class="menubar" aria-label="Основная навигация">
           <a href="./index.html">Главная</a>
           <a href="./about.html">О компании</a>
@@ -139,9 +160,10 @@
           <a href="./contacts.html">Контакты</a>
         </nav>
       </div>
+
     </header>
 
-    <!-- ===== MAIN ===== -->
+    <!-- ========= MAIN ========= -->
     <main>
       <!-- HERO -->
       <section class="section">
@@ -155,6 +177,7 @@
                 <a class="btn sec" href="./projects.html">Наши объекты</a>
               </div>
 
+              <!-- KPIs -->
               <div class="kpi">
                 <div class="card"><div class="num">10+ лет</div><div class="cap">в проектных поставках</div></div>
                 <div class="card"><div class="num">100%</div><div class="cap">прозрачность и отчётность</div></div>
@@ -240,18 +263,17 @@
       </section>
     </main>
 
+    <!-- FOOTER -->
     <footer>
       <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
     </footer>
   </div>
 
-  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight current item in row 2
-    document.querySelectorAll('.header-menubar .menubar a').forEach(a=>{
-      if(a.href===window.location.href){ a.classList.add('active'); }
-    });
+    // highlight current menu item (row 2)
+    document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
   </script>
 </body>
 </html>
