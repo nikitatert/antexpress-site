@@ -7,6 +7,11 @@
   <meta name="description" content="Услуги компании АНТэкспресс." />
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
+  <style>
+    .breadcrumbs{font-size:14px;color:var(--muted)}
+    .breadcrumbs a{color:inherit;text-decoration:none}
+    .breadcrumbs a:hover{text-decoration:underline}
+  </style>
 </head>
 <body>
   <div class="wrap">
@@ -22,6 +27,7 @@
 
     <main>
       <section class="hero section">
+        <div class="breadcrumbs"><a href="./index.html">Главная</a> &nbsp;›&nbsp; Услуги</div>
         <h1>Услуги</h1>
         <p>Здесь в будущем появится описание услуг компании.</p>
       </section>
@@ -32,11 +38,10 @@
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
     </footer>
   </div>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+
   <script>
-    document.querySelectorAll('nav a').forEach(a=>{
-      if(a.href===window.location.href){a.classList.add('active')}
-    });
+    document.getElementById('y').textContent=new Date().getFullYear();
+    document.querySelectorAll('nav a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
   </script>
 </body>
 </html>
