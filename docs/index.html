@@ -30,30 +30,31 @@
       gap:16px; padding:12px 0;
       border-bottom:1px solid var(--border);
     }
-    .brand img{height:64px; width:auto} /* big logo */
-    .contact-row{display:flex; align-items:center; gap:18px; flex-wrap:wrap}
-    .ci{display:flex; align-items:center; gap:8px; font-weight:700}
+    .brand img{height:68px; width:auto} /* big logo */
+    .contact-row{display:flex; align-items:center; gap:22px; flex-wrap:wrap}
+    .ci{display:flex; align-items:center; gap:10px; font-weight:700}
     .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
     .ci a{color:var(--text); text-decoration:none}
     .ci a:hover{color:var(--link)}
     .menubar{
       display:flex; align-items:center; gap:14px; padding:10px 0;
+      border-bottom:1px solid var(--border);
+      margin-bottom:10px;
     }
     .menubar a{ font-weight:700; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; border:1px solid transparent }
     .menubar a:hover{ color:var(--link); border-color:var(--border) }
     .menubar a.active{ border-color:var(--text); }
-
     @media (max-width: 920px){
-      .brand img{height:52px}
+      .brand img{height:56px}
       .topbar{gap:12px}
     }
     @media (max-width: 680px){
-      .contact-row{gap:10px}
+      .contact-row{gap:12px}
       .ci{font-size:14px}
-      .brand img{height:44px}
+      .brand img{height:46px}
     }
 
-    /* ====== Home-specific blocks (kept from your redesign) ====== */
+    /* ====== Home-specific blocks ====== */
     .hero-wrap{
       position:relative; overflow:hidden; border-radius:20px;
       background: radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
@@ -126,6 +127,7 @@
         <a href="./about.html">О компании</a>
         <a href="./services.html">Услуги</a>
         <a href="./projects.html">Наши объекты</a>
+        <a href="./contacts.html">Контакты</a>
       </nav>
     </header>
 
@@ -238,7 +240,7 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight "Главная"
+    // highlight "Главная" in second-row menu
     document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
   </script>
 </body>
