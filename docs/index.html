@@ -7,14 +7,14 @@
   <meta name="description" content="АНТэкспресс — единая точка ответственности за проектные поставки: планирование, закупки, логистика и контроль качества под KPI и сроки." />
   <link rel="icon" href="./logo.png" type="image/png" />
 
-  <!-- prevent theme flash -->
+  <!-- Theme no-flash -->
   <script>
     (function(){
       try{
         var k='site-theme';
         var s=localStorage.getItem(k);
-        var d=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-theme', s || (d ? 'dark' : 'light'));
+        var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', s|| (d?'dark':'light'));
       }catch(e){}
     })();
   </script>
@@ -24,76 +24,71 @@
   <script defer src="./theme.js"></script>
 
   <style>
-    /* ===== HEADER with two stacked rows ===== */
-    header{ background: var(--card); }
+    /* ===== TWO-LINE HEADER ===== */
+    header{display:block;width:100%}
 
-    /* Row 1: LOGO · Телефон · Email · Время работы (one continuous row) */
+    /* LINE 1: logo + contacts ONLY */
     .topbar{
-      display:flex; align-items:center; justify-content:flex-start;
-      gap:28px; padding:14px 0; border-bottom:1px solid var(--border);
-      flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0; gap:16px;
+      border-bottom:1px solid var(--border);
     }
-    .topbar::-webkit-scrollbar{ display:none; }
-    .brand img{ height:72px; width:auto; flex:0 0 auto; }
+    .brand img{height:72px; width:auto} /* big logo */
+    .contact-row{display:flex; align-items:center; gap:24px; flex-wrap:wrap}
+    .ci{display:flex; align-items:center; gap:10px; font-weight:700}
+    .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
+    .ci a{color:var(--text); text-decoration:none}
+    .ci a:hover{color:var(--link)}
 
-    .cblock{
-      display:flex; flex-direction:column; line-height:1.2; flex:0 0 auto;
-      min-width:200px;
-    }
-    .cblock .label{ font-size:12px; color:var(--muted); font-weight:600; }
-    .cblock .value{ font-weight:700; white-space:nowrap; }
-    .cblock .value a{ color:var(--text); text-decoration:none; }
-    .cblock .value a:hover{ color:var(--link); }
-
-    /* Row 2: menu (on its own row, under row 1) */
+    /* LINE 2: main menu UNDER the topbar */
     .menubar{
-      display:flex; align-items:center; gap:22px;
-      padding:12px 0; border-bottom:1px solid var(--border);
-      margin-bottom:20px; flex-wrap:nowrap; overflow-x:auto;
-      -webkit-overflow-scrolling:touch;
+      display:flex; align-items:center; gap:14px;
+      padding:10px 0; border-bottom:1px solid var(--border);
     }
-    .menubar::-webkit-scrollbar{ display:none; }
-    .menubar a{
-      font-weight:700; padding:8px 10px; border-radius:10px;
-      text-decoration:none; color:var(--text); border:1px solid transparent;
-      white-space:nowrap; flex:0 0 auto;
-    }
-    .menubar a:hover{ color:var(--link); border-color:var(--border); }
+    .menubar a{ font-weight:700; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; border:1px solid transparent }
+    .menubar a:hover{ color:var(--link); border-color:var(--border) }
     .menubar a.active{ border-color:var(--text); }
+    .menubar .spacer{flex:1} /* push toggle to the right on line 2 */
 
-    /* Responsive tweaks */
-    @media (max-width:980px){ .brand img{height:60px} .cblock{min-width:170px} }
-    @media (max-width:720px){ .brand img{height:52px} .cblock{min-width:unset} }
+    @media (max-width: 920px){
+      .brand img{height:58px}
+      .contact-row{gap:14px}
+    }
+    @media (max-width: 680px){
+      .brand img{height:48px}
+      .ci{font-size:14px}
+    }
 
-    /* ===== Home sections (unchanged) ===== */
+    /* ===== Home-specific blocks ===== */
     .hero-wrap{
       position:relative; overflow:hidden; border-radius:20px;
       background: radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
                   radial-gradient(1000px 600px at 120% 20%, rgba(10,124,255,.10), transparent 60%),
                   var(--card);
-      border:1px solid var(--border); box-shadow: var(--shadow);
+      border:1px solid var(--border);
+      box-shadow: var(--shadow);
       padding: clamp(28px, 6vw, 60px);
     }
-    .hero-grid{display:grid; gap:24px; grid-template-columns:1.3fr 1fr; align-items:center}
-    @media (max-width:900px){ .hero-grid{grid-template-columns:1fr} }
+    .hero-grid{display:grid; gap:24px; grid-template-columns: 1.3fr 1fr; align-items:center}
+    @media (max-width: 900px){ .hero-grid{grid-template-columns:1fr} }
     .kpi{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:20px}
-    .kpi .card{text-align:center; padding:18px}
-    .kpi .num{font-size:clamp(24px,4vw,34px); font-weight:800}
-    .kpi .cap{color:var(--muted); font-size:12px}
+    .kpi .card{ text-align:center; padding:18px }
+    .kpi .num{ font-size: clamp(24px, 4vw, 34px); font-weight:800 }
+    .kpi .cap{ color: var(--muted); font-size: 12px }
     .features{display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media (max-width:900px){ .features{grid-template-columns:1fr} }
+    @media (max-width: 900px){ .features{grid-template-columns:1fr} }
     .features .card{padding:20px}
     .features h3{margin:0 0 6px 0}
     .section h2{margin-bottom:6px}
     .lead{color:var(--muted); margin-bottom:18px}
     .process{display:grid; gap:14px; grid-template-columns:repeat(4,minmax(0,1fr))}
-    @media (max-width:1024px){ .process{grid-template-columns:repeat(2,minmax(0,1fr))} }
-    @media (max-width:640px){ .process{grid-template-columns:1fr} }
+    @media (max-width: 1024px){ .process{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width: 640px){ .process{grid-template-columns:1fr} }
     .step{position:relative; padding:18px}
     .step .n{font-weight:800; font-size:12px; color:var(--muted); letter-spacing:.08em}
     .projects .list{display:grid; gap:14px; grid-template-columns:repeat(5,minmax(0,1fr))}
-    @media (max-width:1100px){ .projects .list{grid-template-columns:repeat(3,minmax(0,1fr))} }
-    @media (max-width:640px){ .projects .list{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width: 1100px){ .projects .list{grid-template-columns:repeat(3,minmax(0,1fr))} }
+    @media (max-width: 640px){ .projects .list{grid-template-columns:repeat(2,minmax(0,1fr))} }
     .projects .card h3{margin:2px 0}
     .cta-strip{
       display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
@@ -105,38 +100,46 @@
 <body>
   <div class="wrap">
 
-    <!-- ===== HEADER ===== -->
+    <!-- ====== HEADER (TWO SEPARATE LINES) ====== -->
     <header>
-      <!-- ROW 1: logo, phone, email, hours (one line) -->
-      <div class="topbar">
-        <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" /></a>
 
-        <div class="cblock">
-          <span class="label">Телефон</span>
-          <span class="value"><a href="tel:+74950000000">+7 (495) 000-00-00</a></span>
-        </div>
-        <div class="cblock">
-          <span class="label">Email</span>
-          <span class="value"><a href="mailto:info@antexp.ru">info@antexp.ru</a></span>
-        </div>
-        <div class="cblock">
-          <span class="label">Время работы</span>
-          <span class="value">Пн–Пт, 9:00–18:00</span>
+      <!-- LINE 1: logo + contacts -->
+      <div class="topbar">
+        <a class="brand" href="./index.html" aria-label="АНТэкспресс — на главную">
+          <img src="./logo.png" alt="АНТэкспресс" />
+        </a>
+
+        <div class="contact-row">
+          <!-- Edit your real phone/email/hours here -->
+          <div class="ci">
+            📞 <div><small>Call-центр</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div>
+          </div>
+          <div class="ci">
+            ✉️ <div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div>
+          </div>
+          <div class="ci">
+            🕘 <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div>
+          </div>
         </div>
       </div>
 
-      <!-- ROW 2: menu (separate row UNDER row 1) -->
+      <!-- LINE 2: menu ONLY (and theme toggle at far right) -->
       <nav class="menubar" aria-label="Основная навигация">
         <a href="./index.html">Главная</a>
         <a href="./about.html">О компании</a>
         <a href="./services.html">Услуги</a>
         <a href="./projects.html">Наши объекты</a>
         <a href="./contacts.html">Контакты</a>
+        <span class="spacer"></span>
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
+          <span class="sun">☀︎</span><span class="moon">☾</span>
+        </button>
       </nav>
     </header>
 
-    <!-- ===== MAIN (unchanged) ===== -->
+    <!-- ====== MAIN ====== -->
     <main>
+      <!-- HERO -->
       <section class="section">
         <div class="hero-wrap">
           <div class="hero-grid">
@@ -147,6 +150,8 @@
                 <a class="btn" href="./contacts.html">Запросить КП</a>
                 <a class="btn sec" href="./projects.html">Наши объекты</a>
               </div>
+
+              <!-- KPIs -->
               <div class="kpi">
                 <div class="card"><div class="num">10+ лет</div><div class="cap">в проектных поставках</div></div>
                 <div class="card"><div class="num">100%</div><div class="cap">прозрачность и отчётность</div></div>
@@ -154,6 +159,7 @@
                 <div class="card"><div class="num">5 регионов</div><div class="cap">ключевые объекты</div></div>
               </div>
             </div>
+
             <div>
               <div class="card" style="height:180px; display:grid; place-items:center;">
                 <strong>План-график поставок</strong>
@@ -168,9 +174,70 @@
         </div>
       </section>
 
-      <!-- keep the rest of your home sections as they are -->
+      <!-- WHAT WE DO -->
+      <section class="section">
+        <h2>Что делаем</h2>
+        <p class="lead">Закрываем весь цикл проектных поставок — от тендеров до ввода на площадке.</p>
+        <div class="features">
+          <div class="card">
+            <h3>Планирование и МТО</h3>
+            <p class="muted">Номенклатура, альтернативы, графики поставок и бюджетирование.</p>
+          </div>
+          <div class="card">
+            <h3>Закупка и контрактация</h3>
+            <p class="muted">Тендеры, проверка подрядчиков, условия поставки и управление рисками.</p>
+          </div>
+          <div class="card">
+            <h3>Логистика и контроль</h3>
+            <p class="muted">Складирование, сертификация, таможня, «последняя миля», трекинг 24/7.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS SHORTLIST -->
+      <section class="section projects">
+        <h2>Наши объекты</h2>
+        <p class="lead">Подборка объектов, где мы отвечаем за снабжение и логистику.</p>
+        <div class="list">
+          <a class="card" href="./project-nikolo-dol.html"><h3>Николо-Дол</h3></a>
+          <a class="card" href="./project-skandinaviya.html"><h3>Скандинавия</h3></a>
+          <a class="card" href="./project-sakhalin.html"><h3>Сахалин</h3></a>
+          <a class="card" href="./project-baikal.html"><h3>Байкал</h3></a>
+          <a class="card" href="./project-lahta.html"><h3>Лахта Парк</h3></a>
+        </div>
+        <div class="toolbar" style="margin-top:14px">
+          <a class="btn sec" href="./projects.html">Все объекты</a>
+        </div>
+      </section>
+
+      <!-- PROCESS -->
+      <section class="section">
+        <h2>Как мы работаем</h2>
+        <p class="lead">Простая схема взаимодействия и понятные точки контроля.</p>
+        <div class="process">
+          <div class="card step"><div class="n">01</div><h3>Бриф проекта</h3><p class="muted">Сценарий снабжения, риски и KPI.</p></div>
+          <div class="card step"><div class="n">02</div><h3>Коммерческое предложение</h3><p class="muted">Смета, график, условия и SLA.</p></div>
+          <div class="card step"><div class="n">03</div><h3>Контрактация</h3><p class="muted">Тендеры, договоры, гарантийные условия.</p></div>
+          <div class="card step"><div class="n">04</div><h3>Поставка и отчётность</h3><p class="muted">Трекинг, закрывающие документы, ввод.</p></div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="section">
+        <div class="cta-strip">
+          <div>
+            <h3>Нужна поставка «под ключ»?</h3>
+            <div class="muted">Пришлите спецификацию — подготовим КП и сроки.</div>
+          </div>
+          <div class="toolbar">
+            <a class="btn" href="./contacts.html">Запросить КП</a>
+            <a class="btn sec" href="mailto:info@antexp.ru?subject=Запрос%20КП%20—%20АНТэкспресс">Написать на почту</a>
+          </div>
+        </div>
+      </section>
     </main>
 
+    <!-- FOOTER -->
     <footer>
       <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
@@ -179,9 +246,8 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    document.querySelectorAll('.menubar a').forEach(a=>{
-      if(a.href===window.location.href){a.classList.add('active')}
-    });
+    // highlight "Главная" in the second line menu
+    document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
   </script>
 </body>
 </html>
