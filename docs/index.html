@@ -24,47 +24,49 @@
   <script defer src="./theme.js"></script>
 
   <style>
-    /* ====== STRICT two-line header ====== */
-    header{display:block}
-    .topbar-line, .nav-line{width:100%; display:block}
-
-    .topbar-line{
-      border-bottom:1px solid var(--border);
+    /* ======= Header (strict two-row layout) ======= */
+    header{margin-bottom:8px}
+    .header-top{
+      display:grid;
+      grid-template-columns:auto 1fr; /* logo | contacts */
+      gap:18px;
+      align-items:center;
       padding:12px 0;
+      border-bottom:1px solid var(--border);
     }
-    .topbar-inner{
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
+    .brand img{height:70px; width:auto}
+    .top-contacts{
+      display:flex; justify-content:flex-end; align-items:center; gap:28px; flex-wrap:wrap;
     }
-    .brand img{height:72px; width:auto} /* big logo */
-
-    .contact-row{display:flex; align-items:center; gap:22px; flex-wrap:wrap}
-    .ci{display:flex; align-items:center; gap:10px; font-weight:700}
-    .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
+    .ci{display:flex; flex-direction:column; line-height:1.2}
+    .ci .label{font-size:12px; color:var(--muted); font-weight:700; letter-spacing:.02em}
+    .ci .value{font-weight:800}
     .ci a{color:var(--text); text-decoration:none}
     .ci a:hover{color:var(--link)}
-
-    .nav-line{
+    .header-nav{
+      padding:10px 0;
       border-bottom:1px solid var(--border);
-      padding:10px 0; margin-bottom:10px;
     }
-    .nav-inner{display:flex; gap:14px}
-    .nav-inner a{
+    .header-nav .menubar{
+      display:flex; align-items:center; gap:14px;
+    }
+    .header-nav .menubar a{
       font-weight:700; padding:8px 10px; border-radius:10px;
       color:var(--text); text-decoration:none; border:1px solid transparent;
     }
-    .nav-inner a:hover{ color:var(--link); border-color:var(--border) }
-    .nav-inner a.active{ border-color:var(--text) }
+    .header-nav .menubar a:hover{ color:var(--link); border-color:var(--border) }
+    .header-nav .menubar a.active{ border-color:var(--text) }
 
-    @media (max-width: 920px){
-      .brand img{height:58px}
+    /* Responsive stacking */
+    @media (max-width: 900px){
+      .brand img{height:56px}
     }
-    @media (max-width: 700px){
-      .contact-row{gap:12px}
-      .ci{font-size:14px}
-      .brand img{height:48px}
+    @media (max-width: 720px){
+      .header-top{grid-template-columns:1fr}
+      .top-contacts{justify-content:flex-start; gap:18px}
     }
 
-    /* ====== Home blocks (same as before) ====== */
+    /* ======= Home blocks (same as before) ======= */
     .hero-wrap{
       position:relative; overflow:hidden; border-radius:20px;
       background: radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
@@ -105,42 +107,44 @@
 <body>
   <div class="wrap">
 
-    <!-- ====== HEADER (2 lines) ====== -->
+    <!-- ====== HEADER (two separate rows) ====== -->
     <header>
-      <!-- Line 1: logo + contacts -->
-      <div class="topbar-line">
-        <div class="topbar-inner">
-          <a class="brand" href="./index.html" aria-label="АНТэкспресс — на главную">
-            <img src="./logo.png" alt="АНТэкспресс" />
-          </a>
+      <!-- Row 1: Logo + contacts -->
+      <div class="header-top">
+        <a class="brand" href="./index.html" aria-label="АНТэкспресс — на главную">
+          <img src="./logo.png" alt="АНТэкспресс" />
+        </a>
 
-          <div class="contact-row">
-            <!-- EDIT your real phone/email/hours here -->
-            <div class="ci">
-              📞 <div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div>
-            </div>
-            <div class="ci">
-              ✉️ <div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div>
-            </div>
-            <div class="ci">
-              🕘 <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div>
-            </div>
-            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
-              <span class="sun">☀︎</span><span class="moon">☾</span>
-            </button>
+        <div class="top-contacts">
+          <!-- Edit your actual data here -->
+          <div class="ci">
+            <span class="label">Телефон</span>
+            <span class="value"><a href="tel:+74950000000">+7 (495) 000-00-00</a></span>
           </div>
+          <div class="ci">
+            <span class="label">Email</span>
+            <span class="value"><a href="mailto:info@antexp.ru">info@antexp.ru</a></span>
+          </div>
+          <div class="ci">
+            <span class="label">Время работы</span>
+            <span class="value">Пн–Пт, 9:00–18:00</span>
+          </div>
+
+          <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
+            <span class="sun">☀︎</span><span class="moon">☾</span>
+          </button>
         </div>
       </div>
 
-      <!-- Line 2: main menu (separate row) -->
-      <div class="nav-line" role="navigation" aria-label="Основная навигация">
-        <div class="nav-inner">
+      <!-- Row 2: Main nav -->
+      <div class="header-nav">
+        <nav class="menubar" aria-label="Основная навигация">
           <a href="./index.html">Главная</a>
           <a href="./about.html">О компании</a>
           <a href="./services.html">Услуги</a>
           <a href="./projects.html">Наши объекты</a>
           <a href="./contacts.html">Контакты</a>
-        </div>
+        </nav>
       </div>
     </header>
 
@@ -204,7 +208,7 @@
       <!-- PROJECTS SHORTLIST -->
       <section class="section projects">
         <h2>Наши объекты</h2>
-      <p class="lead">Подборка объектов, где мы отвечаем за снабжение и логистику.</p>
+        <p class="lead">Подборка объектов, где мы отвечаем за снабжение и логистику.</p>
         <div class="list">
           <a class="card" href="./project-nikolo-dol.html"><h3>Николо-Дол</h3></a>
           <a class="card" href="./project-skandinaviya.html"><h3>Скандинавия</h3></a>
@@ -253,8 +257,8 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight in the second (nav) line
-    document.querySelectorAll('.nav-inner a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
+    // highlight "Главная" in row 2 menu
+    document.querySelectorAll('.header-nav .menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
   </script>
 </body>
 </html>
