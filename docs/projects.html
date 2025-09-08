@@ -6,9 +6,27 @@
   <title>Проекты — АНТэкспресс</title>
   <meta name="description" content="Проекты и кейсы компании АНТэкспресс." />
   <link rel="icon" href="./logo.png" type="image/png" />
+
+  <!-- 🛡️ Set theme EARLY to prevent flash -->
+  <script>
+    (function(){
+      try{
+        var KEY='site-theme';
+        var saved=localStorage.getItem(KEY);
+        var prefersDark=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var initial=saved || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', initial);
+      }catch(e){}
+    })();
+  </script>
+
+  <!-- Styles load after we set data-theme -->
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="./theme.css" />
+
+  <!-- Toggle logic can be deferred -->
   <script defer src="./theme.js"></script>
+
   <style>
     .map-wrap{margin-top:28px}
     #ru-map{
@@ -29,7 +47,9 @@
         <a href="./services.html">Услуги</a>
         <a href="./projects.html">Проекты</a>
         <a href="./contacts.html">Контакты</a>
-        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема"><span class="sun">☀︎</span><span class="moon">☾</span></button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
+          <span class="sun">☀︎</span><span class="moon">☾</span>
+        </button>
       </nav>
     </header>
 
@@ -84,7 +104,7 @@
         { coords:[46.957,142.736], hint:'Южно-Сахалинск — СТК «Горный воздух»', balloon:'<strong>Сахалин</strong><br>о. Сахалин, г. Южно-Сахалинск, СТК «Горный воздух».<br><a href="./project-sakhalin.html">Открыть проект</a>' },
         { coords:[54.5144,36.2550], hint:'Калужская область — усадьба Гурьевых', balloon:'<strong>Калужская область</strong><br>На месте усадьбы Гурьевых XVIII века.<br><a href="./project-nikolo-dol.html">Открыть проект</a>' },
         { coords:[53.780,108.261], hint:'Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»', balloon:'<strong>Байкал</strong><br>Респ. Бурятия, с. Турка, ОЭЗ «Байкальская гавань».<br><a href="./project-baikal.html">Открыть проект</a>' },
-        { coords:[60.010,30.260], hint:'Санкт-Петербург — ул. Новая, д. 51, к. 79, стр. 1', balloon:'<strong>Санкт-Петербург</strong><br>ул. Новая, д. 51, к. 79, стр. 1 (10 минут от «Лахта Центра»).<br><a href="./project-skandinaviya.html">Открыть проект</a>' }
+        { coords:[60.010,30.260], hint:'Санкт-Петербург — ул. Новая, д. 51, к. 79, стр. 1', balloon:'<strong>Санкт-Петербург</strong><br>ул. Новая, д. 51, к. 79, стр. 1 (10 минут от «Лахта Центра»).<br><a href="./project-lahta.html">Открыть проект</a>' }
       ];
 
       var collection = new ymaps.GeoObjectCollection({}, { preset:'islands#greenDotIcon' });
