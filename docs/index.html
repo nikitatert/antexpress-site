@@ -7,6 +7,10 @@
   <meta name="description" content="АНТэкспресс — снабжение и логистика для крупных инфраструктурных проектов." />
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
+  <!-- New theme styles -->
+  <link rel="stylesheet" href="./theme.css" />
+  <!-- Load theme script early (defer to attach handlers after DOM) -->
+  <script defer src="./theme.js"></script>
 </head>
 <body>
   <div class="wrap">
@@ -17,6 +21,10 @@
         <a href="./services.html">Услуги</a>
         <a href="./projects.html">Проекты</a>
         <a href="./contacts.html">Контакты</a>
+        <!-- Professional Dark/Light toggle -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
+          <span class="sun">☀︎</span><span class="moon">☾</span>
+        </button>
       </nav>
     </header>
 
