@@ -7,6 +7,8 @@
   <meta name="description" content="Фото проекта Скандинавия — АНТэкспресс." />
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./theme.css" />
+  <script defer src="./theme.js"></script>
   <style>
     .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
     .gallery{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
@@ -33,6 +35,7 @@
         <a href="./services.html">Услуги</a>
         <a href="./projects.html">Проекты</a>
         <a href="./contacts.html">Контакты</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема"><span class="sun">☀︎</span><span class="moon">☾</span></button>
       </nav>
     </header>
 
