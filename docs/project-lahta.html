@@ -13,25 +13,12 @@
     figure{margin:0}
     .gallery img{width:100%;height:auto;border-radius:12px;border:1px solid var(--border);cursor:zoom-in}
     figcaption{font-size:12px;color:var(--muted);margin-top:6px}
-
-    /* Lightbox */
     .lightbox[hidden]{display:none}
-    .lightbox{
-      position:fixed; inset:0; background:rgba(0,0,0,.8);
-      display:grid; place-items:center; z-index:2000; padding:24px;
-    }
-    .lightbox__img{max-width:92vw; max-height:92vh; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.5)}
-    .lightbox__controls{
-      position:fixed; inset:0; pointer-events:none;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:24px;
-    }
-    .lb-btn{
-      pointer-events:auto;
-      background:rgba(255,255,255,.9); border:0; border-radius:12px;
-      padding:10px 14px; font-size:16px; font-weight:700; cursor:pointer;
-    }
-    .lb-close{position:fixed; top:16px; right:16px}
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.8);display:grid;place-items:center;z-index:2000;padding:24px}
+    .lightbox__img{max-width:92vw;max-height:92vh;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+    .lightbox__controls{position:fixed;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:space-between;padding:24px}
+    .lb-btn{pointer-events:auto;background:rgba(255,255,255,.9);border:0;border-radius:12px;padding:10px 14px;font-size:16px;font-weight:700;cursor:pointer}
+    .lb-close{position:fixed;top:16px;right:16px}
   </style>
 </head>
 <body>
@@ -40,6 +27,7 @@
       <a class="logo" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" width="200" height="58"/></a>
       <nav>
         <a href="./about.html">О компании</a>
+        <a href="./services.html">Услуги</a>
         <a href="./projects.html">Проекты</a>
         <a href="./contacts.html">Контакты</a>
       </nav>
@@ -57,13 +45,11 @@
 
       <section class="section">
         <div class="gallery" id="gallery">
-          <!-- Загрузите фото сюда: docs/media/lahta-park/
-               Назовите их последовательно: lahta-01.jpg, lahta-02.jpg, ... -->
+          <!-- Добавьте фото в docs/media/lahta-park/lahta-01.jpg и т.д. -->
           <figure><img src="./media/lahta-park/lahta-01.jpg" alt="Лахта Парк — фото 1"><figcaption>Фото 1</figcaption></figure>
           <figure><img src="./media/lahta-park/lahta-02.jpg" alt="Лахта Парк — фото 2"><figcaption>Фото 2</figcaption></figure>
           <figure><img src="./media/lahta-park/lahta-03.jpg" alt="Лахта Парк — фото 3"><figcaption>Фото 3</figcaption></figure>
           <figure><img src="./media/lahta-park/lahta-04.jpg" alt="Лахта Парк — фото 4"><figcaption>Фото 4</figcaption></figure>
-          <!-- Добавляйте ещё блоки figure по мере необходимости -->
         </div>
       </section>
     </main>
@@ -74,7 +60,6 @@
     </footer>
   </div>
 
-  <!-- Lightbox -->
   <div class="lightbox" id="lightbox" hidden>
     <img class="lightbox__img" id="lbImg" alt="Просмотр изображения">
     <button class="lb-btn lb-close" id="lbClose" aria-label="Закрыть">×</button>
@@ -85,37 +70,19 @@
   </div>
 
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+    document.getElementById('y').textContent=new Date().getFullYear();
+    document.querySelectorAll('nav a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
 
-    // nav highlight
-    document.querySelectorAll('nav a').forEach(a=>{
-      if(a.href===window.location.href){a.classList.add('active')}
-    });
-
-    // Lightbox JS
-    const gallery = Array.from(document.querySelectorAll('#gallery img'));
-    const box = document.getElementById('lightbox');
-    const img = document.getElementById('lbImg');
-    const btnPrev = document.getElementById('lbPrev');
-    const btnNext = document.getElementById('lbNext');
-    const btnClose = document.getElementById('lbClose');
-    let idx = 0;
-
-    function openAt(i){ idx = i; img.src = gallery[idx].src; box.hidden = false; document.body.style.overflow = 'hidden'; }
-    function closeBox(){ box.hidden = true; document.body.style.overflow = ''; }
-    function nav(delta){ idx = (idx + delta + gallery.length) % gallery.length; img.src = gallery[idx].src; }
-
-    gallery.forEach((el,i)=>el.addEventListener('click', ()=>openAt(i)));
-    btnClose.addEventListener('click', closeBox);
-    btnPrev.addEventListener('click', ()=>nav(-1));
-    btnNext.addEventListener('click', ()=>nav(1));
-    box.addEventListener('click', (e)=>{ if(e.target===box) closeBox(); });
-    window.addEventListener('keydown', (e)=>{
-      if(box.hidden) return;
-      if(e.key==='Escape') closeBox();
-      if(e.key==='ArrowLeft') nav(-1);
-      if(e.key==='ArrowRight') nav(1);
-    });
+    const gallery=[...document.querySelectorAll('#gallery img')];
+    const box=document.getElementById('lightbox'), img=document.getElementById('lbImg');
+    const prev=document.getElementById('lbPrev'), next=document.getElementById('lbNext'), close=document.getElementById('lbClose');
+    let i=0; function openAt(x){i=x;img.src=gallery[i].src;box.hidden=false;document.body.style.overflow='hidden'}
+    function nav(d){i=(i+d+gallery.length)%gallery.length;img.src=gallery[i].src}
+    function closeBox(){box.hidden=true;document.body.style.overflow=''}
+    gallery.forEach((el,idx)=>el.addEventListener('click',()=>openAt(idx)));
+    prev.addEventListener('click',()=>nav(-1)); next.addEventListener('click',()=>nav(1)); close.addEventListener('click',closeBox);
+    box.addEventListener('click',e=>{if(e.target===box)closeBox()});
+    window.addEventListener('keydown',e=>{if(box.hidden)return; if(e.key==='Escape')closeBox(); if(e.key==='ArrowLeft')nav(-1); if(e.key==='ArrowRight')nav(1)});
   </script>
 </body>
 </html>
