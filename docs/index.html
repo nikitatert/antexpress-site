@@ -22,44 +22,126 @@
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="./theme.css" />
   <script defer src="./theme.js"></script>
+
+  <style>
+    /* ====== STRICT two-line header ====== */
+    header{display:block}
+    .topbar-line, .nav-line{width:100%; display:block}
+
+    .topbar-line{
+      border-bottom:1px solid var(--border);
+      padding:12px 0;
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+    }
+    .brand img{height:72px; width:auto} /* big logo */
+
+    .contact-row{display:flex; align-items:center; gap:22px; flex-wrap:wrap}
+    .ci{display:flex; align-items:center; gap:10px; font-weight:700}
+    .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
+    .ci a{color:var(--text); text-decoration:none}
+    .ci a:hover{color:var(--link)}
+
+    .nav-line{
+      border-bottom:1px solid var(--border);
+      padding:10px 0; margin-bottom:10px;
+    }
+    .nav-inner{display:flex; gap:14px}
+    .nav-inner a{
+      font-weight:700; padding:8px 10px; border-radius:10px;
+      color:var(--text); text-decoration:none; border:1px solid transparent;
+    }
+    .nav-inner a:hover{ color:var(--link); border-color:var(--border) }
+    .nav-inner a.active{ border-color:var(--text) }
+
+    @media (max-width: 920px){
+      .brand img{height:58px}
+    }
+    @media (max-width: 700px){
+      .contact-row{gap:12px}
+      .ci{font-size:14px}
+      .brand img{height:48px}
+    }
+
+    /* ====== Home blocks (same as before) ====== */
+    .hero-wrap{
+      position:relative; overflow:hidden; border-radius:20px;
+      background: radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
+                  radial-gradient(1000px 600px at 120% 20%, rgba(10,124,255,.10), transparent 60%),
+                  var(--card);
+      border:1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: clamp(28px, 6vw, 60px);
+    }
+    .hero-grid{display:grid; gap:24px; grid-template-columns: 1.3fr 1fr; align-items:center}
+    @media (max-width: 900px){ .hero-grid{grid-template-columns:1fr} }
+    .kpi{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:20px}
+    .kpi .card{ text-align:center; padding:18px }
+    .kpi .num{ font-size: clamp(24px, 4vw, 34px); font-weight:800 }
+    .kpi .cap{ color: var(--muted); font-size: 12px }
+    .features{display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width: 900px){ .features{grid-template-columns:1fr} }
+    .features .card{padding:20px}
+    .features h3{margin:0 0 6px 0}
+    .section h2{margin-bottom:6px}
+    .lead{color:var(--muted); margin-bottom:18px}
+    .process{display:grid; gap:14px; grid-template-columns:repeat(4,minmax(0,1fr))}
+    @media (max-width: 1024px){ .process{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width: 640px){ .process{grid-template-columns:1fr} }
+    .step{position:relative; padding:18px}
+    .step .n{font-weight:800; font-size:12px; color:var(--muted); letter-spacing:.08em}
+    .projects .list{display:grid; gap:14px; grid-template-columns:repeat(5,minmax(0,1fr))}
+    @media (max-width: 1100px){ .projects .list{grid-template-columns:repeat(3,minmax(0,1fr))} }
+    @media (max-width: 640px){ .projects .list{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    .projects .card h3{margin:2px 0}
+    .cta-strip{
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px 20px; box-shadow:var(--shadow)
+    }
+    .cta-strip h3{margin:0}
+  </style>
 </head>
 <body>
   <div class="wrap">
 
-    <!-- ====== HEADER (TWO SEPARATE LINES) ====== -->
+    <!-- ====== HEADER (2 lines) ====== -->
     <header>
+      <!-- Line 1: logo + contacts -->
+      <div class="topbar-line">
+        <div class="topbar-inner">
+          <a class="brand" href="./index.html" aria-label="АНТэкспресс — на главную">
+            <img src="./logo.png" alt="АНТэкспресс" />
+          </a>
 
-      <!-- LINE 1: logo + contacts -->
-      <div class="topbar">
-        <a class="brand" href="./index.html" aria-label="АНТэкспресс — на главную">
-          <img src="./logo.png" alt="АНТэкспресс" />
-        </a>
-
-        <div class="contact-row">
-          <div class="ci">
-            📞 <div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div>
-          </div>
-          <div class="ci">
-            ✉️ <div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div>
-          </div>
-          <div class="ci">
-            🕘 <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div>
+          <div class="contact-row">
+            <!-- EDIT your real phone/email/hours here -->
+            <div class="ci">
+              📞 <div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div>
+            </div>
+            <div class="ci">
+              ✉️ <div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div>
+            </div>
+            <div class="ci">
+              🕘 <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
+              <span class="sun">☀︎</span><span class="moon">☾</span>
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- LINE 2: menu ONLY -->
-      <nav class="menubar" aria-label="Основная навигация">
-        <a href="./index.html">Главная</a>
-        <a href="./about.html">О компании</a>
-        <a href="./services.html">Услуги</a>
-        <a href="./projects.html">Наши объекты</a>
-        <a href="./contacts.html">Контакты</a>
-        <span class="spacer"></span>
-        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
-          <span class="sun">☀︎</span><span class="moon">☾</span>
-        </button>
-      </nav>
+      <!-- Line 2: main menu (separate row) -->
+      <div class="nav-line" role="navigation" aria-label="Основная навигация">
+        <div class="nav-inner">
+          <a href="./index.html">Главная</a>
+          <a href="./about.html">О компании</a>
+          <a href="./services.html">Услуги</a>
+          <a href="./projects.html">Наши объекты</a>
+          <a href="./contacts.html">Контакты</a>
+        </div>
+      </div>
     </header>
 
     <!-- ====== MAIN ====== -->
@@ -122,7 +204,7 @@
       <!-- PROJECTS SHORTLIST -->
       <section class="section projects">
         <h2>Наши объекты</h2>
-        <p class="lead">Подборка объектов, где мы отвечаем за снабжение и логистику.</p>
+      <p class="lead">Подборка объектов, где мы отвечаем за снабжение и логистику.</p>
         <div class="list">
           <a class="card" href="./project-nikolo-dol.html"><h3>Николо-Дол</h3></a>
           <a class="card" href="./project-skandinaviya.html"><h3>Скандинавия</h3></a>
@@ -164,15 +246,15 @@
 
     <!-- FOOTER -->
     <footer>
-      <div>© <span id="y"></span> ООО «АНТЭкспресс». Все права защищены.</div>
+      <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
     </footer>
   </div>
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight "Главная"
-    document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
+    // highlight in the second (nav) line
+    document.querySelectorAll('.nav-inner a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
   </script>
 </body>
-</html> 
+</html>
