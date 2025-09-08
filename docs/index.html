@@ -24,37 +24,42 @@
   <script defer src="./theme.js"></script>
 
   <style>
-    /* ====== HEADER: topbar + menubar ====== */
+    /* ===== TWO-LINE HEADER ===== */
+    header{display:block;width:100%}
+
+    /* LINE 1: logo + contacts ONLY */
     .topbar{
       display:flex; align-items:center; justify-content:space-between;
-      gap:16px; padding:12px 0;
+      padding:12px 0; gap:16px;
       border-bottom:1px solid var(--border);
     }
-    .brand img{height:68px; width:auto} /* big logo */
-    .contact-row{display:flex; align-items:center; gap:22px; flex-wrap:wrap}
+    .brand img{height:72px; width:auto} /* big logo */
+    .contact-row{display:flex; align-items:center; gap:24px; flex-wrap:wrap}
     .ci{display:flex; align-items:center; gap:10px; font-weight:700}
     .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
     .ci a{color:var(--text); text-decoration:none}
     .ci a:hover{color:var(--link)}
+
+    /* LINE 2: main menu UNDER the topbar */
     .menubar{
-      display:flex; align-items:center; gap:14px; padding:10px 0;
-      border-bottom:1px solid var(--border);
-      margin-bottom:10px;
+      display:flex; align-items:center; gap:14px;
+      padding:10px 0; border-bottom:1px solid var(--border);
     }
     .menubar a{ font-weight:700; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; border:1px solid transparent }
     .menubar a:hover{ color:var(--link); border-color:var(--border) }
     .menubar a.active{ border-color:var(--text); }
+    .menubar .spacer{flex:1} /* push toggle to the right on line 2 */
+
     @media (max-width: 920px){
-      .brand img{height:56px}
-      .topbar{gap:12px}
+      .brand img{height:58px}
+      .contact-row{gap:14px}
     }
     @media (max-width: 680px){
-      .contact-row{gap:12px}
+      .brand img{height:48px}
       .ci{font-size:14px}
-      .brand img{height:46px}
     }
 
-    /* ====== Home-specific blocks ====== */
+    /* ===== Home-specific blocks ===== */
     .hero-wrap{
       position:relative; overflow:hidden; border-radius:20px;
       background: radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
@@ -95,17 +100,17 @@
 <body>
   <div class="wrap">
 
-    <!-- ====== HEADER ====== -->
+    <!-- ====== HEADER (TWO SEPARATE LINES) ====== -->
     <header>
 
-      <!-- Top info bar -->
+      <!-- LINE 1: logo + contacts -->
       <div class="topbar">
         <a class="brand" href="./index.html" aria-label="АНТэкспресс — на главную">
           <img src="./logo.png" alt="АНТэкспресс" />
         </a>
 
         <div class="contact-row">
-          <!-- EDIT your real phone/email/hours here -->
+          <!-- Edit your real phone/email/hours here -->
           <div class="ci">
             📞 <div><small>Call-центр</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div>
           </div>
@@ -115,19 +120,20 @@
           <div class="ci">
             🕘 <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div>
           </div>
-          <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
-            <span class="sun">☀︎</span><span class="moon">☾</span>
-          </button>
         </div>
       </div>
 
-      <!-- Second bar: main menu -->
+      <!-- LINE 2: menu ONLY (and theme toggle at far right) -->
       <nav class="menubar" aria-label="Основная навигация">
         <a href="./index.html">Главная</a>
         <a href="./about.html">О компании</a>
         <a href="./services.html">Услуги</a>
         <a href="./projects.html">Наши объекты</a>
         <a href="./contacts.html">Контакты</a>
+        <span class="spacer"></span>
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
+          <span class="sun">☀︎</span><span class="moon">☾</span>
+        </button>
       </nav>
     </header>
 
@@ -240,7 +246,7 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight "Главная" in second-row menu
+    // highlight "Главная" in the second line menu
     document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
   </script>
 </body>
