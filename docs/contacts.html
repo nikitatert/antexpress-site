@@ -7,6 +7,15 @@
   <meta name="description" content="Свяжитесь с АНТэкспресс для консультации и подготовки коммерческого предложения." />
   <link rel="icon" href="./logo.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
+  <style>
+    .form{display:grid;gap:10px;margin-top:12px}
+    .form label{font-weight:600}
+    .form input,.form textarea{
+      width:100%; padding:12px; border:1px solid var(--border); border-radius:12px;
+      font:inherit; resize:vertical
+    }
+    .form small{color:var(--muted)}
+  </style>
 </head>
 <body>
   <div class="wrap">
@@ -23,18 +32,37 @@
     <main>
       <section class="hero section">
         <h1>Контакты</h1>
+
         <div class="card" style="margin-top:18px">
           <h3>Свяжитесь с нами</h3>
           <p><strong>Почта:</strong> <a href="mailto:info@antexp.ru">info@antexp.ru</a></p>
           <p><strong>Почтовый адрес:</strong> 121151, г. Москва, наб. Тараса Шевченко, 23А</p>
-
           <h3 style="margin-top:18px">График работы</h3>
           <p>Пн–Пт, 9:00 до 18:00</p>
+        </div>
 
-          <p style="margin-top:18px">Опишите задачу — подготовим ориентировочную дорожную карту поставок.</p>
-          <div class="cta" style="margin-top:12px">
-            <a class="btn" href="mailto:info@antexp.ru?subject=Запрос%20КП%20—%20АНТэкспресс">Написать письмо</a>
-          </div>
+        <div class="card" style="margin-top:18px">
+          <h3>Быстрый запрос</h3>
+          <p class="muted">Заполните форму — мы получим письмо с вашими данными.</p>
+          <form class="form" id="contactForm">
+            <div>
+              <label for="name">Имя *</label>
+              <input id="name" name="name" type="text" required placeholder="Иван Иванов" />
+            </div>
+            <div>
+              <label for="email">Email *</label>
+              <input id="email" name="email" type="email" required placeholder="you@example.com" />
+            </div>
+            <div>
+              <label for="msg">Сообщение *</label>
+              <textarea id="msg" name="msg" rows="6" required placeholder="Коротко опишите задачу…"></textarea>
+              <small>Нажимая «Отправить», вы откроете почтовый клиент с готовым письмом.</small>
+            </div>
+            <div class="toolbar">
+              <button class="btn" type="submit">Отправить</button>
+              <a class="btn sec" href="mailto:info@antexp.ru?subject=Запрос%20КП%20—%20АНТэкспресс">Написать напрямую</a>
+            </div>
+          </form>
         </div>
       </section>
     </main>
@@ -45,10 +73,23 @@
     </footer>
   </div>
 
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    document.querySelectorAll('nav a').forEach(a=>{
-      if(a.href===window.location.href){a.classList.add('active')}
+    document.getElementById('y').textContent=new Date().getFullYear();
+    document.querySelectorAll('nav a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
+
+    // Mailto form (no backend needed)
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('msg').value.trim();
+
+      const subject = encodeURIComponent('Запрос КП — АНТэкспресс');
+      const body = encodeURIComponent(
+        Имя: ${name}\nEmail: ${email}\n\nСообщение:\n${msg}
+      );
+      window.location.href = mailto:info@antexp.ru?subject=${subject}&body=${body};
     });
   </script>
 </body>
