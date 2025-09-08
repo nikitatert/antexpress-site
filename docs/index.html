@@ -7,14 +7,14 @@
   <meta name="description" content="АНТэкспресс — единая точка ответственности за проектные поставки: планирование, закупки, логистика и контроль качества под KPI и сроки." />
   <link rel="icon" href="./logo.png" type="image/png" />
 
-  <!-- Theme no-flash -->
+  <!-- Prevent theme flash -->
   <script>
     (function(){
       try{
         var k='site-theme';
         var s=localStorage.getItem(k);
-        var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-theme', s|| (d?'dark':'light'));
+        var d=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', s || (d?'dark':'light'));
       }catch(e){}
     })();
   </script>
@@ -24,49 +24,44 @@
   <script defer src="./theme.js"></script>
 
   <style>
-    /* ======= Header (strict two-row layout) ======= */
-    header{margin-bottom:8px}
-    .header-top{
-      display:grid;
-      grid-template-columns:auto 1fr; /* logo | contacts */
-      gap:18px;
-      align-items:center;
-      padding:12px 0;
+    /* ===== Two DISTINCT header rows ===== */
+    header { margin-bottom: 12px; }
+    .header-topbar{
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      width: 100%;
+    }
+    .brand img{ height:72px; width:auto; display:block; }
+    .top-contacts{ display:flex; align-items:center; gap:28px; flex-wrap:wrap; }
+    .ci{ display:flex; flex-direction:column; line-height:1.2; }
+    .ci .label{ font-size:12px; color:var(--muted); font-weight:700; letter-spacing:.02em; }
+    .ci .value{ font-weight:800; }
+    .ci a{ color:var(--text); text-decoration:none; }
+    .ci a:hover{ color:var(--link); }
+
+    /* Row 2 is a SEPARATE block under row 1 */
+    .header-menubar{
+      display:block; width:100%;
+      padding: 10px 0;
       border-bottom:1px solid var(--border);
     }
-    .brand img{height:70px; width:auto}
-    .top-contacts{
-      display:flex; justify-content:flex-end; align-items:center; gap:28px; flex-wrap:wrap;
-    }
-    .ci{display:flex; flex-direction:column; line-height:1.2}
-    .ci .label{font-size:12px; color:var(--muted); font-weight:700; letter-spacing:.02em}
-    .ci .value{font-weight:800}
-    .ci a{color:var(--text); text-decoration:none}
-    .ci a:hover{color:var(--link)}
-    .header-nav{
-      padding:10px 0;
-      border-bottom:1px solid var(--border);
-    }
-    .header-nav .menubar{
-      display:flex; align-items:center; gap:14px;
-    }
-    .header-nav .menubar a{
+    .menubar{ display:flex; align-items:center; gap:14px; }
+    .menubar a{
       font-weight:700; padding:8px 10px; border-radius:10px;
       color:var(--text); text-decoration:none; border:1px solid transparent;
     }
-    .header-nav .menubar a:hover{ color:var(--link); border-color:var(--border) }
-    .header-nav .menubar a.active{ border-color:var(--text) }
+    .menubar a:hover{ color:var(--link); border-color:var(--border); }
+    .menubar a.active{ border-color:var(--text); }
 
-    /* Responsive stacking */
-    @media (max-width: 900px){
-      .brand img{height:56px}
-    }
+    /* Responsive */
+    @media (max-width: 900px){ .brand img{height:58px} }
     @media (max-width: 720px){
-      .header-top{grid-template-columns:1fr}
-      .top-contacts{justify-content:flex-start; gap:18px}
+      .top-contacts{ gap:18px; justify-content:flex-start; }
+      .brand img{height:50px}
     }
 
-    /* ======= Home blocks (same as before) ======= */
+    /* ===== Home sections (unchanged) ===== */
     .hero-wrap{
       position:relative; overflow:hidden; border-radius:20px;
       background: radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
@@ -107,16 +102,14 @@
 <body>
   <div class="wrap">
 
-    <!-- ====== HEADER (two separate rows) ====== -->
+    <!-- ===== HEADER (Row 1 + Row 2) ===== -->
     <header>
-      <!-- Row 1: Logo + contacts -->
-      <div class="header-top">
-        <a class="brand" href="./index.html" aria-label="АНТэкспресс — на главную">
-          <img src="./logo.png" alt="АНТэкспресс" />
-        </a>
+      <!-- Row 1 -->
+      <div class="header-topbar">
+        <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" /></a>
 
         <div class="top-contacts">
-          <!-- Edit your actual data here -->
+          <!-- Update your real data here -->
           <div class="ci">
             <span class="label">Телефон</span>
             <span class="value"><a href="tel:+74950000000">+7 (495) 000-00-00</a></span>
@@ -136,8 +129,8 @@
         </div>
       </div>
 
-      <!-- Row 2: Main nav -->
-      <div class="header-nav">
+      <!-- Row 2 -->
+      <div class="header-menubar">
         <nav class="menubar" aria-label="Основная навигация">
           <a href="./index.html">Главная</a>
           <a href="./about.html">О компании</a>
@@ -148,7 +141,7 @@
       </div>
     </header>
 
-    <!-- ====== MAIN ====== -->
+    <!-- ===== MAIN ===== -->
     <main>
       <!-- HERO -->
       <section class="section">
@@ -162,7 +155,6 @@
                 <a class="btn sec" href="./projects.html">Наши объекты</a>
               </div>
 
-              <!-- KPIs -->
               <div class="kpi">
                 <div class="card"><div class="num">10+ лет</div><div class="cap">в проектных поставках</div></div>
                 <div class="card"><div class="num">100%</div><div class="cap">прозрачность и отчётность</div></div>
@@ -248,17 +240,18 @@
       </section>
     </main>
 
-    <!-- FOOTER -->
     <footer>
       <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
     </footer>
   </div>
 
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
   <script>
-    // highlight "Главная" in row 2 menu
-    document.querySelectorAll('.header-nav .menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
+    // highlight current item in row 2
+    document.querySelectorAll('.header-menubar .menubar a').forEach(a=>{
+      if(a.href===window.location.href){ a.classList.add('active'); }
+    });
   </script>
 </body>
 </html>
