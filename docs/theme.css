@@ -1,0 +1,51 @@
+/* docs/theme.css */
+/* Color system (light & dark) using CSS variables */
+:root{
+  --bg:#ffffff;
+  --text:#0f172a;
+  --card:#ffffff;
+  --border:#e5e7eb;
+  --muted:#6b7280;
+  --link:#0a7cff;
+  --link-hover:#075fcc;
+  --shadow:0 6px 20px rgba(0,0,0,.06);
+}
+
+[data-theme="dark"]{
+  --bg:#0b0f14;
+  --text:#e6e9ee;
+  --card:#0f141b;
+  --border:#1f2a37;
+  --muted:#9aa4b2;
+  --link:#5aa8ff;
+  --link-hover:#8cc2ff;
+  --shadow:0 6px 24px rgba(0,0,0,.5);
+}
+
+/* Apply variables to common elements (non-destructive) */
+html, body { background: var(--bg); color: var(--text); }
+a { color: var(--link); }
+a:hover { color: var(--link-hover); }
+.card { background: var(--card); border-color: var(--border); box-shadow: var(--shadow); }
+header, footer { background: var(--card); border-color: var(--border); }
+
+/* Toggle button */
+.theme-toggle{
+  appearance:none; cursor:pointer; border:1px solid var(--border);
+  background:var(--card); color:var(--text);
+  border-radius:999px; padding:8px 12px; line-height:1; font-weight:700;
+  display:inline-flex; align-items:center; gap:8px;
+  box-shadow: var(--shadow); transition:transform .08s ease;
+}
+.theme-toggle:active{ transform: translateY(1px); }
+.theme-toggle .sun{ display:inline-block; }
+.theme-toggle .moon{ display:none; }
+[data-theme="dark"] .theme-toggle .sun{ display:none; }
+[data-theme="dark"] .theme-toggle .moon{ display:inline-block; }
+
+/* Keep header spacing tidy when adding the button */
+header nav{ display:flex; flex-wrap:wrap; align-items:center; gap:14px; }
+@media (max-width: 520px){
+  header nav{ gap:10px; }
+  .theme-toggle{ padding:8px 10px; }
+}
