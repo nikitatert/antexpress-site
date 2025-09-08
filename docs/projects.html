@@ -4,24 +4,44 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Наши объекты — АНТЭкспресс</title>
+
+  <script>
+    (function(){
+      try{
+        var k='site-theme';
+        var s=localStorage.getItem(k);
+        var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', s||(d?'dark':'light'));
+      }catch(e){}
+    })();
+  </script>
+
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="./theme.css" />
   <script defer src="./theme.js"></script>
+
+  <style>
+    .map-wrap{margin-top:28px}
+    #ru-map{
+      height:520px; width:100%;
+      border:1px solid var(--border); border-radius:16px; overflow:hidden;
+      background:#eef2f1;
+    }
+    @media (max-width:640px){ #ru-map{height:400px} }
+  </style>
 </head>
 <body>
   <div class="wrap">
-
-    <!-- HEADER -->
     <header>
       <div class="topbar">
-        <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТЭкспресс" /></a>
+        <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТЭкспресс" style="height:72px;width:auto" /></a>
         <div class="contact-row">
           <div class="ci"><div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
           <div class="ci"><div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div></div>
           <div class="ci"><div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
         </div>
       </div>
-      <nav class="menubar">
+      <nav class="menubar" aria-label="Основная навигация">
         <a href="./index.html">Главная</a>
         <a href="./about.html">О компании</a>
         <a href="./services.html">Услуги</a>
@@ -32,24 +52,51 @@
       </nav>
     </header>
 
-    <!-- MAIN -->
     <main class="section">
       <h1>Наши объекты</h1>
-      <ul>
-        <li><a href="./project-nikolo-dol.html">Николо-Дол</a></li>
-        <li><a href="./project-skandinaviya.html">Скандинавия</a></li>
-        <li><a href="./project-sakhalin.html">Сахалин</a></li>
-        <li><a href="./project-baikal.html">Байкал</a></li>
-        <li><a href="./project-lahta.html">Лахта Парк</a></li>
-      </ul>
+      <div class="list" style="display:grid;gap:14px;grid-template-columns:repeat(5,minmax(0,1fr))">
+        <a class="card" href="./project-nikolo-dol.html"><h3>Николо-Дол</h3></a>
+        <a class="card" href="./project-skandinaviya.html"><h3>Скандинавия</h3></a>
+        <a class="card" href="./project-sakhalin.html"><h3>Сахалин</h3></a>
+        <a class="card" href="./project-baikal.html"><h3>Байкал</h3></a>
+        <a class="card" href="./project-lahta.html"><h3>Лахта Парк</h3></a>
+      </div>
+
+      <section class="section">
+        <h2>География проектов</h2>
+        <div class="map-wrap"><div id="ru-map"></div></div>
+      </section>
     </main>
 
-    <!-- FOOTER -->
     <footer>
       <div>© <span id="y"></span> ООО «АНТЭкспресс». Все права защищены.</div>
-      <div><a href="./privacy.html">Политика конфиденциальности</a></div>
+      <div><a href="./privacy.html" style="color:var(--muted)">Политика конфиденциальности</a></div>
     </footer>
   </div>
+
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+
+  <!-- Yandex Map -->
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+  <script>
+    ymaps.ready(function(){
+      var map = new ymaps.Map('ru-map', { center:[61.5,96], zoom:4, controls:['zoomControl'] }, {
+        restrictMapArea:[[41.0,19.0],[82.0,190.0]], suppressMapOpenBlock:true
+      });
+      var points = [
+        { c:[55.536,37.541], h:'Коммунарка — ЖК «Скандинавия Юг»', b:'<strong>Скандинавия</strong><br>МО, Коммунарка.' , u:'./project-skandinaviya.html'},
+        { c:[46.957,142.736], h:'Южно-Сахалинск — СТК «Горный воздух»', b:'<strong>Сахалин</strong><br>СТК «Горный воздух».', u:'./project-sakhalin.html'},
+        { c:[54.5144,36.2550], h:'Калужская область — усадьба Гурьевых', b:'<strong>Николо-Дол</strong><br>Калужская обл.', u:'./project-nikolo-dol.html'},
+        { c:[53.780,108.261], h:'Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»', b:'<strong>Байкал</strong><br>с. Турка.', u:'./project-baikal.html'},
+        { c:[60.010,30.260], h:'Санкт-Петербург — ул. Новая, 51', b:'<strong>Лахта Парк</strong><br>СПб, рядом с «Лахта Центром».', u:'./project-lahta.html'}
+      ];
+      var col = new ymaps.GeoObjectCollection({}, { preset:'islands#greenDotIcon' });
+      points.forEach(p=>{
+        col.add(new ymaps.Placemark(p.c, { hintContent:p.h, balloonContent: p.b + '<br><a href="'+p.u+'">Открыть проект</a>' }));
+      });
+      map.geoObjects.add(col);
+      var b = col.getBounds(); if(b){ map.setBounds(b, {checkZoomRange:true, zoomMargin:40}); }
+    });
+  </script>
 </body>
 </html>
