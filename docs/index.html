@@ -14,7 +14,7 @@
         var k='site-theme';
         var s=localStorage.getItem(k);
         var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-theme', s||(d?'dark':'light'));
+        document.documentElement.setAttribute('data-theme', s|| (d?'dark':'light'));
       }catch(e){}
     })();
   </script>
@@ -24,113 +24,114 @@
   <script defer src="./theme.js"></script>
 
   <style>
-    /* ========= DARK HEADER like the sample ========= */
-    .header-dark{background:#0f141b;color:#e6e9ee}
-    .header-dark a{color:#e6e9ee;text-decoration:none}
-    .header-dark a:hover{color:#ff7a3c}
-    .header-dark .container{padding:0; margin:0}
-
-    /* Row 1 */
-    .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)}
-    .brand img{height:74px;width:auto}
-    .topline{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
-    .ci{display:flex;flex-direction:column;line-height:1.15}
-    .ci .label{font-size:12px;color:#9aa4b2;font-weight:700;letter-spacing:.02em}
-    .ci .value{font-weight:800}
-    .btn-accent{
-      background:#ff7a3c;color:#0f141b!important;border:1px solid transparent;
-      font-weight:800;border-radius:10px;padding:10px 14px;display:inline-flex;align-items:center;gap:8px
+    /* ====== HEADER: topbar + menubar ====== */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:12px 0;
+      border-bottom:1px solid var(--border);
     }
-    .btn-accent:hover{background:#ff945f}
-
-    /* Theme toggle on dark header */
-    .theme-toggle.inverse{
-      background:transparent!important;border:1px solid rgba(255,255,255,.18)!important;
-      color:#e6e9ee!important;border-radius:999px;padding:8px 12px;font-weight:700
+    .brand img{height:68px; width:auto} /* big logo */
+    .contact-row{display:flex; align-items:center; gap:22px; flex-wrap:wrap}
+    .ci{display:flex; align-items:center; gap:10px; font-weight:700}
+    .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
+    .ci a{color:var(--text); text-decoration:none}
+    .ci a:hover{color:var(--link)}
+    .menubar{
+      display:flex; align-items:center; gap:14px; padding:10px 0;
+      border-bottom:1px solid var(--border);
+      margin-bottom:10px;
     }
-    .theme-toggle.inverse:hover{border-color:#ff7a3c;color:#ff7a3c!important}
+    .menubar a{ font-weight:700; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; border:1px solid transparent }
+    .menubar a:hover{ color:var(--link); border-color:var(--border) }
+    .menubar a.active{ border-color:var(--text); }
+    @media (max-width: 920px){
+      .brand img{height:56px}
+      .topbar{gap:12px}
+    }
+    @media (max-width: 680px){
+      .contact-row{gap:12px}
+      .ci{font-size:14px}
+      .brand img{height:46px}
+    }
 
-    /* Row 2 */
-    .menubar-wrap{border-bottom:1px solid rgba(255,255,255,.08)}
-    .menubar{display:flex;align-items:center;gap:20px;padding:12px 0}
-    .menubar a{font-weight:800;padding:8px 10px;border-radius:10px;border:1px solid transparent}
-    .menubar a:hover{border-color:rgba(255,255,255,.18)}
-    .menubar a.active{color:#ff7a3c;border-bottom:2px solid #ff7a3c;border-radius:0}
-
-    /* Keep the rest of page as before */
+    /* ====== Home-specific blocks ====== */
     .hero-wrap{
-      position:relative;overflow:hidden;border-radius:20px;
-      background:radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
-                 radial-gradient(1000px 600px at 120% 20%, rgba(10,124,255,.10), transparent 60%),
-                 var(--card);
-      border:1px solid var(--border);box-shadow:var(--shadow);
-      padding:clamp(28px,6vw,60px)
+      position:relative; overflow:hidden; border-radius:20px;
+      background: radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
+                  radial-gradient(1000px 600px at 120% 20%, rgba(10,124,255,.10), transparent 60%),
+                  var(--card);
+      border:1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: clamp(28px, 6vw, 60px);
     }
-    .hero-grid{display:grid;gap:24px;grid-template-columns:1.3fr 1fr;align-items:center}
-    @media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
-    .kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:20px}
-    .kpi .card{text-align:center;padding:18px}
-    .kpi .num{font-size:clamp(24px,4vw,34px);font-weight:800}
-    .kpi .cap{color:var(--muted);font-size:12px}
-    .features{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media (max-width:900px){.features{grid-template-columns:1fr}}
+    .hero-grid{display:grid; gap:24px; grid-template-columns: 1.3fr 1fr; align-items:center}
+    @media (max-width: 900px){ .hero-grid{grid-template-columns:1fr} }
+    .kpi{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:20px}
+    .kpi .card{ text-align:center; padding:18px }
+    .kpi .num{ font-size: clamp(24px, 4vw, 34px); font-weight:800 }
+    .kpi .cap{ color: var(--muted); font-size: 12px }
+    .features{display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width: 900px){ .features{grid-template-columns:1fr} }
     .features .card{padding:20px}
     .features h3{margin:0 0 6px 0}
     .section h2{margin-bottom:6px}
-    .lead{color:var(--muted);margin-bottom:18px}
-    .process{display:grid;gap:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
-    @media (max-width:1024px){.process{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media (max-width:640px){.process{grid-template-columns:1fr}}
-    .step{position:relative;padding:18px}
-    .step .n{font-weight:800;font-size:12px;color:var(--muted);letter-spacing:.08em}
-    .projects .list{display:grid;gap:14px;grid-template-columns:repeat(5,minmax(0,1fr))}
-    @media (max-width:1100px){.projects .list{grid-template-columns:repeat(3,minmax(0,1fr))}}
-    @media (max-width:640px){.projects .list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    .lead{color:var(--muted); margin-bottom:18px}
+    .process{display:grid; gap:14px; grid-template-columns:repeat(4,minmax(0,1fr))}
+    @media (max-width: 1024px){ .process{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width: 640px){ .process{grid-template-columns:1fr} }
+    .step{position:relative; padding:18px}
+    .step .n{font-weight:800; font-size:12px; color:var(--muted); letter-spacing:.08em}
+    .projects .list{display:grid; gap:14px; grid-template-columns:repeat(5,minmax(0,1fr))}
+    @media (max-width: 1100px){ .projects .list{grid-template-columns:repeat(3,minmax(0,1fr))} }
+    @media (max-width: 640px){ .projects .list{grid-template-columns:repeat(2,minmax(0,1fr))} }
     .projects .card h3{margin:2px 0}
-    .cta-strip{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow)}
-
-    /* Responsive header adjustments */
-    @media (max-width:940px){.brand img{height:60px}}
-    @media (max-width:760px){
-      .topbar{flex-direction:column;align-items:flex-start;gap:10px}
-      .topline{gap:16px}
-      .brand img{height:50px}
+    .cta-strip{
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px 20px; box-shadow:var(--shadow)
     }
+    .cta-strip h3{margin:0}
   </style>
 </head>
 <body>
   <div class="wrap">
 
-    <!-- ========= HEADER (two separate dark rows) ========= -->
-    <header class="header-dark">
-      <!-- Row 1: logo + contacts -->
+    <!-- ====== HEADER ====== -->
+    <header>
+
+      <!-- Top info bar -->
       <div class="topbar">
-        <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" /></a>
-        <div class="topline">
-          <!-- EDIT these three values with your real data -->
-          <div class="ci"><span class="label">Телефон</span><span class="value"><a href="tel:+74950000000">+7 (495) 000-00-00</a></span></div>
-          <div class="ci"><span class="label">Email</span><span class="value"><a href="mailto:info@antexp.ru">info@antexp.ru</a></span></div>
-          <div class="ci"><span class="label">Время работы</span><span class="value">Пн–Пт, 9:00–18:00</span></div>
-          <a class="btn-accent" href="./contacts.html">Консультация</a>
-          <button class="theme-toggle inverse" id="themeToggle" aria-label="Переключить тему" title="Тема">
+        <a class="brand" href="./index.html" aria-label="АНТэкспресс — на главную">
+          <img src="./logo.png" alt="АНТэкспресс" />
+        </a>
+
+        <div class="contact-row">
+          <!-- EDIT your real phone/email/hours here -->
+          <div class="ci">
+            📞 <div><small>Call-центр</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div>
+          </div>
+          <div class="ci">
+            ✉️ <div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div>
+          </div>
+          <div class="ci">
+            🕘 <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div>
+          </div>
+          <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
             <span class="sun">☀︎</span><span class="moon">☾</span>
           </button>
         </div>
       </div>
 
-      <!-- Row 2: main navigation -->
-      <div class="menubar-wrap">
-        <nav class="menubar" aria-label="Основная навигация">
-          <a href="./index.html">Главная</a>
-          <a href="./about.html">О компании</a>
-          <a href="./services.html">Услуги</a>
-          <a href="./projects.html">Наши объекты</a>
-          <a href="./contacts.html">Контакты</a>
-        </nav>
-      </div>
+      <!-- Second bar: main menu -->
+      <nav class="menubar" aria-label="Основная навигация">
+        <a href="./index.html">Главная</a>
+        <a href="./about.html">О компании</a>
+        <a href="./services.html">Услуги</a>
+        <a href="./projects.html">Наши объекты</a>
+        <a href="./contacts.html">Контакты</a>
+      </nav>
     </header>
 
-    <!-- ========= MAIN ========= -->
+    <!-- ====== MAIN ====== -->
     <main>
       <!-- HERO -->
       <section class="section">
@@ -144,6 +145,7 @@
                 <a class="btn sec" href="./projects.html">Наши объекты</a>
               </div>
 
+              <!-- KPIs -->
               <div class="kpi">
                 <div class="card"><div class="num">10+ лет</div><div class="cap">в проектных поставках</div></div>
                 <div class="card"><div class="num">100%</div><div class="cap">прозрачность и отчётность</div></div>
@@ -171,9 +173,18 @@
         <h2>Что делаем</h2>
         <p class="lead">Закрываем весь цикл проектных поставок — от тендеров до ввода на площадке.</p>
         <div class="features">
-          <div class="card"><h3>Планирование и МТО</h3><p class="muted">Номенклатура, альтернативы, графики поставок и бюджетирование.</p></div>
-          <div class="card"><h3>Закупка и контрактация</h3><p class="muted">Тендеры, проверка подрядчиков, условия поставки и управление рисками.</p></div>
-          <div class="card"><h3>Логистика и контроль</h3><p class="muted">Складирование, сертификация, таможня, «последняя миля», трекинг 24/7.</p></div>
+          <div class="card">
+            <h3>Планирование и МТО</h3>
+            <p class="muted">Номенклатура, альтернативы, графики поставок и бюджетирование.</p>
+          </div>
+          <div class="card">
+            <h3>Закупка и контрактация</h3>
+            <p class="muted">Тендеры, проверка подрядчиков, условия поставки и управление рисками.</p>
+          </div>
+          <div class="card">
+            <h3>Логистика и контроль</h3>
+            <p class="muted">Складирование, сертификация, таможня, «последняя миля», трекинг 24/7.</p>
+          </div>
         </div>
       </section>
 
@@ -220,6 +231,7 @@
       </section>
     </main>
 
+    <!-- FOOTER -->
     <footer>
       <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
@@ -228,7 +240,7 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight current item in dark menubar
+    // highlight "Главная" in second-row menu
     document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
   </script>
 </body>
