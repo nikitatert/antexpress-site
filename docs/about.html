@@ -4,24 +4,38 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>О компании — АНТЭкспресс</title>
+
+  <!-- Theme no-flash -->
+  <script>
+    (function(){
+      try{
+        var k='site-theme';
+        var s=localStorage.getItem(k);
+        var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', s||(d?'dark':'light'));
+      }catch(e){}
+    })();
+  </script>
+
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="./theme.css" />
   <script defer src="./theme.js"></script>
 </head>
 <body>
   <div class="wrap">
-
     <!-- HEADER -->
     <header>
+      <!-- line 1 -->
       <div class="topbar">
-        <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТЭкспресс" /></a>
+        <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТЭкспресс" style="height:72px;width:auto" /></a>
         <div class="contact-row">
           <div class="ci"><div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
           <div class="ci"><div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div></div>
           <div class="ci"><div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
         </div>
       </div>
-      <nav class="menubar">
+      <!-- line 2 -->
+      <nav class="menubar" aria-label="Основная навигация">
         <a href="./index.html">Главная</a>
         <a href="./about.html" class="active">О компании</a>
         <a href="./services.html">Услуги</a>
@@ -41,7 +55,7 @@
     <!-- FOOTER -->
     <footer>
       <div>© <span id="y"></span> ООО «АНТЭкспресс». Все права защищены.</div>
-      <div><a href="./privacy.html">Политика конфиденциальности</a></div>
+      <div><a href="./privacy.html" style="color:var(--muted)">Политика конфиденциальности</a></div>
     </footer>
   </div>
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
