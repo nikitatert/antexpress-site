@@ -34,7 +34,10 @@
     }
 
     .brand{display:flex; align-items:center}
-    .brand .logo{height:72px; width:auto}
+    .brand .logo {
+  height: 100px;   /* bigger logo */
+  width: auto;
+}
     /* swap logos by theme */
     .logo.dark{display:none}
     [data-theme="dark"] .logo.light{display:none}
@@ -55,14 +58,14 @@
     .menubar a.active{ border-color:var(--text); }
     .menubar .spacer{flex:1}
 
-    @media (max-width: 920px){
-      .brand .logo{height:56px}
-      .contact-row{gap:12px}
-    }
-    @media (max-width: 680px){
-      .brand .logo{height:46px}
-      .ci{font-size:14px}
-    }
+   @media (max-width: 920px){
+  .brand .logo{height:80px}
+  .contact-row{gap:12px}
+}
+@media (max-width: 680px){
+  .brand .logo{height:60px}
+  .ci{font-size:14px}
+}
 
     /* ===== Home blocks ===== */
     .hero-wrap{
