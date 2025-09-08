@@ -1,11 +1,11 @@
 /* docs/theme.css */
-/* Color system (light & dark) using CSS variables */
+/* ===== Color system (light & dark) using CSS variables ===== */
 :root{
   --bg:#ffffff;
-  --text:#0f172a;
+  --text:#0f172a;        /* near-slate-900 */
   --card:#ffffff;
-  --border:#e5e7eb;
-  --muted:#6b7280;
+  --border:#e5e7eb;      /* slate-200 */
+  --muted:#6b7280;       /* slate-500 */
   --link:#0a7cff;
   --link-hover:#075fcc;
   --shadow:0 6px 20px rgba(0,0,0,.06);
@@ -22,20 +22,54 @@
   --shadow:0 6px 24px rgba(0,0,0,.5);
 }
 
-/* Apply variables to common elements (non-destructive) */
+/* ===== Base application of variables ===== */
 html, body { background: var(--bg); color: var(--text); }
 a { color: var(--link); }
 a:hover { color: var(--link-hover); }
-.card { background: var(--card); border-color: var(--border); box-shadow: var(--shadow); }
-header, footer { background: var(--card); border-color: var(--border); }
+.muted, .muted * { color: var(--muted) !important; }
 
-/* Toggle button */
+/* Cards / header / footer pick up theme colors */
+.card { background: var(--card); border:1px solid var(--border); box-shadow: var(--shadow); border-radius: 16px; padding: 16px; }
+header, footer { background: var(--card); border-bottom:1px solid var(--border); }
+footer { border-top:1px solid var(--border); }
+
+/* ===== Buttons (ensures contrast in both themes) ===== */
+.btn, .btn:link, .btn:visited {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 16px; border-radius:12px; font-weight:700; text-decoration:none;
+  border:1px solid transparent; cursor:pointer; line-height:1;
+  background: var(--text);           /* dark background */
+  color: var(--bg) !important;       /* light text */
+  box-shadow: var(--shadow);
+  transition: background .15s ease, color .15s ease, border-color .15s ease, transform .06s ease;
+}
+.btn:hover { background: var(--link); color: #fff !important; border-color: var(--link); }
+[data-theme="dark"] .btn:hover { color: #0b0f14 !important; } /* better contrast on lightish hover in dark */
+
+.btn:active { transform: translateY(1px); }
+
+/* Secondary button: transparent background with themed text */
+.btn.sec, .btn.sec:link, .btn.sec:visited {
+  background: transparent;
+  color: var(--text) !important;
+  border-color: var(--border);
+}
+.btn.sec:hover {
+  background: var(--card);
+  border-color: var(--text);
+  color: var(--text) !important;
+}
+
+/* Make sure buttons inside toolbars wrap nicely */
+.toolbar{display:flex; gap:10px; flex-wrap:wrap;}
+
+/* ===== Toggle button ===== */
 .theme-toggle{
   appearance:none; cursor:pointer; border:1px solid var(--border);
   background:var(--card); color:var(--text);
   border-radius:999px; padding:8px 12px; line-height:1; font-weight:700;
   display:inline-flex; align-items:center; gap:8px;
-  box-shadow: var(--shadow); transition:transform .08s ease;
+  box-shadow: var(--shadow); transition:transform .08s ease, background .15s ease, color .15s ease, border-color .15s ease;
 }
 .theme-toggle:active{ transform: translateY(1px); }
 .theme-toggle .sun{ display:inline-block; }
@@ -49,3 +83,6 @@ header nav{ display:flex; flex-wrap:wrap; align-items:center; gap:14px; }
   header nav{ gap:10px; }
   .theme-toggle{ padding:8px 10px; }
 }
+
+/* ===== Optional helpers ===== */
+.section h1, .section h2, .section h3 { color: var(--text); }
