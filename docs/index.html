@@ -7,7 +7,7 @@
   <meta name="description" content="АНТэкспресс — единая точка ответственности за проектные поставки: планирование, закупки, логистика и контроль качества под KPI и сроки." />
   <link rel="icon" href="./logo.png" type="image/png" />
 
-  <!-- 🛡️ Theme no-flash -->
+  <!-- Theme no-flash -->
   <script>
     (function(){
       try{
@@ -19,13 +19,41 @@
     })();
   </script>
 
-  <!-- Base styles -->
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="./theme.css" />
   <script defer src="./theme.js"></script>
 
   <style>
-    /* ---------- Home specific styles ---------- */
+    /* ====== HEADER: topbar + menubar ====== */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:12px 0;
+      border-bottom:1px solid var(--border);
+    }
+    .brand img{height:64px; width:auto} /* big logo */
+    .contact-row{display:flex; align-items:center; gap:18px; flex-wrap:wrap}
+    .ci{display:flex; align-items:center; gap:8px; font-weight:700}
+    .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
+    .ci a{color:var(--text); text-decoration:none}
+    .ci a:hover{color:var(--link)}
+    .menubar{
+      display:flex; align-items:center; gap:14px; padding:10px 0;
+    }
+    .menubar a{ font-weight:700; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; border:1px solid transparent }
+    .menubar a:hover{ color:var(--link); border-color:var(--border) }
+    .menubar a.active{ border-color:var(--text); }
+
+    @media (max-width: 920px){
+      .brand img{height:52px}
+      .topbar{gap:12px}
+    }
+    @media (max-width: 680px){
+      .contact-row{gap:10px}
+      .ci{font-size:14px}
+      .brand img{height:44px}
+    }
+
+    /* ====== Home-specific blocks (kept from your redesign) ====== */
     .hero-wrap{
       position:relative; overflow:hidden; border-radius:20px;
       background: radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
@@ -37,31 +65,25 @@
     }
     .hero-grid{display:grid; gap:24px; grid-template-columns: 1.3fr 1fr; align-items:center}
     @media (max-width: 900px){ .hero-grid{grid-template-columns:1fr} }
-
     .kpi{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:20px}
     .kpi .card{ text-align:center; padding:18px }
     .kpi .num{ font-size: clamp(24px, 4vw, 34px); font-weight:800 }
     .kpi .cap{ color: var(--muted); font-size: 12px }
-
     .features{display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
     @media (max-width: 900px){ .features{grid-template-columns:1fr} }
     .features .card{padding:20px}
     .features h3{margin:0 0 6px 0}
-
     .section h2{margin-bottom:6px}
     .lead{color:var(--muted); margin-bottom:18px}
-
     .process{display:grid; gap:14px; grid-template-columns:repeat(4,minmax(0,1fr))}
     @media (max-width: 1024px){ .process{grid-template-columns:repeat(2,minmax(0,1fr))} }
     @media (max-width: 640px){ .process{grid-template-columns:1fr} }
     .step{position:relative; padding:18px}
     .step .n{font-weight:800; font-size:12px; color:var(--muted); letter-spacing:.08em}
-
     .projects .list{display:grid; gap:14px; grid-template-columns:repeat(5,minmax(0,1fr))}
     @media (max-width: 1100px){ .projects .list{grid-template-columns:repeat(3,minmax(0,1fr))} }
     @media (max-width: 640px){ .projects .list{grid-template-columns:repeat(2,minmax(0,1fr))} }
     .projects .card h3{margin:2px 0}
-
     .cta-strip{
       display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
       background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px 20px; box-shadow:var(--shadow)
@@ -71,20 +93,43 @@
 </head>
 <body>
   <div class="wrap">
-    <!-- Header -->
+
+    <!-- ====== HEADER ====== -->
     <header>
-      <a class="logo" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" width="220" height="64"/></a>
-      <nav>
+
+      <!-- Top info bar -->
+      <div class="topbar">
+        <a class="brand" href="./index.html" aria-label="АНТэкспресс — на главную">
+          <img src="./logo.png" alt="АНТэкспресс" />
+        </a>
+
+        <div class="contact-row">
+          <!-- EDIT your real phone/email/hours here -->
+          <div class="ci">
+            📞 <div><small>Call-центр</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div>
+          </div>
+          <div class="ci">
+            ✉️ <div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div>
+          </div>
+          <div class="ci">
+            🕘 <div><small>Время работы</small>Пн–Пт, 9:00–18:00</div>
+          </div>
+          <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
+            <span class="sun">☀︎</span><span class="moon">☾</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Second bar: main menu -->
+      <nav class="menubar" aria-label="Основная навигация">
+        <a href="./index.html">Главная</a>
         <a href="./about.html">О компании</a>
         <a href="./services.html">Услуги</a>
-        <a href="./projects.html">Проекты</a>
-        <a href="./contacts.html">Контакты</a>
-        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
-          <span class="sun">☀︎</span><span class="moon">☾</span>
-        </button>
+        <a href="./projects.html">Наши объекты</a>
       </nav>
     </header>
 
+    <!-- ====== MAIN ====== -->
     <main>
       <!-- HERO -->
       <section class="section">
@@ -95,7 +140,7 @@
               <p class="lead">Единая точка ответственности: планирование, закупка, логистика и контроль качества под KPI и сроки. Работаем с промышленными и инфраструктурными проектами по всей России.</p>
               <div class="toolbar">
                 <a class="btn" href="./contacts.html">Запросить КП</a>
-                <a class="btn sec" href="./projects.html">Смотреть проекты</a>
+                <a class="btn sec" href="./projects.html">Наши объекты</a>
               </div>
 
               <!-- KPIs -->
@@ -108,7 +153,6 @@
             </div>
 
             <div>
-              <!-- simple visual card stack -->
               <div class="card" style="height:180px; display:grid; place-items:center;">
                 <strong>План-график поставок</strong>
                 <span class="muted">KPI, бюджеты, контроль сроков</span>
@@ -122,7 +166,7 @@
         </div>
       </section>
 
-      <!-- WHAT WE DO (concise) -->
+      <!-- WHAT WE DO -->
       <section class="section">
         <h2>Что делаем</h2>
         <p class="lead">Закрываем весь цикл проектных поставок — от тендеров до ввода на площадке.</p>
@@ -144,7 +188,7 @@
 
       <!-- PROJECTS SHORTLIST -->
       <section class="section projects">
-        <h2>Текущие проекты</h2>
+        <h2>Наши объекты</h2>
         <p class="lead">Подборка объектов, где мы отвечаем за снабжение и логистику.</p>
         <div class="list">
           <a class="card" href="./project-nikolo-dol.html"><h3>Николо-Дол</h3></a>
@@ -154,11 +198,11 @@
           <a class="card" href="./project-lahta.html"><h3>Лахта Парк</h3></a>
         </div>
         <div class="toolbar" style="margin-top:14px">
-          <a class="btn sec" href="./projects.html">Все проекты</a>
+          <a class="btn sec" href="./projects.html">Все объекты</a>
         </div>
       </section>
 
-      <!-- PROCESS / HOW WE WORK -->
+      <!-- PROCESS -->
       <section class="section">
         <h2>Как мы работаем</h2>
         <p class="lead">Простая схема взаимодействия и понятные точки контроля.</p>
@@ -170,7 +214,7 @@
         </div>
       </section>
 
-      <!-- CTA STRIP -->
+      <!-- CTA -->
       <section class="section">
         <div class="cta-strip">
           <div>
@@ -185,7 +229,7 @@
       </section>
     </main>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer>
       <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
@@ -194,8 +238,8 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight current nav
-    document.querySelectorAll('nav a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
+    // highlight "Главная"
+    document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
   </script>
 </body>
 </html>
