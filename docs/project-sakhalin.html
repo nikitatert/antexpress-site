@@ -3,92 +3,61 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Сахалин — проект АНТэкспресс</title>
-  <meta name="description" content="Фото проекта Сахалин — АНТэкспресс." />
-  <link rel="icon" href="./logo.png" type="image/png" />
-  <link rel="stylesheet" href="./style.css" />
-  <link rel="stylesheet" href="./theme.css" />
-  <script defer src="./theme.js"></script>
+  <title>Сахалин — АНТЭкспресс</title>
+  <script>(function(){try{var k='site-theme',s=localStorage.getItem(k),d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
+  <link rel="stylesheet" href="./style.css" /><link rel="stylesheet" href="./theme.css" /><script defer src="./theme.js"></script>
   <style>
-    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .gallery{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    figure{margin:0}
-    .gallery img{width:100%;height:auto;border-radius:12px;border:1px solid var(--border);cursor:zoom-in;aspect-ratio:4/3;object-fit:cover;background:#f4f4f4}
-    figcaption{font-size:12px;color:var(--muted);margin-top:6px}
-    .lightbox[hidden]{display:none}
-    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.8);display:grid;place-items:center;z-index:2000;padding:24px}
-    .lightbox__img{max-width:92vw;max-height:92vh;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
-    .lightbox__controls{position:fixed;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:space-between;padding:24px}
-    .lb-btn{pointer-events:auto;background:rgba(255,255,255,.9);border:0;border-radius:12px;padding:10px 14px;font-size:16px;font-weight:700;cursor:pointer}
-    .lb-close{position:fixed;top:16px;right:16px}
-    .breadcrumbs{font-size:14px;color:var(--muted)}
-    .breadcrumbs a{color:inherit;text-decoration:none}
-    .breadcrumbs a:hover{text-decoration:underline}
+    header{display:block;width:100%}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:16px;border-bottom:1px solid var(--border)}
+    .brand .logo{height:72px;width:auto}
+    .contact-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+    .ci{display:flex;align-items:center;gap:10px;font-weight:700}
+    .ci small{display:block;font-weight:600;color:var(--muted);line-height:1.1}
+    .topbar .ci a{color:var(--text);text-decoration:none}.topbar .ci a:hover{color:var(--link)}
+    .menubar{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--border)}
+    .menubar a{font-weight:700;padding:8px 10px;border-radius:10px;color:var(--text);text-decoration:none;border:1px solid transparent}
+    .menubar a:hover{color:var(--link);border-color:var(--border)}.menubar a.active{border-color:var(--text)}.menubar .spacer{flex:1}
+    .logo.dark{display:none}[data-theme="dark"] .logo.light{display:none}[data-theme="dark"] .logo.dark{display:inline}
+    @media (max-width:920px){.brand .logo{height:58px}.contact-row{gap:14px}}@media (max-width:680px){.brand .logo{height:48px}.ci{font-size:14px}}
+    .gallery{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}@media (max-width:640px){.gallery{grid-template-columns:1fr}}
+    .gallery img{width:100%;height:300px;object-fit:cover;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow)}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <a class="logo" href="./index.html"><img src="./logo.png" alt="АНТэкспресс" width="200" height="58"/></a>
-      <nav>
-        <a href="./about.html">О компании</a>
-        <a href="./services.html">Услуги</a>
-        <a href="./projects.html">Проекты</a>
-        <a href="./contacts.html">Контакты</a>
-        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема"><span class="sun">☀︎</span><span class="moon">☾</span></button>
+      <div class="topbar">
+        <a class="brand" href="./index.html"><img src="./logo-light.png" alt="АНТЭкспресс" class="logo light"/><img src="./logo-dark.png" alt="АНТЭкспресс" class="logo dark"/></a>
+        <div class="contact-row">
+          <div class="ci"><div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
+          <div class="ci"><div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div></div>
+          <div class="ci"><div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
+        </div>
+      </div>
+      <nav class="menubar" aria-label="Основная навигация">
+        <a href="./index.html">Главная</a><a href="./about.html">О компании</a><a href="./services.html">Услуги</a><a href="./projects.html" class="active">Наши объекты</a><a href="./contacts.html">Контакты</a>
+        <span class="spacer"></span><button class="theme-toggle" id="themeToggle"><span class="sun">☀︎</span><span class="moon">☾</span></button>
       </nav>
     </header>
 
-    <main>
-      <section class="hero section">
-        <div class="breadcrumbs"><a href="./index.html">Главная</a> &nbsp;›&nbsp; <a href="./projects.html">Проекты</a> &nbsp;›&nbsp; Сахалин</div>
-        <h1>Сахалин</h1>
-        <p>Фотогалерея проекта.</p>
-        <div class="toolbar">
-          <a class="btn sec" href="./projects.html">← К списку проектов</a>
-          <a class="btn" href="./contacts.html">Связаться</a>
-        </div>
-      </section>
+    <main class="section">
+      <nav class="breadcrumbs" style="font-size:14px;color:var(--muted);margin-bottom:6px">
+        <a href="./index.html" style="color:inherit;text-decoration:none">Главная</a> › <a href="./projects.html" style="color:inherit;text-decoration:none">Наши объекты</a> › Сахалин
+      </nav>
+      <h1>Сахалин — Южно-Сахалинск, СТК «Горный воздух»</h1>
 
-      <section class="section">
-        <div class="gallery" id="gallery">
-          <figure><img loading="lazy" decoding="async" src="./media/sakhalin/sakhalin-01.jpg" alt="Сахалин — фото 1"><figcaption>Фото 1</figcaption></figure>
-          <figure><img loading="lazy" decoding="async" src="./media/sakhalin/sakhalin-02.jpg" alt="Сахалин — фото 2"><figcaption>Фото 2</figcaption></figure>
-          <figure><img loading="lazy" decoding="async" src="./media/sakhalin/sakhalin-03.jpg" alt="Сахалин — фото 3"><figcaption>Фото 3</figcaption></figure>
-          <figure><img loading="lazy" decoding="async" src="./media/sakhalin/sakhalin-04.jpg" alt="Сахалин — фото 4"><figcaption>Фото 4</figcaption></figure>
-        </div>
-      </section>
+      <div class="gallery">
+        <img src="./docs%20media/sakhalin/sakhalin-01.jpg" alt="Сахалин 1">
+        <img src="./docs%20media/sakhalin/sakhalin-02.jpg" alt="Сахалин 2">
+        <img src="./docs%20media/sakhalin/sakhalin-03.jpg" alt="Сахалин 3">
+        <img src="./docs%20media/sakhalin/sakhalin-04.jpg" alt="Сахалин 4">
+      </div>
     </main>
 
     <footer>
-      <div>© <span id="y"></span> ООО «АНТэкспресс». Все права защищены.</div>
-      <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
+      <div>© <span id="y"></span> ООО «АНТЭкспресс». Все права защищены.</div>
+      <div><a href="./privacy.html" style="color:var(--muted)">Политика конфиденциальности</a></div>
     </footer>
-  </div>
-
-  <div class="lightbox" id="lightbox" hidden>
-    <img class="lightbox__img" id="lbImg" alt="Просмотр изображения">
-    <button class="lb-btn lb-close" id="lbClose" aria-label="Закрыть">×</button>
-    <div class="lightbox__controls">
-      <button class="lb-btn" id="lbPrev" aria-label="Предыдущее">←</button>
-      <button class="lb-btn" id="lbNext" aria-label="Следующее">→</button>
-    </div>
-  </div>
-
-  <script>
-    document.getElementById('y').textContent=new Date().getFullYear();
-    document.querySelectorAll('nav a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
-
-    const gallery=[...document.querySelectorAll('#gallery img')];
-    const box=document.getElementById('lightbox'), img=document.getElementById('lbImg');
-    const prev=document.getElementById('lbPrev'), next=document.getElementById('lbNext'), close=document.getElementById('lbClose');
-    let i=0; function openAt(x){i=x;img.src=gallery[i].src;box.hidden=false;document.body.style.overflow='hidden'}
-    function nav(d){i=(i+d+gallery.length)%gallery.length;img.src=gallery[i].src}
-    function closeBox(){box.hidden=true;document.body.style.overflow=''}
-    gallery.forEach((el,idx)=>el.addEventListener('click',()=>openAt(idx)));
-    prev.addEventListener('click',()=>nav(-1)); next.addEventListener('click',()=>nav(1)); close.addEventListener('click',closeBox);
-    box.addEventListener('click',e=>{if(e.target===box)closeBox()});
-    window.addEventListener('keydown',e=>{if(box.hidden)return; if(e.key==='Escape')closeBox(); if(e.key==='ArrowLeft')nav(-1); if(e.key==='ArrowRight')nav(1)});
-  </script>
+  </div><script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
