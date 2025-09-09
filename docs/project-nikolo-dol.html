@@ -3,52 +3,127 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Николо-Дол — объект — АНТЭкспресс</title>
-  <link rel="icon" href="./logo.png" type="image/png" />
-  <script>(function(){try{var k='site-theme',s=localStorage.getItem(k),d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
-  <link rel="stylesheet" href="./style.css"/><link rel="stylesheet" href="./theme.css"/><script defer src="./theme.js"></script>
+  <title>Николо-Дол — АНТЭкспресс</title>
+
+  <!-- Theme no-flash -->
+  <script>
+    (function(){
+      try{
+        var k='site-theme';
+        var s=localStorage.getItem(k);
+        var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', s||(d?'dark':'light'));
+      }catch(e){}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./theme.css" />
+  <script defer src="./theme.js"></script>
+
+  <!-- Header styles + logo swap + gallery -->
   <style>
-    .breadcrumbs{font-size:14px;color:var(--muted)} .breadcrumbs a{color:inherit;text-decoration:none} .breadcrumbs a:hover{text-decoration:underline}
-    .gallery{display:grid;gap:10px;grid-template-columns:repeat(3,minmax(0,1fr))} @media(max-width:900px){.gallery{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.gallery{grid-template-columns:1fr}}
-    .gallery img{width:100%;height:auto;border-radius:12px;border:1px solid var(--border)}
+    header{display:block;width:100%}
+
+    /* LINE 1 */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0; gap:16px;
+      border-bottom:1px solid var(--border);
+    }
+    .brand .logo{height:72px; width:auto}
+    .contact-row{display:flex; align-items:center; gap:24px; flex-wrap:wrap}
+    .ci{display:flex; align-items:center; gap:10px; font-weight:700}
+    .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
+    .topbar .ci a{color:var(--text); text-decoration:none}
+    .topbar .ci a:hover{color:var(--link)}
+
+    /* LINE 2 */
+    .menubar{
+      display:flex; align-items:center; gap:14px;
+      padding:10px 0; border-bottom:1px solid var(--border);
+    }
+    .menubar a{ font-weight:700; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; border:1px solid transparent }
+    .menubar a:hover{ color:var(--link); border-color:var(--border) }
+    .menubar a.active{ border-color:var(--text); }
+    .menubar .spacer{flex:1}
+
+    /* Logo theme swap */
+    .logo.dark{display:none}
+    [data-theme="dark"] .logo.light{display:none}
+    [data-theme="dark"] .logo.dark{display:inline}
+
+    @media (max-width: 920px){
+      .brand .logo{height:58px}
+      .contact-row{gap:14px}
+    }
+    @media (max-width: 680px){
+      .brand .logo{height:48px}
+      .ci{font-size:14px}
+    }
+
+    /* Gallery */
+    .gallery{display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width: 980px){ .gallery{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width: 560px){ .gallery{grid-template-columns:1fr} }
+    .gallery img{width:100%; height:auto; display:block; border-radius:12px; border:1px solid var(--border); box-shadow:var(--shadow)}
   </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <div class="topbar">
-    <a class="brand" href="./index.html"><img src="./logo.png" alt="АНТЭкспресс" style="height:72px"/></a>
-    <div class="contact-row">
-      <div class="ci"><div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
-      <div class="ci"><div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div></div>
-      <div class="ci"><div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
-    </div>
+  <div class="wrap">
+    <!-- ===== HEADER ===== -->
+    <header>
+      <!-- line 1 -->
+      <div class="topbar">
+        <a class="brand" href="./index.html" aria-label="АНТЭкспресс — на главную">
+          <img src="./logo-light.png" alt="АНТЭкспресс" class="logo light" />
+          <img src="./logo-dark.png"  alt="АНТЭкспресс" class="logo dark" />
+        </a>
+        <div class="contact-row">
+          <div class="ci"><div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
+          <div class="ci"><div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div></div>
+          <div class="ci"><div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
+        </div>
+      </div>
+
+      <!-- line 2 -->
+      <nav class="menubar" aria-label="Основная навигация">
+        <a href="./index.html">Главная</a>
+        <a href="./about.html">О компании</a>
+        <a href="./services.html">Услуги</a>
+        <a href="./projects.html" class="active">Наши объекты</a>
+        <a href="./contacts.html">Контакты</a>
+        <span class="spacer"></span>
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
+          <span class="sun">☀︎</span><span class="moon">☾</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main class="section">
+      <h1>Николо-Дол</h1>
+      <p class="muted">Калужская область — объект проектных поставок и логистики.</p>
+
+      <div class="gallery">
+        <img src="./media/nikolo-dol/nikolo-01.jpg" alt="Николо-Дол — фото 1" loading="lazy">
+        <img src="./media/nikolo-dol/nikolo-02.jpg" alt="Николо-Дол — фото 2" loading="lazy">
+        <img src="./media/nikolo-dol/nikolo-03.jpg" alt="Николо-Дол — фото 3" loading="lazy">
+        <img src="./media/nikolo-dol/nikolo-04.jpg" alt="Николо-Дол — фото 4" loading="lazy">
+        <img src="./media/nikolo-dol/nikolo-05.jpg" alt="Николо-Дол — фото 5" loading="lazy">
+        <img src="./media/nikolo-dol/nikolo-06.jpg" alt="Николо-Дол — фото 6" loading="lazy">
+        <img src="./media/nikolo-dol/nikolo-07.jpg" alt="Николо-Дол — фото 7" loading="lazy">
+        <img src="./media/nikolo-dol/nikolo-08.jpg" alt="Николо-Дол — фото 8" loading="lazy">
+      </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+      <div>© <span id="y"></span> ООО «АНТЭкспресс». Все права защищены.</div>
+      <div><a href="./privacy.html" style="color:var(--muted)">Политика конфиденциальности</a></div>
+    </footer>
   </div>
-  <nav class="menubar"><a href="./index.html">Главная</a><a href="./about.html">О компании</a><a href="./services.html">Услуги</a><a href="./projects.html">Наши объекты</a><a href="./contacts.html">Контакты</a><span class="spacer"></span><button class="theme-toggle" id="themeToggle" aria-label="Переключить тему"><span class="sun">☀︎</span><span class="moon">☾</span></button></nav>
-</header>
 
-<main>
-  <section class="hero section">
-    <div class="breadcrumbs"><a href="./index.html">Главная</a> › <a href="./projects.html">Наши объекты</a> › Николо-Дол</div>
-    <h1>Николо-Дол</h1>
-    <p>Промышленное строительство. Калужская область.</p>
-  </section>
-
-  <section class="section">
-    <div class="gallery">
-      <img src="./docs media/nikolo-dol/nikolo-01.jpg" alt="Николо-Дол 1">
-      <img src="./docs media/nikolo-dol/nikolo-02.jpg" alt="Николо-Дол 2">
-      <img src="./docs media/nikolo-dol/nikolo-03.jpg" alt="Николо-Дол 3">
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div>© <span id="y"></span> ООО «АНТЭкспресс». Все права защищены.</div>
-  <div><a href="./privacy.html" style="color:var(--muted)">Политика конфиденциальности</a></div>
-</footer>
-</div>
-<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
-<script>document.querySelectorAll('.menubar a').forEach(a=>{if(a.pathname==='/projects.html')a.classList.add('active')});</script>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
