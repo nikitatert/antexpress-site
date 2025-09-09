@@ -23,68 +23,47 @@
 
   <style>
     header{display:block;width:100%}
-    .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:16px;border-bottom:1px solid var(--border)}
-    .brand .logo{height:72px;width:auto}
-    .contact-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
-    .ci{display:flex;align-items:center;gap:10px;font-weight:700}
-    .ci small{display:block;font-weight:600;color:var(--muted);line-height:1.1}
-    .topbar .ci a{color:var(--text);text-decoration:none}
+    .topbar{display:flex; align-items:center; justify-content:space-between; padding:12px 0; gap:16px; border-bottom:1px solid var(--border);}
+    .brand .logo{height:72px; width:auto}
+    .contact-row{display:flex; align-items:center; gap:24px; flex-wrap:wrap}
+    .ci{display:flex; align-items:center; gap:10px; font-weight:700}
+    .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
+    .topbar .ci a{color:var(--text); text-decoration:none}
     .topbar .ci a:hover{color:var(--link)}
-    .menubar{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--border)}
-    .menubar a{font-weight:700;padding:8px 10px;border-radius:10px;color:var(--text);text-decoration:none;border:1px solid transparent}
-    .menubar a:hover{color:var(--link);border-color:var(--border)}
-    .menubar a.active{border-color:var(--text)}
+    .menubar{display:flex; align-items:center; gap:14px; padding:10px 0; border-bottom:1px solid var(--border);}
+    .menubar a{font-weight:700; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; border:1px solid transparent}
+    .menubar a:hover{color:var(--link); border-color:var(--border)}
+    .menubar a.active{border-color:var(--text);}
     .menubar .spacer{flex:1}
     .logo.dark{display:none}
     [data-theme="dark"] .logo.light{display:none}
     [data-theme="dark"] .logo.dark{display:inline}
-    @media(max-width:920px){.brand .logo{height:58px}.contact-row{gap:14px}}
-    @media(max-width:680px){.brand .logo{height:48px}.ci{font-size:14px}}
-    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-    .btn,.btn:link,.btn:visited{text-decoration:none}
+    @media (max-width:920px){.brand .logo{height:58px} .contact-row{gap:14px}}
+    @media (max-width:680px){.brand .logo{height:48px} .ci{font-size:14px}}
 
-    /* Info block */
-    .info-block{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:16px 20px;
-      margin:20px 0;
-      box-shadow:var(--shadow);
-    }
-    .info-block h2{margin-top:0;font-size:20px}
-    .info-block ul{margin:0;padding-left:18px}
-    .info-block li{margin:6px 0}
+    .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px}
+    .btn, .btn:link, .btn:visited{text-decoration:none}
 
-    /* Gallery */
-    .gallery{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
+    .gallery{display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
     @media(max-width:980px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:560px){.gallery{grid-template-columns:1fr}}
     .gallery a{display:block}
-    .gallery img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);transition:transform .12s ease}
+    .gallery img{width:100%; height:auto; display:block; border-radius:12px; border:1px solid var(--border); box-shadow:var(--shadow); transition:transform .12s ease}
     .gallery img:hover{transform:scale(1.01)}
 
-    /* Lightbox */
-    .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.7);z-index:9999;padding:20px}
-    .lightbox.open{display:flex}
-    .lightbox-content{position:relative;max-width:min(1200px,96vw);max-height:86vh;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:10px}
-    .lightbox-img{max-width:calc(96vw - 60px);max-height:76vh;display:block;border-radius:8px}
-    .lightbox-close,.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:var(--card);color:var(--text);border:1px solid var(--border);width:40px;height:40px;border-radius:999px;display:grid;place-items:center;cursor:pointer;font-weight:800;user-select:none}
-    .lightbox-close{top:12px;right:12px;transform:none}
-    .lightbox-prev{left:-52px}
-    .lightbox-next{right:-52px}
-    @media(max-width:760px){.lightbox-prev{left:6px}.lightbox-next{right:6px}}
-    .lightbox-caption{margin-top:8px;font-size:14px;color:var(--muted);text-align:center}
+    .project-info{margin:20px 0; padding:20px; background:var(--card); border:1px solid var(--border); border-radius:12px; box-shadow:var(--shadow)}
+    .project-info h2{margin-top:0}
+    .project-info ul{margin:0; padding-left:20px}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- HEADER -->
+    <!-- ===== HEADER ===== -->
     <header>
       <div class="topbar">
         <a class="brand" href="./index.html" aria-label="АНТЭкспресс — на главную">
           <img src="./logo-light.png" alt="АНТЭкспресс" class="logo light" />
-          <img src="./logo-dark.png"  alt="АНТЭкспресс" class="logo dark" />
+          <img src="./logo-dark.png" alt="АНТЭкспресс" class="logo dark" />
         </a>
         <div class="contact-row">
           <div class="ci"><div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
@@ -92,18 +71,20 @@
           <div class="ci"><div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
         </div>
       </div>
-      <nav class="menubar">
+      <nav class="menubar" aria-label="Основная навигация">
         <a href="./index.html">Главная</a>
         <a href="./about.html">О компании</a>
         <a href="./services.html">Услуги</a>
         <a href="./projects.html" class="active">Наши объекты</a>
         <a href="./contacts.html">Контакты</a>
         <span class="spacer"></span>
-        <button class="theme-toggle" id="themeToggle"><span class="sun">☀︎</span><span class="moon">☾</span></button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
+          <span class="sun">☀︎</span><span class="moon">☾</span>
+        </button>
       </nav>
     </header>
 
-    <!-- MAIN -->
+    <!-- ===== MAIN ===== -->
     <main class="section">
       <div class="toolbar">
         <a class="btn sec" href="./projects.html">← К списку проектов</a>
@@ -113,31 +94,30 @@
       <h1>Байкал</h1>
       <p class="muted">Республика Бурятия, с. Турка — ОЭЗ «Байкальская гавань».</p>
 
-      <div class="info-block">
+      <div class="project-info">
         <h2>О проекте</h2>
         <ul>
-          <li>Гостиница, термальный комплекс и Healing Center «Green Flow Baikal»</li>
-          <li>Площадь участка: 6,9 га</li>
-          <li>Общая площадь здания: 10 990 м²</li>
-          <li>Этажность: 6 этажей</li>
-          <li>Термальный комплекс: 6 260 м², 2 этажа</li>
+          <li><strong>Назначение:</strong> Гостиница, термальный комплекс и Healing Center «Green Flow Baikal»</li>
+          <li><strong>Площадь участка:</strong> 6,9 га</li>
+          <li><strong>Общая площадь здания:</strong> 10 990 м², 6 этажей</li>
+          <li><strong>Термальный комплекс:</strong> 6 260 м², 2 этажа</li>
+          <li><strong>Планируемая дата реализации объекта:</strong> —</li>
         </ul>
       </div>
 
-      <!-- Gallery -->
       <div class="gallery" id="gallery" data-project="baikal">
-        <a href="./media/baikal/baikal-01.jpg"><img src="./media/baikal/baikal-01.jpg" alt="Байкал — фото 1"></a>
-        <a href="./media/baikal/baikal-02.jpg"><img src="./media/baikal/baikal-02.jpg" alt="Байкал — фото 2"></a>
-        <a href="./media/baikal/baikal-03.jpg"><img src="./media/baikal/baikal-03.jpg" alt="Байкал — фото 3"></a>
-        <a href="./media/baikal/baikal-04.jpg"><img src="./media/baikal/baikal-04.jpg" alt="Байкал — фото 4"></a>
-        <a href="./media/baikal/baikal-05.jpg"><img src="./media/baikal/baikal-05.jpg" alt="Байкал — фото 5"></a>
-        <a href="./media/baikal/baikal-06.jpg"><img src="./media/baikal/baikal-06.jpg" alt="Байкал — фото 6"></a>
-        <a href="./media/baikal/baikal-07.jpg"><img src="./media/baikal/baikal-07.jpg" alt="Байкал — фото 7"></a>
-        <a href="./media/baikal/baikal-08.jpg"><img src="./media/baikal/baikal-08.jpg" alt="Байкал — фото 8"></a>
+        <a href="./media/baikal/baikal-01.jpg"><img src="./media/baikal/baikal-01.jpg" alt="Байкал — фото 1" loading="lazy"></a>
+        <a href="./media/baikal/baikal-02.jpg"><img src="./media/baikal/baikal-02.jpg" alt="Байкал — фото 2" loading="lazy"></a>
+        <a href="./media/baikal/baikal-03.jpg"><img src="./media/baikal/baikal-03.jpg" alt="Байкал — фото 3" loading="lazy"></a>
+        <a href="./media/baikal/baikal-04.jpg"><img src="./media/baikal/baikal-04.jpg" alt="Байкал — фото 4" loading="lazy"></a>
+        <a href="./media/baikal/baikal-05.jpg"><img src="./media/baikal/baikal-05.jpg" alt="Байкал — фото 5" loading="lazy"></a>
+        <a href="./media/baikal/baikal-06.jpg"><img src="./media/baikal/baikal-06.jpg" alt="Байкал — фото 6" loading="lazy"></a>
+        <a href="./media/baikal/baikal-07.jpg"><img src="./media/baikal/baikal-07.jpg" alt="Байкал — фото 7" loading="lazy"></a>
+        <a href="./media/baikal/baikal-08.jpg"><img src="./media/baikal/baikal-08.jpg" alt="Байкал — фото 8" loading="lazy"></a>
       </div>
     </main>
 
-    <!-- FOOTER -->
+    <!-- ===== FOOTER ===== -->
     <footer>
       <div>© <span id="y"></span> ООО «АНТЭкспресс». Все права защищены.</div>
       <div><a href="./privacy.html" style="color:var(--muted)">Политика конфиденциальности</a></div>
@@ -146,33 +126,36 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 
-  <!-- Lightbox -->
+  <!-- Lightbox script same as before -->
   <script>
     (function(){
-      const gallery=document.getElementById('gallery');if(!gallery)return;
-      const links=Array.from(gallery.querySelectorAll('a'));let idx=0;
+      const gallery=document.getElementById('gallery');
+      if(!gallery)return;
+      const links=[...gallery.querySelectorAll('a')];
+      let idx=0;
       const box=document.createElement('div');
       box.className='lightbox';
-      box.innerHTML=`<div class="lightbox-content">
-        <button class="lightbox-close">×</button>
-        <button class="lightbox-prev">‹</button>
-        <img class="lightbox-img" src="" alt="">
-        <button class="lightbox-next">›</button>
-        <div class="lightbox-caption"></div>
-      </div>`;
+      box.innerHTML=`
+        <div class="lightbox-content">
+          <button class="lightbox-close">×</button>
+          <button class="lightbox-prev">‹</button>
+          <img class="lightbox-img" src="" alt="">
+          <button class="lightbox-next">›</button>
+          <div class="lightbox-caption"></div>
+        </div>`;
       document.body.appendChild(box);
       const img=box.querySelector('.lightbox-img');
       const cap=box.querySelector('.lightbox-caption');
-      function open(i){idx=i;const a=links[idx];img.src=a.href;img.alt=a.querySelector('img')?.alt||'';cap.textContent=img.alt;box.classList.add('open');document.body.style.overflow='hidden'}
-      function close(){box.classList.remove('open');document.body.style.overflow=''}
-      function prev(){open((idx-1+links.length)%links.length)}
-      function next(){open((idx+1)%links.length)}
-      links.forEach((a,i)=>a.addEventListener('click',e=>{e.preventDefault();open(i)}));
+      function open(i){idx=i;const a=links[idx];img.src=a.href;img.alt=a.querySelector('img')?.alt||'';cap.textContent=img.alt;box.classList.add('open');document.body.style.overflow='hidden';}
+      function close(){box.classList.remove('open');document.body.style.overflow='';}
+      function prev(){open((idx-1+links.length)%links.length);}
+      function next(){open((idx+1)%links.length);}
       box.querySelector('.lightbox-close').onclick=close;
       box.querySelector('.lightbox-prev').onclick=prev;
       box.querySelector('.lightbox-next').onclick=next;
-      box.addEventListener('click',e=>{if(e.target===box)close()});
-      document.addEventListener('keydown',e=>{if(!box.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')prev();if(e.key==='ArrowRight')next()});
+      box.onclick=e=>{if(e.target===box)close();}
+      document.addEventListener('keydown',e=>{if(!box.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')prev();if(e.key==='ArrowRight')next();});
+      links.forEach((a,i)=>a.onclick=e=>{e.preventDefault();open(i);});
     })();
   </script>
 </body>
