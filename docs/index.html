@@ -24,24 +24,21 @@
   <script defer src="./theme.js"></script>
 
   <style>
+    /* ===== HEADER ===== */
     header{display:block;width:100%}
-
-    .topbar{display:flex;align-items:center;justify-content:space-between;
-      padding:12px 0;gap:16px;border-bottom:1px solid var(--border)}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:16px;border-bottom:1px solid var(--border)}
     .brand{display:flex;align-items:center}
     .brand .logo{height:100px;width:auto}
     .logo.dark{display:none}
     [data-theme="dark"] .logo.light{display:none}
     [data-theme="dark"] .logo.dark{display:inline}
-
     .contact-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
     .ci{display:flex;align-items:center;gap:10px;font-weight:700}
     .ci small{display:block;font-weight:600;color:var(--muted);line-height:1.1}
     .topbar .ci a{color:var(--text);text-decoration:none}
     .topbar .ci a:hover{color:var(--link)}
 
-    .menubar{display:flex;align-items:center;gap:14px;padding:10px 0;
-      border-bottom:1px solid var(--border);margin-bottom:10px}
+    .menubar{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--border);margin-bottom:10px}
     .menubar a{font-weight:700;padding:8px 10px;border-radius:10px;color:var(--text);text-decoration:none;border:1px solid transparent}
     .menubar a:hover{color:var(--link);border-color:var(--border)}
     .menubar a.active{border-color:var(--text)}
@@ -50,26 +47,46 @@
     @media(max-width:920px){.brand .logo{height:80px}.contact-row{gap:12px}}
     @media(max-width:680px){.brand .logo{height:60px}.ci{font-size:14px}}
 
-    .hero-wrap{position:relative;overflow:hidden;border-radius:20px;
+    /* ===== HERO & KPI ===== */
+    .hero-wrap{
+      position:relative;overflow:hidden;border-radius:20px;
       background:radial-gradient(1200px 500px at 20% -20%,rgba(10,124,255,.12),transparent 60%),
                  radial-gradient(1000px 600px at 120% 20%,rgba(10,124,255,.10),transparent 60%),
                  var(--card);
       border:1px solid var(--border);box-shadow:var(--shadow);
-      padding:clamp(28px,6vw,60px)}
+      padding:clamp(28px,6vw,60px)
+    }
     .hero-grid{display:grid;gap:24px;grid-template-columns:1.3fr 1fr;align-items:center}
     @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+    .lead{color:var(--muted);margin-bottom:18px}
 
-    .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:20px}
-    .kpi .card{text-align:center;padding:18px}
-    .kpi .num{font-size:clamp(20px,3.5vw,30px);font-weight:800;word-wrap:break-word}
+    .kpi{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;
+      margin-top:20px
+    }
+    .kpi .card{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;padding:18px;min-height:132px
+    }
+    .kpi .num{
+      font-size:clamp(22px,3.2vw,28px);
+      font-weight:800;line-height:1.05;white-space:nowrap
+    }
     .kpi .cap{color:var(--muted);font-size:12px}
+    /* tiny screens: keep single line for numbers */
+    @media(max-width:520px){
+      .kpi{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .kpi .num{font-size:22px}
+    }
 
+    /* ===== OTHER BLOCKS ===== */
     .features{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
     @media(max-width:900px){.features{grid-template-columns:1fr}}
     .features .card{padding:20px}
     .features h2{margin-bottom:6px}
     .section h2{margin-bottom:6px}
-    .lead{color:var(--muted);margin-bottom:18px}
 
     .projects .list{display:grid;gap:14px;grid-template-columns:repeat(5,minmax(0,1fr))}
     @media(max-width:1100px){.projects .list{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -123,10 +140,22 @@
               </div>
 
               <div class="kpi">
-                <div class="card"><div class="num">10+ лет</div><div class="cap">в проектных поставках</div></div>
-                <div class="card"><div class="num">100%</div><div class="cap">прозрачность и отчётность</div></div>
-                <div class="card"><div class="num">24/7</div><div class="cap">трек логистики</div></div>
-                <div class="card"><div class="num">5 регионов</div><div class="cap">ключевые объекты</div></div>
+                <div class="card">
+                  <div class="num">10+&nbsp;лет</div>
+                  <div class="cap">в проектных поставках</div>
+                </div>
+                <div class="card">
+                  <div class="num">100%</div>
+                  <div class="cap">прозрачность и отчётность</div>
+                </div>
+                <div class="card">
+                  <div class="num">24/7</div>
+                  <div class="cap">трек логистики</div>
+                </div>
+                <div class="card">
+                  <div class="num">5&nbsp;регионов</div>
+                  <div class="cap">ключевые объекты</div>
+                </div>
               </div>
             </div>
 
@@ -186,7 +215,7 @@
             <h3>Нужна поставка «под ключ»?</h3>
             <div class="muted">Пришлите спецификацию — подготовим КП и сроки.</div>
           </div>
-          <div class="toolbar">
+        <div class="toolbar">
             <a class="btn" href="./contacts.html">Запросить КП</a>
             <a class="btn sec" href="mailto:info@antexp.ru?subject=Запрос%20КП%20—%20АНТЭкспресс">Написать на почту</a>
           </div>
