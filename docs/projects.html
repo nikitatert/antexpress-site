@@ -107,12 +107,11 @@
     <main class="section">
       <h1>Наши объекты</h1>
 
-      <div class="list" style="display:grid;gap:14px;grid-template-columns:repeat(5,minmax(0,1fr))">
+      <div class="list" style="display:grid;gap:14px;grid-template-columns:repeat(4,minmax(0,1fr))">
         <a class="card" href="./project-nikolo-dol.html"><h3>Николо-Дол</h3></a>
         <a class="card" href="./project-skandinaviya.html"><h3>Скандинавия</h3></a>
         <a class="card" href="./project-sakhalin.html"><h3>Сахалин</h3></a>
         <a class="card" href="./project-baikal.html"><h3>Байкал</h3></a>
-        <a class="card" href="./project-lahta.html"><h3>Лахта Парк</h3></a>
       </div>
 
       <section class="section">
@@ -130,7 +129,7 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 
-  <!-- Yandex Map -->
+  <!-- Yandex Map (4 points only) -->
   <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
   <script>
     ymaps.ready(function(){
@@ -141,8 +140,7 @@
         { c:[55.536,37.541], h:'Коммунарка — ЖК «Скандинавия Юг»', b:'<strong>Скандинавия</strong><br>МО, Коммунарка.' , u:'./project-skandinaviya.html'},
         { c:[46.957,142.736], h:'Южно-Сахалинск — СТК «Горный воздух»', b:'<strong>Сахалин</strong><br>СТК «Горный воздух».', u:'./project-sakhalin.html'},
         { c:[54.5144,36.2550], h:'Калужская область — усадьба Гурьевых', b:'<strong>Николо-Дол</strong><br>Калужская обл.', u:'./project-nikolo-dol.html'},
-        { c:[53.780,108.261], h:'Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»', b:'<strong>Байкал</strong><br>с. Турка.', u:'./project-baikal.html'},
-        { c:[60.010,30.260], h:'Санкт-Петербург — ул. Новая, 51', b:'<strong>Лахта Парк</strong><br>СПб, рядом с «Лахта Центром».', u:'./project-lahta.html'}
+        { c:[53.780,108.261], h:'Респ. Бурятия, с. Турка — ОЭЗ «Байкальская гавань»', b:'<strong>Байкал</strong><br>с. Турка.', u:'./project-baikal.html'}
       ];
       var col = new ymaps.GeoObjectCollection({}, { preset:'islands#greenDotIcon' });
       points.forEach(p=>{
