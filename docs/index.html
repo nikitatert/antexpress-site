@@ -24,121 +24,91 @@
   <script defer src="./theme.js"></script>
 
   <style>
-    /* ===== TWO-LINE HEADER ===== */
     header{display:block;width:100%}
 
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 0; gap:16px;
-      border-bottom:1px solid var(--border);
-    }
-
-    .brand{display:flex; align-items:center}
-    .brand .logo {
-      height: 100px;   /* bigger logo */
-      width: auto;
-    }
-    /* swap logos by theme */
+    .topbar{display:flex;align-items:center;justify-content:space-between;
+      padding:12px 0;gap:16px;border-bottom:1px solid var(--border)}
+    .brand{display:flex;align-items:center}
+    .brand .logo{height:100px;width:auto}
     .logo.dark{display:none}
     [data-theme="dark"] .logo.light{display:none}
     [data-theme="dark"] .logo.dark{display:inline}
 
-    .contact-row{display:flex; align-items:center; gap:24px; flex-wrap:wrap}
-    .ci{display:flex; align-items:center; gap:10px; font-weight:700}
-    .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
-    .topbar .ci a{color:var(--text); text-decoration:none}
+    .contact-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+    .ci{display:flex;align-items:center;gap:10px;font-weight:700}
+    .ci small{display:block;font-weight:600;color:var(--muted);line-height:1.1}
+    .topbar .ci a{color:var(--text);text-decoration:none}
     .topbar .ci a:hover{color:var(--link)}
 
-    .menubar{
-      display:flex; align-items:center; gap:14px; padding:10px 0;
-      border-bottom:1px solid var(--border); margin-bottom:10px;
-    }
-    .menubar a{ font-weight:700; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; border:1px solid transparent }
-    .menubar a:hover{ color:var(--link); border-color:var(--border) }
-    .menubar a.active{ border-color:var(--text); }
+    .menubar{display:flex;align-items:center;gap:14px;padding:10px 0;
+      border-bottom:1px solid var(--border);margin-bottom:10px}
+    .menubar a{font-weight:700;padding:8px 10px;border-radius:10px;color:var(--text);text-decoration:none;border:1px solid transparent}
+    .menubar a:hover{color:var(--link);border-color:var(--border)}
+    .menubar a.active{border-color:var(--text)}
     .menubar .spacer{flex:1}
 
-    @media (max-width: 920px){
-      .brand .logo{height:80px}
-      .contact-row{gap:12px}
-    }
-    @media (max-width: 680px){
-      .brand .logo{height:60px}
-      .ci{font-size:14px}
-    }
+    @media(max-width:920px){.brand .logo{height:80px}.contact-row{gap:12px}}
+    @media(max-width:680px){.brand .logo{height:60px}.ci{font-size:14px}}
 
-    /* ===== Home blocks ===== */
-    .hero-wrap{
-      position:relative; overflow:hidden; border-radius:20px;
-      background: radial-gradient(1200px 500px at 20% -20%, rgba(10,124,255,.12), transparent 60%),
-                  radial-gradient(1000px 600px at 120% 20%, rgba(10,124,255,.10), transparent 60%),
-                  var(--card);
-      border:1px solid var(--border);
-      box-shadow: var(--shadow);
-      padding: clamp(28px, 6vw, 60px);
-    }
-    .hero-grid{display:grid; gap:24px; grid-template-columns: 1.3fr 1fr; align-items:center}
-    @media (max-width: 900px){ .hero-grid{grid-template-columns:1fr} }
-    .kpi{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:20px}
-    .kpi .card{ text-align:center; padding:18px }
-    .kpi .num{ font-size: clamp(24px, 4vw, 34px); font-weight:800 }
-    .kpi .cap{ color: var(--muted); font-size: 12px }
-    .features{display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media (max-width: 900px){ .features{grid-template-columns:1fr} }
+    .hero-wrap{position:relative;overflow:hidden;border-radius:20px;
+      background:radial-gradient(1200px 500px at 20% -20%,rgba(10,124,255,.12),transparent 60%),
+                 radial-gradient(1000px 600px at 120% 20%,rgba(10,124,255,.10),transparent 60%),
+                 var(--card);
+      border:1px solid var(--border);box-shadow:var(--shadow);
+      padding:clamp(28px,6vw,60px)}
+    .hero-grid{display:grid;gap:24px;grid-template-columns:1.3fr 1fr;align-items:center}
+    @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+
+    .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:20px}
+    .kpi .card{text-align:center;padding:18px}
+    .kpi .num{font-size:clamp(20px,3.5vw,30px);font-weight:800;word-wrap:break-word}
+    .kpi .cap{color:var(--muted);font-size:12px}
+
+    .features{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media(max-width:900px){.features{grid-template-columns:1fr}}
     .features .card{padding:20px}
     .features h2{margin-bottom:6px}
     .section h2{margin-bottom:6px}
-    .lead{color:var(--muted); margin-bottom:18px}
-    .process{display:grid; gap:14px; grid-template-columns:repeat(4,minmax(0,1fr))}
-    @media (max-width: 1024px){ .process{grid-template-columns:repeat(2,minmax(0,1fr))} }
-    @media (max-width: 640px){ .process{grid-template-columns:1fr} }
-    .step{position:relative; padding:18px}
-    .step .n{font-weight:800; font-size:12px; color:var(--muted); letter-spacing:.08em}
-    .projects .list{display:grid; gap:14px; grid-template-columns:repeat(4,minmax(0,1fr))}
-    @media (max-width: 1100px){ .projects .list{grid-template-columns:repeat(3,minmax(0,1fr))} }
-    @media (max-width: 640px){ .projects .list{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    .lead{color:var(--muted);margin-bottom:18px}
+
+    .projects .list{display:grid;gap:14px;grid-template-columns:repeat(5,minmax(0,1fr))}
+    @media(max-width:1100px){.projects .list{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:640px){.projects .list{grid-template-columns:repeat(2,minmax(0,1fr))}}
     .projects .card h3{margin:2px 0}
-    .cta-strip{
-      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
-      background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px 20px; box-shadow:var(--shadow)
-    }
+
+    .cta-strip{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+      background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow)}
     .cta-strip h3{margin:0}
   </style>
 </head>
 <body>
   <div class="wrap">
 
-    <!-- ====== HEADER ====== -->
+    <!-- HEADER -->
     <header>
-      <!-- LINE 1 -->
       <div class="topbar">
-        <a class="brand" href="./index.html" aria-label="АНТЭкспресс — на главную">
-          <img src="./logo-light.png" alt="АНТЭкспресс" class="logo light" />
-          <img src="./logo-dark.png"  alt="АНТЭкспресс" class="logo dark" />
+        <a class="brand" href="./index.html">
+          <img src="./logo-light.png" alt="АНТЭкспресс" class="logo light"/>
+          <img src="./logo-dark.png" alt="АНТЭкспресс" class="logo dark"/>
         </a>
-
         <div class="contact-row">
           <div class="ci"><div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
           <div class="ci"><div><small>Email</small><a href="mailto:info@antexp.ru">info@antexp.ru</a></div></div>
           <div class="ci"><div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
         </div>
       </div>
-
-      <!-- LINE 2 -->
-      <nav class="menubar" aria-label="Основная навигация">
+      <nav class="menubar">
         <a href="./index.html" class="active">Главная</a>
         <a href="./about.html">О компании</a>
         <a href="./services.html">Услуги</a>
         <a href="./projects.html">Наши объекты</a>
         <a href="./contacts.html">Контакты</a>
         <span class="spacer"></span>
-        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
-          <span class="sun">☀︎</span><span class="moon">☾</span>
-        </button>
+        <button class="theme-toggle" id="themeToggle"><span class="sun">☀︎</span><span class="moon">☾</span></button>
       </nav>
     </header>
 
-    <!-- ====== MAIN ====== -->
+    <!-- MAIN -->
     <main>
       <!-- HERO -->
       <section class="section">
@@ -161,11 +131,11 @@
             </div>
 
             <div>
-              <div class="card" style="height:180px; display:grid; place-items:center;">
+              <div class="card" style="height:180px;display:grid;place-items:center;">
                 <strong>План-график поставок</strong>
                 <span class="muted">KPI, бюджеты, контроль сроков</span>
               </div>
-              <div class="card" style="height:180px; margin-top:14px; display:grid; place-items:center;">
+              <div class="card" style="height:180px;margin-top:14px;display:grid;place-items:center;">
                 <strong>Логистика и таможня</strong>
                 <span class="muted">мультимодальные маршруты</span>
               </div>
@@ -174,7 +144,7 @@
         </div>
       </section>
 
-      <!-- WHAT WE DO -->
+      <!-- FEATURES -->
       <section class="section">
         <h2>Что делаем</h2>
         <p class="lead">Закрываем весь цикл проектных поставок — от тендеров до ввода на площадке.</p>
@@ -209,18 +179,6 @@
         </div>
       </section>
 
-      <!-- PROCESS -->
-      <section class="section">
-        <h2>Как мы работаем</h2>
-        <p class="lead">Простая схема взаимодействия и понятные точки контроля.</p>
-        <div class="process">
-          <div class="card step"><div class="n">01</div><h3>Бриф проекта</h3><p class="muted">Сценарий снабжения, риски и KPI.</p></div>
-          <div class="card step"><div class="n">02</div><h3>Коммерческое предложение</h3><p class="muted">Смета, график, условия и SLA.</p></div>
-          <div class="card step"><div class="n">03</div><h3>Контрактация</h3><p class="muted">Тендеры, договоры, гарантийные условия.</p></div>
-          <div class="card step"><div class="n">04</div><h3>Поставка и отчётность</h3><p class="muted">Трекинг, закрывающие документы, ввод.</p></div>
-        </div>
-      </section>
-
       <!-- CTA -->
       <section class="section">
         <div class="cta-strip">
@@ -245,8 +203,7 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight current in second-line menu
-    document.querySelectorAll('.menubar a').forEach(a=>{ if(a.href===window.location.href){a.classList.add('active')} });
+    document.querySelectorAll('.menubar a').forEach(a=>{if(a.href===window.location.href){a.classList.add('active')}})
   </script>
 </body>
 </html>
