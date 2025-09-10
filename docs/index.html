@@ -50,13 +50,16 @@
     /* ===== HERO & KPI ===== */
     .hero-wrap{
       position:relative;overflow:hidden;border-radius:20px;
-      background:radial-gradient(1200px 500px at 20% -20%,rgba(10,124,255,.12),transparent 60%),
-                 radial-gradient(1000px 600px at 120% 20%,rgba(10,124,255,.10),transparent 60%),
-                 var(--card);
+      background:var(--card);
       border:1px solid var(--border);box-shadow:var(--shadow);
       padding:clamp(28px,6vw,60px)
     }
-    .hero-grid{display:grid;gap:24px;grid-template-columns:1.3fr 1fr;align-items:center}
+    /* background layers for slideshow */
+    .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s ease;z-index:0}
+    .hero-bg.on{opacity:1}
+    .hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:0}
+
+    .hero-grid{position:relative;z-index:1;display:grid;gap:24px;grid-template-columns:1.3fr 1fr;align-items:center}
     @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
     .lead{color:var(--muted);margin-bottom:18px}
 
@@ -75,7 +78,6 @@
       font-weight:800;line-height:1.05;white-space:nowrap
     }
     .kpi .cap{color:var(--muted);font-size:12px}
-    /* tiny screens: keep single line for numbers */
     @media(max-width:520px){
       .kpi{grid-template-columns:repeat(2,minmax(0,1fr))}
       .kpi .num{font-size:22px}
@@ -130,6 +132,11 @@
       <!-- HERO -->
       <section class="section">
         <div class="hero-wrap">
+          <!-- slideshow layers -->
+          <div class="hero-bg on" id="heroBg1"></div>
+          <div class="hero-bg" id="heroBg2"></div>
+          <div class="hero-overlay"></div>
+
           <div class="hero-grid">
             <div>
               <h1>Генеральный подрядчик по снабжению и логистике</h1>
@@ -215,7 +222,7 @@
             <h3>Нужна поставка «под ключ»?</h3>
             <div class="muted">Пришлите спецификацию — подготовим КП и сроки.</div>
           </div>
-        <div class="toolbar">
+          <div class="toolbar">
             <a class="btn" href="./contacts.html">Запросить КП</a>
             <a class="btn sec" href="mailto:info@antexp.ru?subject=Запрос%20КП%20—%20АНТЭкспресс">Написать на почту</a>
           </div>
@@ -232,7 +239,49 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    document.querySelectorAll('.menubar a').forEach(a=>{if(a.href===window.location.href){a.classList.add('active')}})
+    // highlight current
+    document.querySelectorAll('.menubar a').forEach(a=>{if(a.href===window.location.href){a.classList.add('active')}});
+
+    // ===== HERO SLIDESHOW =====
+    (function(){
+      const images = [
+        './media/baikal/baikal-03.jpg',
+        './media/baikal/baikal-04.jpg',
+        './media/baikal/baikal-07.jpg',
+        './media/sakhalin/sakhalin-01.jpg',
+        './media/sakhalin/sakhalin-02.jpg',
+        './media/skandinaviya/skandinaviya-01.jpg',
+        './media/skandinaviya/skandinaviya-03.jpg'
+      ];
+
+      // preload
+      images.forEach(src => { const i=new Image(); i.src=src; });
+
+      const a = document.getElementById('heroBg1');
+      const b = document.getElementById('heroBg2');
+      let idx = 0, showA = true;
+
+      function setBg(el, src){ el.style.backgroundImage = 'url(' + src + ')'; }
+      setBg(a, images[0]);
+      setBg(b, images[1]); b.classList.remove('on'); a.classList.add('on');
+      idx = 1;
+
+      function step(){
+        const next = images[(idx+1) % images.length];
+        if(showA){
+          setBg(b, images[idx]);
+          b.classList.add('on'); a.classList.remove('on');
+        }else{
+          setBg(a, images[idx]);
+          a.classList.add('on'); b.classList.remove('on');
+        }
+        showA = !showA;
+        idx = (idx + 1) % images.length;
+      }
+
+      // start cycle
+      setInterval(step, 6000); // 6s per slide
+    })();
   </script>
 </body>
 </html>
