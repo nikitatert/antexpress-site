@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="./theme.css" />
   <script defer src="./theme.js"></script>
 
-  <!-- Header styles + logo swap + gallery/lightbox styles -->
+  <!-- Header styles + logo swap + gallery/lightbox + info styles -->
   <style>
     header{display:block;width:100%}
 
@@ -65,6 +65,12 @@
     /* Page UI */
     .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px}
     .btn, .btn:link, .btn:visited{ text-decoration:none }
+
+    /* Info block */
+    .project-info{margin:20px 0; padding:20px; border:1px solid var(--border); border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
+    .project-info h2{margin-top:0}
+    .project-info ul{margin:10px 0 0; padding-left:18px}
+    .project-info li{margin:4px 0}
 
     /* Gallery grid */
     .gallery{display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -148,7 +154,18 @@
       <h1>Сахалин</h1>
       <p class="muted">о. Сахалин, г. Южно-Сахалинск — СТК «Горный воздух».</p>
 
-      <!-- Responsive gallery (click to open lightbox) -->
+      <!-- Info block -->
+      <div class="project-info">
+        <h2>О проекте</h2>
+        <ul>
+          <li>Гостиничный комплекс с термальной и спортивной зонами <strong>Green Flow Sakhalin</strong></li>
+          <li>Общая площадь гостиницы: 8 607 м² — 6 этажей + 1 подземный этаж</li>
+          <li>Общая площадь термального комплекса с уличным бассейном: 3 509 м² — 2 этажа + 1 подземный этаж</li>
+          <li>Общая площадь физкультурно-оздоровительного комплекса: 2 529 м² — 3 этажа</li>
+        </ul>
+      </div>
+
+      <!-- Responsive gallery -->
       <div class="gallery" id="gallery" data-project="sakhalin">
         <a href="./media/sakhalin/sakhalin-01.jpg"><img src="./media/sakhalin/sakhalin-01.jpg" alt="Сахалин — фото 1" loading="lazy"></a>
         <a href="./media/sakhalin/sakhalin-02.jpg"><img src="./media/sakhalin/sakhalin-02.jpg" alt="Сахалин — фото 2" loading="lazy"></a>
@@ -166,7 +183,7 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 
-  <!-- Lightweight lightbox logic -->
+  <!-- Lightweight lightbox logic (same as other project pages) -->
   <script>
     (function(){
       const gallery = document.getElementById('gallery');
