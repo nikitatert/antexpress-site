@@ -21,58 +21,45 @@
   <link rel="stylesheet" href="./theme.css" />
   <script defer src="./theme.js"></script>
 
-  <!-- Header styles (same as Home) + logo swap -->
   <style>
     header{display:block;width:100%}
-
-    /* LINE 1 */
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 0; gap:16px;
-      border-bottom:1px solid var(--border);
-    }
-    .brand .logo{height:72px; width:auto}
-    .contact-row{display:flex; align-items:center; gap:24px; flex-wrap:wrap}
-    .ci{display:flex; align-items:center; gap:10px; font-weight:700}
-    .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
-    .topbar .ci a{color:var(--text); text-decoration:none}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:16px;border-bottom:1px solid var(--border)}
+    .brand .logo{height:72px;width:auto}
+    .contact-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+    .ci{display:flex;align-items:center;gap:10px;font-weight:700}
+    .ci small{display:block;font-weight:600;color:var(--muted);line-height:1.1}
+    .topbar .ci a{color:var(--text);text-decoration:none}
     .topbar .ci a:hover{color:var(--link)}
 
-    /* LINE 2 */
-    .menubar{
-      display:flex; align-items:center; gap:14px;
-      padding:10px 0; border-bottom:1px solid var(--border);
-    }
-    .menubar a{ font-weight:700; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; border:1px solid transparent }
-    .menubar a:hover{ color:var(--link); border-color:var(--border) }
-    .menubar a.active{ border-color:var(--text); }
+    .menubar{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--border)}
+    .menubar a{font-weight:700;padding:8px 10px;border-radius:10px;color:var(--text);text-decoration:none;border:1px solid transparent}
+    .menubar a:hover{color:var(--link);border-color:var(--border)}
+    .menubar a.active{border-color:var(--text)}
     .menubar .spacer{flex:1}
 
-    /* Logo theme swap */
     .logo.dark{display:none}
     [data-theme="dark"] .logo.light{display:none}
     [data-theme="dark"] .logo.dark{display:inline}
 
-    @media (max-width: 920px){
-      .brand .logo{height:58px}
-      .contact-row{gap:14px}
-    }
-    @media (max-width: 680px){
-      .brand .logo{height:48px}
-      .ci{font-size:14px}
-    }
+    @media(max-width:920px){.brand .logo{height:58px}.contact-row{gap:14px}}
+    @media(max-width:680px){.brand .logo{height:48px}.ci{font-size:14px}}
+
+    /* Content */
+    .about-text{max-width:900px;margin:0 auto}
+    .about-text h1{margin-bottom:12px}
+    .about-text p{margin:10px 0;line-height:1.6}
+    .about-text ul{margin:12px 0;padding-left:20px}
+    .about-text li{margin:6px 0}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- ===== HEADER (two separate lines) ===== -->
+    <!-- HEADER -->
     <header>
-      <!-- line 1 -->
       <div class="topbar">
-        <a class="brand" href="./index.html" aria-label="АНТЭкспресс — на главную">
-          <!-- Light & Dark logos -->
-          <img src="./logo-light.png" alt="АНТЭкспресс" class="logo light" />
-          <img src="./logo-dark.png"  alt="АНТЭкспресс" class="logo dark" />
+        <a class="brand" href="./index.html">
+          <img src="./logo-light.png" alt="АНТЭкспресс" class="logo light"/>
+          <img src="./logo-dark.png" alt="АНТЭкспресс" class="logo dark"/>
         </a>
         <div class="contact-row">
           <div class="ci"><div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
@@ -80,28 +67,46 @@
           <div class="ci"><div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
         </div>
       </div>
-
-      <!-- line 2 -->
-      <nav class="menubar" aria-label="Основная навигация">
+      <nav class="menubar">
         <a href="./index.html">Главная</a>
         <a href="./about.html" class="active">О компании</a>
         <a href="./services.html">Услуги</a>
         <a href="./projects.html">Наши объекты</a>
         <a href="./contacts.html">Контакты</a>
         <span class="spacer"></span>
-        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
-          <span class="sun">☀︎</span><span class="moon">☾</span>
-        </button>
+        <button class="theme-toggle" id="themeToggle"><span class="sun">☀︎</span><span class="moon">☾</span></button>
       </nav>
     </header>
 
-    <!-- ===== MAIN ===== -->
-    <main class="section">
+    <!-- MAIN -->
+    <main class="section about-text">
       <h1>О компании</h1>
-      <p>АНТЭкспресс — генеральный подрядчик по снабжению и логистике для промышленного и инфраструктурного строительства. Работаем под KPI и сроки, обеспечивая прозрачность и контроль качества на всех этапах.</p>
+      <p><strong>ООО «АНТЭкспресс»</strong> — генеральный подрядчик по снабжению и логистике для промышленного и инфраструктурного строительства. Мы берем на себя полную ответственность за весь цикл поставок: от планирования и закупок до логистики и ввода на площадке.</p>
+
+      <p>Наша команда объединяет специалистов с опытом в международных поставках, управлении проектами и строительной логистике. Благодаря этому мы умеем работать в самых сложных условиях: от удалённых регионов до крупных федеральных центров.</p>
+
+      <h2>Наши принципы</h2>
+      <ul>
+        <li><strong>Прозрачность</strong> — регулярная отчетность, открытость на каждом этапе.</li>
+        <li><strong>Сроки и KPI</strong> — гарантируем выполнение обязательств в оговоренные сроки.</li>
+        <li><strong>Качество</strong> — контроль от производителя до передачи на объект.</li>
+        <li><strong>Гибкость</strong> — индивидуальный подход под задачи клиента.</li>
+      </ul>
+
+      <h2>Что мы делаем</h2>
+      <p>Мы сопровождаем проекты на всех этапах:</p>
+      <ul>
+        <li>планирование и подготовка МТО;</li>
+        <li>проведение тендеров и выбор подрядчиков;</li>
+        <li>закупка оборудования и материалов;</li>
+        <li>логистика, таможня, складирование;</li>
+        <li>оперативное решение задач «последней мили».</li>
+      </ul>
+
+      <p>Сегодня <strong>АНТЭкспресс</strong> — это надежный партнер, который помогает реализовывать масштабные проекты по всей России: от Подмосковья до Дальнего Востока и Байкала.</p>
     </main>
 
-    <!-- ===== FOOTER ===== -->
+    <!-- FOOTER -->
     <footer>
       <div>© <span id="y"></span> ООО «АНТЭкспресс». Все права защищены.</div>
       <div><a href="./privacy.html" style="color:var(--muted)">Политика конфиденциальности</a></div>
