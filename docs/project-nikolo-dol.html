@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Николо-Дол — АНТЭкспресс</title>
+  <title>Сахалин — АНТЭкспресс</title>
 
   <!-- Theme no-flash -->
   <script>
@@ -21,9 +21,10 @@
   <link rel="stylesheet" href="./theme.css" />
   <script defer src="./theme.js"></script>
 
-  <!-- Header styles + logo swap + gallery/lightbox styles -->
+  <!-- Header styles + logo swap + gallery/lightbox + info styles -->
   <style>
     header{display:block;width:100%}
+
     /* LINE 1 */
     .topbar{
       display:flex; align-items:center; justify-content:space-between;
@@ -36,6 +37,7 @@
     .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
     .topbar .ci a{color:var(--text); text-decoration:none}
     .topbar .ci a:hover{color:var(--link)}
+
     /* LINE 2 */
     .menubar{
       display:flex; align-items:center; gap:14px;
@@ -45,10 +47,12 @@
     .menubar a:hover{ color:var(--link); border-color:var(--border) }
     .menubar a.active{ border-color:var(--text); }
     .menubar .spacer{flex:1}
+
     /* Logo theme swap */
     .logo.dark{display:none}
     [data-theme="dark"] .logo.light{display:none}
     [data-theme="dark"] .logo.dark{display:inline}
+
     @media (max-width: 920px){
       .brand .logo{height:58px}
       .contact-row{gap:14px}
@@ -61,6 +65,12 @@
     /* Page UI */
     .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px}
     .btn, .btn:link, .btn:visited{ text-decoration:none }
+
+    /* Info block */
+    .project-info{margin:20px 0; padding:20px; border:1px solid var(--border); border-radius:12px; background:var(--card); box-shadow:var(--shadow)}
+    .project-info h2{margin-top:0}
+    .project-info ul{margin:10px 0 0; padding-left:18px}
+    .project-info li{margin:4px 0}
 
     /* Gallery grid */
     .gallery{display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -141,19 +151,26 @@
         <a class="btn" href="./contacts.html">Связаться</a>
       </div>
 
-      <h1>Николо-Дол</h1>
-      <p class="muted">Калужская область — объект проектных поставок и логистики.</p>
+      <h1>Сахалин</h1>
+      <p class="muted">о. Сахалин, г. Южно-Сахалинск — СТК «Горный воздух».</p>
 
-      <!-- Responsive gallery (click to open lightbox) -->
-      <div class="gallery" id="gallery" data-project="nikolo-dol">
-        <a href="./media/nikolo-dol/nikolo-01.jpg"><img src="./media/nikolo-dol/nikolo-01.jpg" alt="Николо-Дол — фото 1" loading="lazy"></a>
-        <a href="./media/nikolo-dol/nikolo-02.jpg"><img src="./media/nikolo-dol/nikolo-02.jpg" alt="Николо-Дол — фото 2" loading="lazy"></a>
-        <a href="./media/nikolo-dol/nikolo-03.jpg"><img src="./media/nikolo-dol/nikolo-03.jpg" alt="Николо-Дол — фото 3" loading="lazy"></a>
-        <a href="./media/nikolo-dol/nikolo-04.jpg"><img src="./media/nikolo-dol/nikolo-04.jpg" alt="Николо-Дол — фото 4" loading="lazy"></a>
-        <a href="./media/nikolo-dol/nikolo-05.jpg"><img src="./media/nikolo-dol/nikolo-05.jpg" alt="Николо-Дол — фото 5" loading="lazy"></a>
-        <a href="./media/nikolo-dol/nikolo-06.jpg"><img src="./media/nikolo-dol/nikolo-06.jpg" alt="Николо-Дол — фото 6" loading="lazy"></a>
-        <a href="./media/nikolo-dol/nikolo-07.jpg"><img src="./media/nikolo-dol/nikolo-07.jpg" alt="Николо-Дол — фото 7" loading="lazy"></a>
-        <a href="./media/nikolo-dol/nikolo-08.jpg"><img src="./media/nikolo-dol/nikolo-08.jpg" alt="Николо-Дол — фото 8" loading="lazy"></a>
+      <!-- Info block -->
+      <div class="project-info">
+        <h2>О проекте</h2>
+        <ul>
+          <li>Гостиничный комплекс с термальной и спортивной зонами <strong>Green Flow Sakhalin</strong></li>
+          <li>Общая площадь гостиницы: 8 607 м² — 6 этажей + 1 подземный этаж</li>
+          <li>Общая площадь термального комплекса с уличным бассейном: 3 509 м² — 2 этажа + 1 подземный этаж</li>
+          <li>Общая площадь физкультурно-оздоровительного комплекса: 2 529 м² — 3 этажа</li>
+        </ul>
+      </div>
+
+      <!-- Responsive gallery -->
+      <div class="gallery" id="gallery" data-project="sakhalin">
+        <a href="./media/sakhalin/sakhalin-01.jpg"><img src="./media/sakhalin/sakhalin-01.jpg" alt="Сахалин — фото 1" loading="lazy"></a>
+        <a href="./media/sakhalin/sakhalin-02.jpg"><img src="./media/sakhalin/sakhalin-02.jpg" alt="Сахалин — фото 2" loading="lazy"></a>
+        <a href="./media/sakhalin/sakhalin-03.jpg"><img src="./media/sakhalin/sakhalin-03.jpg" alt="Сахалин — фото 3" loading="lazy"></a>
+        <a href="./media/sakhalin/sakhalin-04.jpg"><img src="./media/sakhalin/sakhalin-04.jpg" alt="Сахалин — фото 4" loading="lazy"></a>
       </div>
     </main>
 
@@ -166,7 +183,7 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 
-  <!-- Lightweight lightbox logic -->
+  <!-- Lightweight lightbox logic (same as other project pages) -->
   <script>
     (function(){
       const gallery = document.getElementById('gallery');
