@@ -35,9 +35,9 @@
 
     .brand{display:flex; align-items:center}
     .brand .logo {
-  height: 100px;   /* bigger logo */
-  width: auto;
-}
+      height: 100px;   /* bigger logo */
+      width: auto;
+    }
     /* swap logos by theme */
     .logo.dark{display:none}
     [data-theme="dark"] .logo.light{display:none}
@@ -58,14 +58,14 @@
     .menubar a.active{ border-color:var(--text); }
     .menubar .spacer{flex:1}
 
-   @media (max-width: 920px){
-  .brand .logo{height:80px}
-  .contact-row{gap:12px}
-}
-@media (max-width: 680px){
-  .brand .logo{height:60px}
-  .ci{font-size:14px}
-}
+    @media (max-width: 920px){
+      .brand .logo{height:80px}
+      .contact-row{gap:12px}
+    }
+    @media (max-width: 680px){
+      .brand .logo{height:60px}
+      .ci{font-size:14px}
+    }
 
     /* ===== Home blocks ===== */
     .hero-wrap{
@@ -94,7 +94,7 @@
     @media (max-width: 640px){ .process{grid-template-columns:1fr} }
     .step{position:relative; padding:18px}
     .step .n{font-weight:800; font-size:12px; color:var(--muted); letter-spacing:.08em}
-    .projects .list{display:grid; gap:14px; grid-template-columns:repeat(5,minmax(0,1fr))}
+    .projects .list{display:grid; gap:14px; grid-template-columns:repeat(4,minmax(0,1fr))}
     @media (max-width: 1100px){ .projects .list{grid-template-columns:repeat(3,minmax(0,1fr))} }
     @media (max-width: 640px){ .projects .list{grid-template-columns:repeat(2,minmax(0,1fr))} }
     .projects .card h3{margin:2px 0}
@@ -203,7 +203,6 @@
           <a class="card" href="./project-skandinaviya.html"><h3>Скандинавия</h3></a>
           <a class="card" href="./project-sakhalin.html"><h3>Сахалин</h3></a>
           <a class="card" href="./project-baikal.html"><h3>Байкал</h3></a>
-          <a class="card" href="./project-lahta.html"><h3>Лахта Парк</h3></a>
         </div>
         <div class="toolbar" style="margin-top:14px">
           <a class="btn sec" href="./projects.html">Все объекты</a>
