@@ -7,7 +7,6 @@
   <meta name="description" content="АНТЭкспресс — единая точка ответственности за проектные поставки: планирование, закупки, логистика и контроль качества под KPI и сроки." />
   <link rel="icon" href="./logo-light.png" type="image/png" />
 
-  <!-- Theme no-flash -->
   <script>
     (function(){
       try{
@@ -24,7 +23,6 @@
   <script defer src="./theme.js"></script>
 
   <style>
-    /* ===== HEADER ===== */
     header{display:block;width:100%}
     .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:16px;border-bottom:1px solid var(--border)}
     .brand{display:flex;align-items:center}
@@ -54,22 +52,21 @@
       border:1px solid var(--border);box-shadow:var(--shadow);
       padding:clamp(28px,6vw,60px)
     }
-    /* background layers for slideshow */
     .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s ease;z-index:0}
     .hero-bg.on{opacity:1}
-    /* overlay: darker in light theme, softer in dark theme */
-    .hero-overlay{position:absolute;inset:0;z-index:0;pointer-events:none;background:rgba(0,0,0,.50)}
-    [data-theme="dark"] .hero-overlay{background:rgba(0,0,0,.30)}
+    /* slightly darker overlay for guaranteed contrast */
+    .hero-overlay{position:absolute;inset:0;z-index:0;pointer-events:none;background:rgba(0,0,0,.60)}
+    [data-theme="dark"] .hero-overlay{background:rgba(0,0,0,.35)}
 
     .hero-grid{position:relative;z-index:1;display:grid;gap:24px;grid-template-columns:1.3fr 1fr;align-items:center}
     @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
-    .lead{color:var(--muted);margin-bottom:18px}
+    .lead{margin-bottom:18px}
 
-    /* extra readability on light theme only */
-    [data-theme="light"] .hero-wrap h1,
-    [data-theme="light"] .hero-wrap .lead,
-    [data-theme="light"] .hero-wrap .card strong{
-      text-shadow:0 1px 2px rgba(0,0,0,.35);
+    /* Force hero text white in both themes */
+    .hero-title,
+    .hero-lead{
+      color:#fff !important;
+      text-shadow:0 2px 4px rgba(0,0,0,.45);
     }
 
     .kpi{
@@ -92,7 +89,6 @@
       .kpi .num{font-size:22px}
     }
 
-    /* ===== OTHER BLOCKS ===== */
     .features{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
     @media(max-width:900px){.features{grid-template-columns:1fr}}
     .features .card{padding:20px}
@@ -141,15 +137,14 @@
       <!-- HERO -->
       <section class="section">
         <div class="hero-wrap">
-          <!-- slideshow layers -->
           <div class="hero-bg on" id="heroBg1"></div>
           <div class="hero-bg" id="heroBg2"></div>
           <div class="hero-overlay"></div>
 
           <div class="hero-grid">
             <div>
-              <h1>Генеральный подрядчик по снабжению и логистике</h1>
-              <p class="lead">Единая точка ответственности: планирование, закупка, логистика и контроль качества под KPI и сроки. Работаем с промышленными и инфраструктурными проектами по всей России.</p>
+              <h1 class="hero-title">Генеральный подрядчик по снабжению и логистике</h1>
+              <p class="lead hero-lead">Единая точка ответственности: планирование, закупка, логистика и контроль качества под KPI и сроки. Работаем с промышленными и инфраструктурными проектами по всей России.</p>
               <div class="toolbar">
                 <a class="btn" href="./contacts.html">Запросить КП</a>
                 <a class="btn sec" href="./projects.html">Наши объекты</a>
@@ -239,7 +234,6 @@
       </section>
     </main>
 
-    <!-- FOOTER -->
     <footer>
       <div>© <span id="y"></span> ООО «АНТЭкспресс». Все права защищены.</div>
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
@@ -248,10 +242,8 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
-    // highlight current
     document.querySelectorAll('.menubar a').forEach(a=>{if(a.href===window.location.href){a.classList.add('active')}});
 
-    // ===== HERO SLIDESHOW =====
     (function(){
       const images = [
         './media/baikal/baikal-03.jpg',
@@ -262,8 +254,6 @@
         './media/skandinaviya/skandinaviya-01.jpg',
         './media/skandinaviya/skandinaviya-03.jpg'
       ];
-
-      // preload
       images.forEach(src => { const i=new Image(); i.src=src; });
 
       const a = document.getElementById('heroBg1');
@@ -276,18 +266,12 @@
       idx = 1;
 
       function step(){
-        if(showA){
-          setBg(b, images[idx]);
-          b.classList.add('on'); a.classList.remove('on');
-        }else{
-          setBg(a, images[idx]);
-          a.classList.add('on'); b.classList.remove('on');
-        }
+        if(showA){ setBg(b, images[idx]); b.classList.add('on'); a.classList.remove('on'); }
+        else{ setBg(a, images[idx]); a.classList.add('on'); b.classList.remove('on'); }
         showA = !showA;
         idx = (idx + 1) % images.length;
       }
-
-      setInterval(step, 6000); // 6s per slide
+      setInterval(step, 6000);
     })();
   </script>
 </body>
