@@ -7,6 +7,7 @@
   <meta name="description" content="АНТЭкспресс — единая точка ответственности за проектные поставки: планирование, закупки, логистика и контроль качества под KPI и сроки." />
   <link rel="icon" href="./logo-light.png" type="image/png" />
 
+  <!-- Theme no-flash -->
   <script>
     (function(){
       try{
@@ -23,6 +24,7 @@
   <script defer src="./theme.js"></script>
 
   <style>
+    /* ===== HEADER ===== */
     header{display:block;width:100%}
     .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:16px;border-bottom:1px solid var(--border)}
     .brand{display:flex;align-items:center}
@@ -46,49 +48,39 @@
     @media(max-width:680px){.brand .logo{height:60px}.ci{font-size:14px}}
 
     /* ===== HERO & KPI ===== */
-    .hero-wrap{
-      position:relative;overflow:hidden;border-radius:20px;
-      background:var(--card);
-      border:1px solid var(--border);box-shadow:var(--shadow);
-      padding:clamp(28px,6vw,60px)
-    }
+    .hero-wrap{position:relative;overflow:hidden;border-radius:20px;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);padding:clamp(28px,6vw,60px)}
     .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s ease;z-index:0}
     .hero-bg.on{opacity:1}
-    /* slightly darker overlay for guaranteed contrast */
-    .hero-overlay{position:absolute;inset:0;z-index:0;pointer-events:none;background:rgba(0,0,0,.60)}
-    [data-theme="dark"] .hero-overlay{background:rgba(0,0,0,.35)}
-
+    .hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:0}
     .hero-grid{position:relative;z-index:1;display:grid;gap:24px;grid-template-columns:1.3fr 1fr;align-items:center}
     @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
-    .lead{margin-bottom:18px}
+    .lead{color:#fff;margin-bottom:18px}
 
-    /* Force hero text white in both themes */
-    .hero-title,
-    .hero-lead{
-      color:#fff !important;
-      text-shadow:0 2px 4px rgba(0,0,0,.45);
+    h1{color:#fff} /* Make main heading always white */
+
+    /* Force buttons to be white with black text */
+    .btn, .btn.sec {
+      background:#fff !important;
+      color:#000 !important;
+      border:1px solid #ccc;
+      font-weight:700;
+      padding:10px 18px;
+      border-radius:8px;
+      text-decoration:none;
+      display:inline-block;
+    }
+    .btn:hover, .btn.sec:hover {
+      background:#f0f0f0 !important;
+      color:#000 !important;
     }
 
-    .kpi{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-      gap:14px;
-      margin-top:20px
-    }
-    .kpi .card{
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
-      text-align:center;padding:18px;min-height:132px
-    }
-    .kpi .num{
-      font-size:clamp(22px,3.2vw,28px);
-      font-weight:800;line-height:1.05;white-space:nowrap
-    }
+    .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:20px}
+    .kpi .card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px;min-height:132px}
+    .kpi .num{font-size:clamp(22px,3.2vw,28px);font-weight:800;line-height:1.05;white-space:nowrap}
     .kpi .cap{color:var(--muted);font-size:12px}
-    @media(max-width:520px){
-      .kpi{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .kpi .num{font-size:22px}
-    }
+    @media(max-width:520px){.kpi{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi .num{font-size:22px}}
 
+    /* ===== OTHER BLOCKS ===== */
     .features{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
     @media(max-width:900px){.features{grid-template-columns:1fr}}
     .features .card{padding:20px}
@@ -99,10 +91,6 @@
     @media(max-width:1100px){.projects .list{grid-template-columns:repeat(3,minmax(0,1fr))}}
     @media(max-width:640px){.projects .list{grid-template-columns:repeat(2,minmax(0,1fr))}}
     .projects .card h3{margin:2px 0}
-
-    .cta-strip{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;
-      background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow)}
-    .cta-strip h3{margin:0}
   </style>
 </head>
 <body>
@@ -143,30 +131,18 @@
 
           <div class="hero-grid">
             <div>
-              <h1 class="hero-title">Генеральный подрядчик по снабжению и логистике</h1>
-              <p class="lead hero-lead">Единая точка ответственности: планирование, закупка, логистика и контроль качества под KPI и сроки. Работаем с промышленными и инфраструктурными проектами по всей России.</p>
+              <h1>Генеральный подрядчик по снабжению и логистике</h1>
+              <p class="lead">Единая точка ответственности: планирование, закупка, логистика и контроль качества под KPI и сроки. Работаем с промышленными и инфраструктурными проектами по всей России.</p>
               <div class="toolbar">
                 <a class="btn" href="./contacts.html">Запросить КП</a>
                 <a class="btn sec" href="./projects.html">Наши объекты</a>
               </div>
 
               <div class="kpi">
-                <div class="card">
-                  <div class="num">10+&nbsp;лет</div>
-                  <div class="cap">в проектных поставках</div>
-                </div>
-                <div class="card">
-                  <div class="num">100%</div>
-                  <div class="cap">прозрачность и отчётность</div>
-                </div>
-                <div class="card">
-                  <div class="num">24/7</div>
-                  <div class="cap">трек логистики</div>
-                </div>
-                <div class="card">
-                  <div class="num">5&nbsp;регионов</div>
-                  <div class="cap">ключевые объекты</div>
-                </div>
+                <div class="card"><div class="num">10+&nbsp;лет</div><div class="cap">в проектных поставках</div></div>
+                <div class="card"><div class="num">100%</div><div class="cap">прозрачность и отчётность</div></div>
+                <div class="card"><div class="num">24/7</div><div class="cap">трек логистики</div></div>
+                <div class="card"><div class="num">5&nbsp;регионов</div><div class="cap">ключевые объекты</div></div>
               </div>
             </div>
 
@@ -189,18 +165,9 @@
         <h2>Что делаем</h2>
         <p class="lead">Закрываем весь цикл проектных поставок — от тендеров до ввода на площадке.</p>
         <div class="features">
-          <div class="card">
-            <h3>Планирование и МТО</h3>
-            <p class="muted">Номенклатура, альтернативы, графики поставок и бюджетирование.</p>
-          </div>
-          <div class="card">
-            <h3>Закупка и контрактация</h3>
-            <p class="muted">Тендеры, проверка подрядчиков, условия поставки и управление рисками.</p>
-          </div>
-          <div class="card">
-            <h3>Логистика и контроль</h3>
-            <p class="muted">Складирование, сертификация, таможня, «последняя миля», трекинг 24/7.</p>
-          </div>
+          <div class="card"><h3>Планирование и МТО</h3><p class="muted">Номенклатура, альтернативы, графики поставок и бюджетирование.</p></div>
+          <div class="card"><h3>Закупка и контрактация</h3><p class="muted">Тендеры, проверка подрядчиков, условия поставки и управление рисками.</p></div>
+          <div class="card"><h3>Логистика и контроль</h3><p class="muted">Складирование, сертификация, таможня, «последняя миля», трекинг 24/7.</p></div>
         </div>
       </section>
 
@@ -218,22 +185,9 @@
           <a class="btn sec" href="./projects.html">Все объекты</a>
         </div>
       </section>
-
-      <!-- CTA -->
-      <section class="section">
-        <div class="cta-strip">
-          <div>
-            <h3>Нужна поставка «под ключ»?</h3>
-            <div class="muted">Пришлите спецификацию — подготовим КП и сроки.</div>
-          </div>
-          <div class="toolbar">
-            <a class="btn" href="./contacts.html">Запросить КП</a>
-            <a class="btn sec" href="mailto:info@antexp.ru?subject=Запрос%20КП%20—%20АНТЭкспресс">Написать на почту</a>
-          </div>
-        </div>
-      </section>
     </main>
 
+    <!-- FOOTER -->
     <footer>
       <div>© <span id="y"></span> ООО «АНТЭкспресс». Все права защищены.</div>
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
@@ -242,8 +196,10 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
+    // highlight current
     document.querySelectorAll('.menubar a').forEach(a=>{if(a.href===window.location.href){a.classList.add('active')}});
 
+    // HERO SLIDESHOW
     (function(){
       const images = [
         './media/baikal/baikal-03.jpg',
@@ -255,21 +211,15 @@
         './media/skandinaviya/skandinaviya-03.jpg'
       ];
       images.forEach(src => { const i=new Image(); i.src=src; });
-
       const a = document.getElementById('heroBg1');
       const b = document.getElementById('heroBg2');
       let idx = 0, showA = true;
-
       function setBg(el, src){ el.style.backgroundImage = 'url(' + src + ')'; }
-      setBg(a, images[0]);
-      setBg(b, images[1]); b.classList.remove('on'); a.classList.add('on');
-      idx = 1;
-
+      setBg(a, images[0]); setBg(b, images[1]); b.classList.remove('on'); a.classList.add('on'); idx = 1;
       function step(){
         if(showA){ setBg(b, images[idx]); b.classList.add('on'); a.classList.remove('on'); }
-        else{ setBg(a, images[idx]); a.classList.add('on'); b.classList.remove('on'); }
-        showA = !showA;
-        idx = (idx + 1) % images.length;
+        else { setBg(a, images[idx]); a.classList.add('on'); b.classList.remove('on'); }
+        showA = !showA; idx = (idx + 1) % images.length;
       }
       setInterval(step, 6000);
     })();
