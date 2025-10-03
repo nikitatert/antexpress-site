@@ -62,14 +62,12 @@
       .ci{font-size:14px}
     }
 
-    /* ===== PAGE-SPECIFIC (Projects grid mobile fix) ===== */
+    /* ===== PAGE-SPECIFIC (Projects grid + Dark Mode fix) ===== */
     .list{
       display:grid;
       gap:14px;
-      /* Let the grid auto-fit cards and wrap; min width keeps long Russian words inside */
       grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
     }
-    /* If style.css already styles .card, these rules only enhance/override for fit */
     .card{
       display:flex;
       align-items:center;
@@ -78,21 +76,33 @@
       padding:14px;
       border:1px solid var(--border);
       border-radius:14px;
-      background:var(--bgElevated, #fff);
-      min-height:64px;
-      text-decoration:none;
+      background:var(--bgElevated, #ffffff);   /* light fallback */
       color:var(--text);
+      text-decoration:none;
+      min-height:64px;
+      transition:background .2s ease, border-color .2s ease, color .2s ease;
     }
+    .card:hover{ background:var(--hoverElevated, #f5f5f5); }
+
+    /* DARK THEME OVERRIDES (ensure good contrast) */
+    [data-theme="dark"] .card{
+      background:var(--bgElevatedDark, #1f2328);
+      border-color:var(--borderDark, #2b3137);
+      color:var(--textDark, #e6e6e6);
+    }
+    [data-theme="dark"] .card:hover{
+      background:var(--hoverElevatedDark, #242a31);
+    }
+
     .card h3{
       margin:0;
       line-height:1.15;
-      /* Scales down on small screens */
       font-size:clamp(14px, 3.6vw, 18px);
-      /* Allow multi-word Russian names to wrap if needed */
       white-space:normal;
       word-break:break-word;
       hyphens:auto;
     }
+
     /* On very narrow phones, use 2 columns so words fit comfortably */
     @media (max-width:420px){
       .list{ grid-template-columns:repeat(2, minmax(0,1fr)); }
@@ -144,7 +154,7 @@
     <main class="section">
       <h1>Наши объекты</h1>
 
-      <!-- GRID with mobile fix -->
+      <!-- GRID -->
       <div class="list">
         <a class="card" href="./project-nikolo-dol.html"><h3>Николо-Дол</h3></a>
         <a class="card" href="./project-skandinaviya.html"><h3>Скандинавия</h3></a>
