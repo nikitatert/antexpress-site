@@ -21,11 +21,10 @@
   <link rel="stylesheet" href="./theme.css" />
   <script defer src="./theme.js"></script>
 
-  <!-- Header styles + logo swap (same as Home) -->
+  <!-- Header styles + logo swap -->
   <style>
     header{display:block;width:100%}
 
-    /* LINE 1 */
     .topbar{
       display:flex; align-items:center; justify-content:space-between;
       padding:12px 0; gap:16px;
@@ -38,28 +37,37 @@
     .topbar .ci a{color:var(--text); text-decoration:none}
     .topbar .ci a:hover{color:var(--link)}
 
-    /* LINE 2 */
     .menubar{
       display:flex; align-items:center; gap:14px;
       padding:10px 0; border-bottom:1px solid var(--border);
     }
-    .menubar a{ font-weight:700; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; border:1px solid transparent }
-    .menubar a:hover{ color:var(--link); border-color:var(--border) }
-    .menubar a.active{ border-color:var(--text); }
+    .menubar a{
+      font-weight:700; padding:8px 10px; border-radius:10px;
+      color:var(--text); text-decoration:none; border:1px solid transparent;
+    }
+    .menubar a:hover{color:var(--link); border-color:var(--border)}
+    .menubar a.active{border-color:var(--text)}
     .menubar .spacer{flex:1}
 
-    /* Logo theme swap */
     .logo.dark{display:none}
     [data-theme="dark"] .logo.light{display:none}
     [data-theme="dark"] .logo.dark{display:inline}
 
-    @media (max-width: 920px){
-      .brand .logo{height:58px}
-      .contact-row{gap:14px}
+    @media (max-width:920px){.brand .logo{height:58px}.contact-row{gap:14px}}
+    @media (max-width:680px){.brand .logo{height:48px}.ci{font-size:14px}}
+
+    main.section{
+      line-height:1.6;
     }
-    @media (max-width: 680px){
-      .brand .logo{height:48px}
-      .ci{font-size:14px}
+    main.section h2{
+      margin-top:24px;
+      color:var(--text);
+    }
+    main.section ul{
+      margin:8px 0 16px 22px;
+    }
+    main.section li{
+      margin:4px 0;
     }
   </style>
 </head>
@@ -67,7 +75,6 @@
   <div class="wrap">
     <!-- ===== HEADER ===== -->
     <header>
-      <!-- line 1 -->
       <div class="topbar">
         <a class="brand" href="./index.html" aria-label="АНТЭкспресс — на главную">
           <img src="./logo-light.png" alt="АНТЭкспресс" class="logo light" />
@@ -80,7 +87,6 @@
         </div>
       </div>
 
-      <!-- line 2 -->
       <nav class="menubar" aria-label="Основная навигация">
         <a href="./index.html">Главная</a>
         <a href="./about.html">О компании</a>
@@ -97,13 +103,60 @@
     <!-- ===== MAIN ===== -->
     <main class="section">
       <h1>Услуги</h1>
-      <p class="lead">Комплексное сопровождение проектных поставок — от планирования до ввода на площадке.</p>
+      <p class="lead">Комплексное сопровождение проектных поставок — от планирования до ввода объекта в эксплуатацию.</p>
 
-      <div class="features" style="display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))">
-        <div class="card"><h3>Планирование и МТО</h3><p class="muted">Номенклатура, альтернативы, графики поставок и бюджетирование.</p></div>
-        <div class="card"><h3>Закупка и контрактация</h3><p class="muted">Тендеры, проверка подрядчиков, условия поставки, управление рисками.</p></div>
-        <div class="card"><h3>Логистика и контроль</h3><p class="muted">Мультимодальные маршруты, сертификация, таможня, «последняя миля».</p></div>
-      </div>
+      <h2>1. Предпроектная и подготовительная стадия</h2>
+      <ul>
+        <li>Анализ ТЗ и техническо-экономическая оценка проекта (предварительные сметы, график, риски).</li>
+        <li>Проведение предпроектных обследований, участие в инженерно-геологических и иных изысканиях.</li>
+        <li>Разработка календарного плана реализации и PERT/CPM-графиков.</li>
+        <li>Подготовка бюджета, формирование коммерческих условий и графика платежей.</li>
+        <li>Согласование проектной документации с органами надзора, получение разрешений на строительство (при полном сопровождении).</li>
+      </ul>
+
+      <h2>2. Проектирование и согласование</h2>
+      <ul>
+        <li>Координация работы проектировщиков либо исполнение функций генерального проектировщика (архитектура, конструкции, сети).</li>
+        <li>Контроль соответствия проекта нормативам, требованиям заказчика и экономическим параметрам.</li>
+        <li>Value engineering — оптимизация конструктивных решений и стоимости без ухудшения функционала.</li>
+      </ul>
+
+      <h2>3. Закупки и снабжение</h2>
+      <ul>
+        <li>Формирование спецификаций, проведение тендеров среди поставщиков и субподрядчиков.</li>
+        <li>Управление поставками (включая логистику, таможню, складирование).</li>
+        <li>Гарантии качества поставляемых материалов, инспекции при поставке.</li>
+      </ul>
+
+      <h2>4. Организация строительства и управление подрядчиками</h2>
+      <ul>
+        <li>Мобилизация площадки, организация временных сооружений и инженерных коммуникаций.</li>
+        <li>Подбор и привлечение субподрядчиков, заключение и контроль договоров.</li>
+        <li>Управление производством работ, контроль соблюдения графика и качества.</li>
+        <li>Координация всех видов работ (монолит, металлоконструкции, инженерные сети, отделка и т.д.).</li>
+      </ul>
+
+      <h2>5. Контроль качества, безопасность и экология</h2>
+      <ul>
+        <li>Внедрение системы контроля качества (QA/QC), инспекции и приемка этапов работ.</li>
+        <li>Организация и контроль охраны труда и техники безопасности (HSE), соблюдение экологических требований.</li>
+        <li>Ведение журналов, протоколов и актов испытаний.</li>
+      </ul>
+
+      <h2>6. Финансовое управление и отчётность</h2>
+      <ul>
+        <li>Контроль сметных лимитов, управление изменениями стоимости (change orders).</li>
+        <li>Формирование регулярной отчетности для Заказчика: отчеты по графику, бюджету, выполненным работам и рискам.</li>
+        <li>Оптимизация затрат, контроль дебиторки/кредиторки по проекту.</li>
+      </ul>
+
+      <h2>7. Пусконаладочные работы и ввод в эксплуатацию</h2>
+      <ul>
+        <li>Организация пусконаладки инженерных систем, испытаний, испытаний на надежность.</li>
+        <li>Подготовка эксплуатационной документации (as-built, паспорта оборудования, инструкции, O&M manuals).</li>
+        <li>Обучение обслуживающего персонала Заказчика.</li>
+        <li>Сдача объекта и сопровождение в период гарантии (дефектная ведомость и устранение замечаний).</li>
+      </ul>
     </main>
 
     <!-- ===== FOOTER ===== -->
