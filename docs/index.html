@@ -59,24 +59,38 @@
     .hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,.48);z-index:0}
 
     .hero-grid{position:relative;z-index:1;display:grid;gap:24px;grid-template-columns:1fr;align-items:center}
-    .hero-wrap h1,.hero-wrap .lead{color:#fff !important;text-shadow:0 2px 8px rgba(0,0,0,.35)}
+
+    /* Make hero text white for contrast on photos */
+    .hero-wrap h1,
+    .hero-wrap .lead{color:#fff !important;text-shadow:0 2px 8px rgba(0,0,0,.35)}
     .lead{margin-bottom:18px}
 
-    /* HERO BUTTONS */
-    .hero-wrap .btn,.hero-wrap .btn.sec{
-      font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;display:inline-block;border:1px solid;
-      transition:background .15s ease,color .15s ease,border-color .15s ease;
+    /* Themed hero buttons */
+    .hero-wrap .btn,
+    .hero-wrap .btn.sec{
+      font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;display:inline-block;border:1px solid;transition:background .15s,color .15s,border-color .15s;
     }
-    [data-theme="light"] .hero-wrap .btn,[data-theme="light"] .hero-wrap .btn.sec{background:#fff !important;color:#000 !important;border-color:#cfcfcf !important}
-    [data-theme="light"] .hero-wrap .btn:hover,[data-theme="light"] .hero-wrap .btn.sec:hover{background:#f2f2f2 !important;color:#000 !important;border-color:#c3c3c3 !important}
-    [data-theme="dark"] .hero-wrap .btn,[data-theme="dark"] .hero-wrap .btn.sec{background:#0f0f10 !important;color:#fff !important;border-color:#2a2a2a !important}
-    [data-theme="dark"] .hero-wrap .btn:hover,[data-theme="dark"] .hero-wrap .btn.sec:hover{background:#161618 !important;color:#fff !important;border-color:#3a3a3a !important}
+    [data-theme="light"] .hero-wrap .btn,
+    [data-theme="light"] .hero-wrap .btn.sec{background:#fff !important;color:#000 !important;border-color:#cfcfcf !important}
+    [data-theme="light"] .hero-wrap .btn:hover,
+    [data-theme="light"] .hero-wrap .btn.sec:hover{background:#f2f2f2 !important;color:#000 !important;border-color:#c3c3c3 !important}
+    [data-theme="dark"] .hero-wrap .btn,
+    [data-theme="dark"] .hero-wrap .btn.sec{background:#0f0f10 !important;color:#fff !important;border-color:#2a2a2a !important}
+    [data-theme="dark"] .hero-wrap .btn:hover,
+    [data-theme="dark"] .hero-wrap .btn.sec:hover{background:#161618 !important;color:#fff !important;border-color:#3a3a3a !important}
 
-    .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:20px}
+    .kpi{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;margin-top:20px
+    }
     .kpi .card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px;min-height:132px}
-    .kpi .num{font-size:clamp(22px,3.2vw,28px);font-weight:800;line-height:1.05;white-space:nowrap}
+    .kpi .num{font-size:clamp(22px,3.2vw,28px);font-weight:800;line-height:1.1;text-align:center}
     .kpi .cap{color:var(--muted);font-size:12px}
-    @media(max-width:520px){.kpi{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi .num{font-size:22px}}
+    @media(max-width:520px){
+      .kpi{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .kpi .num{font-size:22px}
+    }
 
     /* ===== OTHER BLOCKS ===== */
     .features{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -88,7 +102,11 @@
     .projects .list{display:grid;gap:14px;grid-template-columns:repeat(5,minmax(0,1fr))}
     @media(max-width:1100px){.projects .list{grid-template-columns:repeat(3,minmax(0,1fr))}}
     @media(max-width:640px){.projects .list{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    .projects .card h3{margin:2px 0}
+    /* Center the project titles inside the bubbles */
+    .projects .list a.card{
+      display:flex;align-items:center;justify-content:center;text-align:center;min-height:78px;padding:14px;
+    }
+    .projects .list a.card h3{margin:0}
   </style>
 </head>
 <body>
@@ -139,7 +157,7 @@
 
               <div class="kpi">
                 <div class="card">
-                  <div class="num">many years</div>
+                  <div class="num">Многолетний опыт</div>
                   <div class="cap">в проектных поставках</div>
                 </div>
                 <div class="card">
@@ -156,7 +174,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> <!-- /hero-grid -->
         </div>
       </section>
 
@@ -186,7 +204,7 @@
         <p class="lead">Подборка объектов, где мы отвечаем за снабжение и логистику.</p>
         <div class="list">
           <a class="card" href="./project-nikolo-dol.html"><h3>Николо-Дол</h3></a>
-          <a class="card" href="./project-skandinaviya.html"><h3>Скандинавия</h3></a>
+          <a class="card" href="./project-skandinaviya.html"><h3>Skandinaviya</h3></a>
           <a class="card" href="./project-sakhalin.html"><h3>Сахалин</h3></a>
           <a class="card" href="./project-baikal.html"><h3>Байкал</h3></a>
         </div>
