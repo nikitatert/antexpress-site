@@ -62,7 +62,12 @@
       .ci{font-size:14px}
     }
 
-    /* ===== PAGE-SPECIFIC (Projects grid + Dark Mode fix) ===== */
+    /* ===== PAGE-SPECIFIC (Projects grid + spacing + Dark Mode fix) ===== */
+    .section > h1{
+      /* extra space before the bubbles under the header */
+      margin: 0 0 clamp(22px, 5vw, 40px);
+    }
+
     .list{
       display:grid;
       gap:14px;
@@ -76,7 +81,7 @@
       padding:14px;
       border:1px solid var(--border);
       border-radius:14px;
-      background:var(--bgElevated, #ffffff);   /* light fallback */
+      background:var(--bgElevated, #ffffff);
       color:var(--text);
       text-decoration:none;
       min-height:64px;
