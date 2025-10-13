@@ -24,30 +24,52 @@
   <script defer src="./theme.js"></script>
 
   <style>
-    /* ===== HEADER ===== */
+    /* ===== UNIFIED HEADER (same as Services/Projects/Contacts) ===== */
     header{display:block;width:100%}
-    .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:16px;border-bottom:1px solid var(--border)}
-    .brand{display:flex;align-items:center}
-    .brand .logo{height:100px;width:auto}
+
+    /* LINE 1 */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0; gap:16px;
+      border-bottom:1px solid var(--border);
+    }
+    .brand .logo{height:72px; width:auto}
+    .contact-row{display:flex; align-items:center; gap:24px; flex-wrap:wrap}
+    .ci{display:flex; align-items:center; gap:10px; font-weight:700}
+    .ci small{display:block; font-weight:600; color:var(--muted); line-height:1.1}
+    .topbar .ci a{color:var(--text); text-decoration:none}
+    .topbar .ci a:hover{color:var(--link)}
+
+    /* LINE 2 */
+    .menubar{
+      display:flex; align-items:center; gap:14px;
+      padding:10px 0; border-bottom:1px solid var(--border);
+    }
+    .menubar a{
+      font-weight:700; padding:8px 10px; border-radius:10px;
+      color:var(--text); text-decoration:none; border:1px solid transparent;
+    }
+    .menubar a:hover{ color:var(--link); border-color:var(--border) }
+    .menubar a.active{ border-color:var(--text); }
+    .menubar .spacer{flex:1}
+
+    /* Logo theme swap */
     .logo.dark{display:none}
     [data-theme="dark"] .logo.light{display:none}
     [data-theme="dark"] .logo.dark{display:inline}
-    .contact-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
-    .ci{display:flex;align-items:center;gap:10px;font-weight:700}
-    .ci small{display:block;font-weight:600;color:var(--muted);line-height:1.1}
-    .topbar .ci a{color:var(--text);text-decoration:none}
-    .topbar .ci a:hover{color:var(--link)}
 
-    .menubar{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--border);margin-bottom:10px}
-    .menubar a{font-weight:700;padding:8px 10px;border-radius:10px;color:var(--text);text-decoration:none;border:1px solid transparent}
-    .menubar a:hover{color:var(--link);border-color:var(--border)}
-    .menubar a.active{border-color:var(--text)}
-    .menubar .spacer{flex:1}
+    @media (max-width: 920px){
+      .brand .logo{height:58px}
+      .contact-row{gap:14px}
+    }
+    @media (max-width: 680px){
+      .brand .logo{height:48px}
+      .ci{font-size:14px}
+    }
 
-    @media(max-width:920px){.brand .logo{height:80px}.contact-row{gap:12px}}
-    @media(max-width:680px){.brand .logo{height:60px}.ci{font-size:14px}}
+    /* ===== PAGE-SPECIFIC ===== */
 
-    /* ===== HERO & KPI ===== */
+    /* HERO & KPI */
     .hero-wrap{
       position:relative;overflow:hidden;border-radius:20px;
       background:var(--card);
@@ -92,7 +114,6 @@
       .kpi .num{font-size:22px}
     }
 
-    /* ===== OTHER BLOCKS ===== */
     .features{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
     @media(max-width:900px){.features{grid-template-columns:1fr}}
     .features .card{padding:20px}
@@ -102,22 +123,20 @@
     .projects .list{display:grid;gap:14px;grid-template-columns:repeat(5,minmax(0,1fr))}
     @media(max-width:1100px){.projects .list{grid-template-columns:repeat(3,minmax(0,1fr))}}
     @media(max-width:640px){.projects .list{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    /* Center the project titles inside the bubbles */
-    .projects .list a.card{
-      display:flex;align-items:center;justify-content:center;text-align:center;min-height:78px;padding:14px;
-    }
+    .projects .list a.card{display:flex;align-items:center;justify-content:center;text-align:center;min-height:78px;padding:14px}
     .projects .list a.card h3{margin:0}
   </style>
 </head>
 <body>
   <div class="wrap">
 
-    <!-- HEADER -->
+    <!-- ===== HEADER ===== -->
     <header>
+      <!-- line 1 -->
       <div class="topbar">
-        <a class="brand" href="./index.html">
+        <a class="brand" href="./index.html" aria-label="АНТЭкспресс — на главную">
           <img src="./logo-light.png" alt="АНТЭкспресс" class="logo light"/>
-          <img src="./logo-dark.png" alt="АНТЭкспресс" class="logo dark"/>
+          <img src="./logo-dark.png"  alt="АНТЭкспресс" class="logo dark"/>
         </a>
         <div class="contact-row">
           <div class="ci"><div><small>Телефон</small><a href="tel:+74950000000">+7 (495) 000-00-00</a></div></div>
@@ -125,18 +144,22 @@
           <div class="ci"><div><small>Время работы</small>Пн–Пт, 9:00–18:00</div></div>
         </div>
       </div>
-      <nav class="menubar">
+
+      <!-- line 2 -->
+      <nav class="menubar" aria-label="Основная навигация">
         <a href="./index.html" class="active">Главная</a>
         <a href="./about.html">О компании</a>
         <a href="./services.html">Услуги</a>
         <a href="./projects.html">Наши объекты</a>
         <a href="./contacts.html">Контакты</a>
         <span class="spacer"></span>
-        <button class="theme-toggle" id="themeToggle"><span class="sun">☀︎</span><span class="moon">☾</span></button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема">
+          <span class="sun">☀︎</span><span class="moon">☾</span>
+        </button>
       </nav>
     </header>
 
-    <!-- MAIN -->
+    <!-- ===== MAIN ===== -->
     <main>
       <!-- HERO -->
       <section class="section">
@@ -214,7 +237,7 @@
       </section>
     </main>
 
-    <!-- FOOTER -->
+    <!-- ===== FOOTER ===== -->
     <footer>
       <div>© <span id="y"></span> ООО «АНТЭкспресс». Все права защищены.</div>
       <div><a href="./privacy.html" style="color:var(--muted);">Политика конфиденциальности</a></div>
@@ -223,6 +246,7 @@
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   <script>
+    // ensure active state if needed
     document.querySelectorAll('.menubar a').forEach(a=>{if(a.href===window.location.href){a.classList.add('active')}});
 
     // HERO SLIDESHOW
