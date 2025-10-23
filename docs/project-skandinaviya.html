@@ -55,13 +55,29 @@
     .project-info ul{margin:10px 0 0; padding-left:18px}
     .project-info li{margin:4px 0}
 
-    /* Gallery grid */
+    /* Gallery grid - Desktop */
     .gallery{display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
     @media (max-width:980px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media (max-width:560px){.gallery{grid-template-columns:1fr}}
     .gallery a{display:block}
     .gallery img{width:100%; height:auto; display:block; border-radius:12px; border:1px solid var(--border); box-shadow:var(--shadow); transition:transform .12s ease;}
     .gallery img:hover{transform:scale(1.01)}
+
+    /* Mobile Gallery Slider */
+    .mobile-gallery {display: none; position: relative; margin: 20px 0;}
+    .mobile-gallery-slide {display: none; text-align: center;}
+    .mobile-gallery-slide.active {display: block;}
+    .mobile-gallery img {max-width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow);}
+    .mobile-gallery-nav {display: flex; justify-content: space-between; align-items: center; margin-top: 15px;}
+    .mobile-gallery-btn {background: var(--card); color: var(--text); border: 1px solid var(--border); width: 44px; height: 44px; border-radius: 999px; display: grid; place-items: center; cursor: pointer; font-weight: 800; user-select: none; font-size: 20px;}
+    .mobile-gallery-btn:disabled {opacity: 0.5; cursor: not-allowed;}
+    .mobile-gallery-counter {font-size: 14px; color: var(--muted);}
+
+    /* Mobile-only styles */
+    @media (max-width: 768px) {
+      .gallery {display: none;}
+      .mobile-gallery {display: block;}
+    }
 
     /* Lightbox */
     .lightbox{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.7); z-index:9999; padding:20px;}
@@ -122,7 +138,7 @@
         </ul>
       </div>
 
-      <!-- Gallery -->
+      <!-- Desktop Gallery -->
       <div class="gallery" id="gallery" data-project="skandinaviya">
         <a href="./media/skandinaviya/skandinaviya-01.jpg"><img src="./media/skandinaviya/skandinaviya-01.jpg" alt="Скандинавия — фото 1" loading="lazy"></a>
         <a href="./media/skandinaviya/skandinaviya-02.jpg"><img src="./media/skandinaviya/skandinaviya-02.jpg" alt="Скандинавия — фото 2" loading="lazy"></a>
@@ -132,6 +148,11 @@
         <a href="./media/skandinaviya/skandinaviya-06.jpg"><img src="./media/skandinaviya/skandinaviya-06.jpg" alt="Скандинавия — фото 6" loading="lazy"></a>
         <a href="./media/skandinaviya/skandinaviya-07.jpg"><img src="./media/skandinaviya/skandinaviya-07.jpg" alt="Скандинавия — фото 7" loading="lazy"></a>
         <a href="./media/skandinaviya/skandinaviya-08.jpg"><img src="./media/skandinaviya/skandinaviya-08.jpg" alt="Скандинавия — фото 8" loading="lazy"></a>
+      </div>
+
+      <!-- Mobile Gallery Slider -->
+      <div class="mobile-gallery" id="mobileGallery">
+        <!-- Slides will be populated by JavaScript -->
       </div>
     </main>
 
@@ -143,6 +164,90 @@
   </div>
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+
+  <!-- Mobile Gallery Script -->
+  <script>
+    (function() {
+      // Only create mobile gallery on mobile devices
+      if (window.innerWidth <= 768) {
+        const gallery = document.getElementById('gallery');
+        const mobileGallery = document.getElementById('mobileGallery');
+        
+        if (!gallery || !mobileGallery) return;
+        
+        const images = [...gallery.querySelectorAll('a')];
+        let currentSlide = 0;
+        
+        // Create mobile gallery structure
+        images.forEach((img, index) => {
+          const slide = document.createElement('div');
+          slide.className = `mobile-gallery-slide ${index === 0 ? 'active' : ''}`;
+          slide.innerHTML = `
+            <a href="${img.href}">
+              <img src="${img.querySelector('img').src}" alt="${img.querySelector('img').alt}" loading="lazy">
+            </a>
+          `;
+          mobileGallery.appendChild(slide);
+        });
+        
+        // Create navigation
+        const nav = document.createElement('div');
+        nav.className = 'mobile-gallery-nav';
+        nav.innerHTML = `
+          <button class="mobile-gallery-btn" id="prevBtn" ${currentSlide === 0 ? 'disabled' : ''}>‹</button>
+          <div class="mobile-gallery-counter">${currentSlide + 1} / ${images.length}</div>
+          <button class="mobile-gallery-btn" id="nextBtn" ${currentSlide === images.length - 1 ? 'disabled' : ''}>›</button>
+        `;
+        mobileGallery.appendChild(nav);
+        
+        // Navigation functions
+        function updateNavigation() {
+          document.getElementById('prevBtn').disabled = currentSlide === 0;
+          document.getElementById('nextBtn').disabled = currentSlide === images.length - 1;
+          document.querySelector('.mobile-gallery-counter').textContent = `${currentSlide + 1} / ${images.length}`;
+        }
+        
+        function showSlide(index) {
+          document.querySelectorAll('.mobile-gallery-slide').forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+          });
+          currentSlide = index;
+          updateNavigation();
+        }
+        
+        document.getElementById('prevBtn').addEventListener('click', () => {
+          if (currentSlide > 0) showSlide(currentSlide - 1);
+        });
+        
+        document.getElementById('nextBtn').addEventListener('click', () => {
+          if (currentSlide < images.length - 1) showSlide(currentSlide + 1);
+        });
+        
+        // Swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        mobileGallery.addEventListener('touchstart', e => {
+          touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        mobileGallery.addEventListener('touchend', e => {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        });
+        
+        function handleSwipe() {
+          const swipeThreshold = 50;
+          if (touchEndX < touchStartX - swipeThreshold && currentSlide < images.length - 1) {
+            showSlide(currentSlide + 1);
+          }
+          if (touchEndX > touchStartX + swipeThreshold && currentSlide > 0) {
+            showSlide(currentSlide - 1);
+          }
+        }
+      }
+    })();
+  </script>
 
   <!-- Lightbox -->
   <script>
