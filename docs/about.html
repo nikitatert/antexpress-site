@@ -22,7 +22,7 @@
   <script defer src="./theme.js"></script>
 
   <style>
-    /* ===== UNIFIED HEADER (same as Services/Projects/Contacts) ===== */
+    /* ===== UNIFIED HEADER (same as other pages) ===== */
     header{display:block;width:100%}
 
     /* LINE 1 */
@@ -65,10 +65,19 @@
       .ci{font-size:14px}
     }
 
-    /* ===== PAGE CONTENT ===== */
-    .about-text{max-width:900px;margin:0 auto}
-    .about-text h1{margin-bottom:12px}
-    .about-text p{margin:10px 0;line-height:1.6}
+    /* ===== PAGE CONTENT =====
+       Shift content slightly left + add space under menu
+    ----------------------------------------------------- */
+    .about-text{
+      /* left-align inside the main page container */
+      max-width:900px;
+      margin: clamp(18px, 3vw, 28px) 0 0;   /* extra space under the menu */
+      margin-left: 0;                       /* align to the left of wrapper */
+      margin-right: auto;
+      padding-left: clamp(8px, 1.5vw, 16px);/* gentle inset so it doesn’t hug the edge */
+    }
+    .about-text h1{margin: 0 0 12px 0}
+    .about-text p{margin:10px 0; line-height:1.6}
   </style>
 </head>
 <body>
@@ -124,4 +133,3 @@
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
- 
